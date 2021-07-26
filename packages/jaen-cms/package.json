@@ -1,0 +1,45 @@
+{
+  "name": "@snek-at/jaen-cms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "christopherbiscardi <chris@christopherbiscardi.com> (@chrisbiscardi)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snek-at/walker.git",
+    "directory": "packages/gatsby-theme-blog-core"
+  },
+  "scripts": {
+    "develop": "gatsby develop"
+  },
+  "peerDependencies": {
+    "gatsby": "^3.3.0"
+  },
+  "dependencies": {
+    "@atlaskit/tree": "^8.4.0",
+    "@chakra-ui/icons": "^1.0.14",
+    "@chakra-ui/react": "^1.6.5",
+    "@emotion/react": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
+    "@react-icons/all-files": "^4.1.0",
+    "@reduxjs/toolkit": "^1.6.1",
+    "framer-motion": "^4.1.17",
+    "gatsby-plugin-emotion": "^6.10.0",
+    "gatsby-plugin-preact": "^5.10.0",
+    "gatsby-plugin-purgecss": "^6.0.2",
+    "gatsby-plugin-react-svg": "^3.0.1",
+    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.24",
+    "lottie-web": "^5.7.12",
+    "preact": "^10.5.14",
+    "preact-render-to-string": "^5.1.19",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "redux-persist": "^6.0.0"
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.13.3",
+    "babel-preset-gatsby": "^1.10.0",
+    "gatsby": "^3.10.1"
+  }
+}

@@ -15,6 +15,5 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "jsx": "preserve"
-  },
-  "include": ["./jaen/src/**/*"]
+  }
 }
