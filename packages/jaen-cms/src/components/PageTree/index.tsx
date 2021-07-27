@@ -14,8 +14,7 @@ import styled from '@emotion/styled'
 // import {FaFile} from '@react-icons/all-files/fa/FaFile'
 // import {FaFolderMinus} from '@react-icons/all-files/fa/FaFolderMinus'
 // import {} from '@react-icons/all-files/fa/FaFolderPlus'
-import {FolderIcon, DocumentIcon} from '../icons'
-
+import {Animation, folderOpenedIconLottie, folderClosedIconLottie, documentIconLottie} from '../icons/lottie'
 import React, {Component} from 'react'
 
 import {treeWithTwoBranches} from './data'
@@ -42,17 +41,29 @@ const getIcon = (
   if (item.children && item.children.length > 0) {
     return item.isExpanded ? (
       <PreTextIcon onClick={() => onCollapse(item.id)}>
-        <FolderIcon />
+        <Animation lottie={folderOpenedIconLottie}>
+          {({container, animation}) => (
+            container
+          )}
+        </Animation>
       </PreTextIcon>
     ) : (
       <PreTextIcon onClick={() => onExpand(item.id)}>
-        <FolderIcon />
+        <Animation lottie={folderClosedIconLottie}>
+          {({container, animation}) => (
+            container
+          )}
+        </Animation>
       </PreTextIcon>
     )
   }
   return (
     <PreTextIcon>
-      <DocumentIcon />
+      <Animation lottie={documentIconLottie}>
+        {({container, animation}) => (
+          container
+        )}
+      </Animation>
     </PreTextIcon>
   )
 }

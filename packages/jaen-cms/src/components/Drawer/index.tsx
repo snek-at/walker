@@ -56,7 +56,9 @@ import {
   MenuItem,
   MenuDivider,
   Spacer,
-  Checkbox
+  Checkbox,
+  Wrap,
+  WrapItem
 } from '@chakra-ui/react'
 import {FaCodeBranch} from '@react-icons/all-files/fa/FaCodeBranch'
 import {FaGithub} from '@react-icons/all-files/fa/FaGithub'
@@ -65,19 +67,28 @@ import {FaSave} from '@react-icons/all-files/fa/FaSave'
 import React from 'react'
 
 import PureTree from '../PageTree'
-
-// import {
-//   SnekIcon,
-//   HelpIcon,
-//   BrightnessIcon,
-//   EditIcon,
-//   DiscardIcon,
-//   SaveIcon,
-//   RocketIcon,
-//   WorkspacesIcon,
-//   AddIcon,
-//   MergeIcon
-// } from '../icons'
+import {
+  SnekIcon //   HelpIcon,
+  //   BrightnessIcon,
+  //   EditIcon,
+  //   DiscardIcon,
+  //   SaveIcon,
+  //   RocketIcon,
+  //   WorkspacesIcon,
+  //   AddIcon,
+  //   MergeIcon
+} from '../icons'
+import {
+  Animation,
+  dmToggleIconLottie,
+  editIconLottie,
+  discardIconLottie,
+  saveIconLottie,
+  publishIconLottie,
+  workspacesIconLottie,
+  folderIconLottie
+} from '../icons/lottie'
+import {ImageTab} from '../tabs'
 
 // import {
 //   FaCodeBranch,
@@ -112,8 +123,22 @@ function DrawerExample() {
         <DrawerContent>
           <DrawerCloseButton />
 
-          <DrawerHeader mb={-6}>
+          <DrawerHeader>
             <HStack>
+              {/* <Animation lottie={sampleLottie}>
+                {({container, animation}) => (
+                  <IconButton
+                    variant="ghost"
+                    aria-label="adad"
+                    icon={container}
+                    onTog
+                    onClick={() => {
+                      animation.play()
+                      animation.resetSegments(true)
+                    }}
+                  />
+                )}
+              </Animation> */}
               <Button
                 minW="4xs"
                 variant="ghost"
@@ -139,99 +164,166 @@ function DrawerExample() {
                 aria-label="adad"
                 icon={<QuestionIcon />}
               />
-              <IconButton
-                variant="ghost"
-                aria-label="adad"
-                icon={
-                  colorMode === 'light' ? (
-                    <BrightnessIcon />
-                  ) : (
-                    <BrightnessIcon />
-                  )
-                }
-                onClick={() => toggleColorMode()}
-              />
+              <Animation lottie={dmToggleIconLottie} supportColorMode={false}>
+                {({container, animation}) => (
+                  <IconButton
+                    variant="ghost"
+                    aria-label="adad"
+                    icon={container}
+                    onClick={() => {
+                      toggleColorMode()
+
+                      colorMode === 'dark'
+                        ? animation.playSegments([20, 114], true)
+                        : animation.playSegments([144, 228], true)
+                    }}
+                  />
+                )}
+              </Animation>
             </HStack>
-            <Divider mt={4} mb={4} />
           </DrawerHeader>
 
-          <DrawerBody pd={0} mt={0}>
+          <Divider />
+
+          <DrawerBody pd={0} mt={2}>
             <HStack>
               <Flex width="100%">
                 <Stack direction="row">
-                  <Tooltip
-                    hasArrow
-                    label="Hey you.. Press me and you can destroy everything"
-                    placement="bottom-start"
-                    fontSize="md">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      leftIcon={<EditIcon />}
-                      rightIcon={
-                        <Badge borderRadius="full" px="2" colorScheme="red">
-                          187
-                        </Badge>
-                      }>
-                      Edit
-                    </Button>
-                  </Tooltip>
+                  <Animation lottie={editIconLottie}>
+                    {({container, animation}) => (
+                      <Tooltip
+                        hasArrow
+                        label="Hey you.. Press me and you can destroy everything"
+                        placement="bottom-start"
+                        fontSize="md">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          leftIcon={container}
+                          rightIcon={
+                            <Badge borderRadius="full" px="2" colorScheme="red">
+                              187
+                            </Badge>
+                          }
+                          onClick={() => {
+                            animation.playSegments(
+                              [0, animation.totalFrames],
+                              true
+                            )
+                          }}>
+                          Edit
+                        </Button>
+                      </Tooltip>
+                    )}
+                  </Animation>
 
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    leftIcon={<DiscardIcon />}>
-                    Discard
-                  </Button>
+                  <Animation lottie={discardIconLottie}>
+                    {({container, animation}) => (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        leftIcon={container}
+                        onClick={() => {
+                          animation.playSegments(
+                            [0, animation.totalFrames],
+                            true
+                          )
+                        }}>
+                        Discard
+                      </Button>
+                    )}
+                  </Animation>
 
-                  <Button size="sm" variant="outline" leftIcon={<SaveIcon />}>
-                    Save
-                  </Button>
+                  <Animation lottie={saveIconLottie}>
+                    {({container, animation}) => (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        leftIcon={container}
+                        onClick={() => {
+                          animation.playSegments(
+                            [0, animation.totalFrames],
+                            true
+                          )
+                        }}>
+                        Save
+                      </Button>
+                    )}
+                  </Animation>
                 </Stack>
+
                 <Spacer />
                 <Stack direction="row">
-                  <Button size="sm" variant="outline" leftIcon={<RocketIcon />}>
-                    Publish
-                  </Button>
+                  <Animation lottie={publishIconLottie}>
+                    {({container, animation}) => (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        leftIcon={container}
+                        onClick={() => {
+                          animation.playSegments(
+                            [0, animation.totalFrames],
+                            true
+                          )
+                        }}>
+                        Publish
+                      </Button>
+                    )}
+                  </Animation>
+                  <Divider orientation="vertical" />
                   <Menu isLazy>
-                    <MenuButton
-                      size="sm"
-                      as={Button}
-                      aria-label="Options"
-                      leftIcon={<WorkspacesIcon />}
-                      rightIcon={
-                        <Badge borderRadius="full" px="2" colorScheme="yellow">
-                          a7bd
-                        </Badge>
-                      }
-                      variant="outline">
-                      Workspaces
-                    </MenuButton>
+                    <Animation lottie={workspacesIconLottie}>
+                      {({container, animation}) => (
+                        <MenuButton
+                          size="sm"
+                          as={Button}
+                          aria-label="Options"
+                          leftIcon={container}
+                          rightIcon={
+                            <Badge
+                              borderRadius="full"
+                              px="2"
+                              colorScheme="yellow">
+                              a7bd
+                            </Badge>
+                          }
+                          variant="outline"
+                          onClick={() => {
+                            animation.playSegments(
+                              [
+                                [0, animation.totalFrames],
+                                [animation.totalFrames, 0]
+                              ],
+                              true
+                            )
+                          }}>
+                          Workspaces
+                        </MenuButton>
+                      )}
+                    </Animation>
                     <MenuList>
                       <MenuItem command="⌘T">Workspaces</MenuItem>
                       <MenuDivider />
-                      <MenuItem icon={<AddIcon />} command="⌘T">
-                        New Workspace
-                      </MenuItem>
-                      <MenuItem icon={<EditIcon />} command="⌘O">
-                        Choose Workspace
-                      </MenuItem>
-                      <MenuItem icon={<MergeIcon />} command="⌘O">
-                        Merge Workspace
-                      </MenuItem>
+                      <MenuItem command="⌘T">New Workspace</MenuItem>
+                      <MenuItem command="⌘O">Choose Workspace</MenuItem>
+                      <MenuItem command="⌘O">Merge Workspace</MenuItem>
                     </MenuList>
                   </Menu>
                 </Stack>
               </Flex>
             </HStack>
-            <Divider mt={4} mb={4} />
-            <Tabs pd={0} mt={0}>
+            {/* <Divider mt={4} mb={4} /> */}
+            <Tabs pd={0} mt={4}>
               <TabList>
                 <Tab>Pages</Tab>
-                <Tab>Files</Tab>
+                <Tab>Images</Tab>
+                <Tab>Documents</Tab>
+                <Spacer />
+                <Tab>Analytics</Tab>
+                <Tab>Settings</Tab>
               </TabList>
 
-              <TabPanels>
+              <TabPanels overflowY="auto" maxH="80vh">
                 <TabPanel>
                   <Box
                     borderWidth="1px"
@@ -278,7 +370,6 @@ function DrawerExample() {
                               #
                             </Text>
                             Additional info
-                            <InfoOutlineIcon w={10} />
                           </Heading>
                           <Checkbox>Hide</Checkbox>
                           <Checkbox>Hide in menus</Checkbox>
@@ -323,7 +414,7 @@ function DrawerExample() {
                   </Box>
                 </TabPanel>
                 <TabPanel>
-                  <p>two!</p>
+                  <ImageTab />
                 </TabPanel>
                 <TabPanel>
                   <p>three!</p>
@@ -331,9 +422,34 @@ function DrawerExample() {
               </TabPanels>
             </Tabs>
           </DrawerBody>
-
-          <DrawerFooter>
-            <Button variant="ghost">v1.3.0</Button>
+          <Divider />
+          <DrawerFooter py={2}>
+            <Button size="sm" variant="ghost">
+              2021 &copy; snek-at
+            </Button>
+            <Spacer />
+            <Menu isLazy>
+              <MenuButton
+                size="sm"
+                as={Button}
+                aria-label="Options"
+                rightIcon={
+                  <Badge borderRadius="full" px="2" colorScheme="green">
+                    en
+                  </Badge>
+                }
+                variant="ghost">
+                Language
+              </MenuButton>
+              <MenuList>
+                <MenuItem command="⌘T">en</MenuItem>
+                <MenuDivider />
+                <MenuItem command="⌘T">de</MenuItem>
+              </MenuList>
+            </Menu>
+            <Button size="sm" variant="ghost">
+              v1.3.0
+            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

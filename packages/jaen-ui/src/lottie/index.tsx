@@ -3,7 +3,7 @@ import React, {useRef} from 'react'
 import {useState} from 'react'
 import {useEffect} from 'react'
 
-import {createLottie, LottieAnimationCreator} from '../../../common/lottie'
+import {createLottie, LottieAnimationCreator} from '../common/lottie'
 
 type LottieFn = (container: HTMLElement, lightMode?: boolean) => LottieFnResult
 type LottieFnResult = {
@@ -63,7 +63,7 @@ export const dmToggleIconLottie: LottieFn = (container, lightMode = true) => {
 
   creator = createLottie({
     container,
-    animationData: require(`../../../common/assets/lottie/dm-toggle.json`),
+    animationData: require(`../common/assets/lottie/dm-toggle.json`),
     loop: false
   })
 
@@ -82,8 +82,8 @@ export const editIconLottie: LottieFn = (container, lightMode = true) => {
   creator = createLottie({
     container,
     animationData: lightMode
-      ? require(`../../../common/assets/lottie/245-edit-document-outline.json`)
-      : require(`../../../common/assets/lottie/245-edit-document-outline-dm.json`),
+      ? require(`../common/assets/lottie/245-edit-document-outline.json`)
+      : require(`../common/assets/lottie/245-edit-document-outline-dm.json`),
     loop: false
   })
 
@@ -99,8 +99,8 @@ export const discardIconLottie: LottieFn = (container, lightMode = true) => {
   creator = createLottie({
     container,
     animationData: lightMode
-      ? require(`../../../common/assets/lottie/185-trash-bin-outline.json`)
-      : require(`../../../common/assets/lottie/185-trash-bin-outline-dm.json`),
+      ? require(`../common/assets/lottie/185-trash-bin-outline.json`)
+      : require(`../common/assets/lottie/185-trash-bin-outline-dm.json`),
     loop: false
   })
 
@@ -116,8 +116,8 @@ export const saveIconLottie: LottieFn = (container, lightMode = true) => {
   creator = createLottie({
     container,
     animationData: lightMode
-      ? require(`../../../common/assets/lottie/1312-micro-sd-card-outline.json`)
-      : require(`../../../common/assets/lottie/1312-micro-sd-card-outline-dm.json`),
+      ? require(`../common/assets/lottie/1312-micro-sd-card-outline.json`)
+      : require(`../common/assets/lottie/1312-micro-sd-card-outline-dm.json`),
     loop: false
   })
 
@@ -133,8 +133,8 @@ export const publishIconLottie: LottieFn = (container, lightMode = true) => {
   creator = createLottie({
     container,
     animationData: lightMode
-      ? require(`../../../common/assets/lottie/489-rocket-space-outline.json`)
-      : require(`../../../common/assets/lottie/489-rocket-space-outline-dm.json`),
+      ? require(`../common/assets/lottie/489-rocket-space-outline.json`)
+      : require(`../common/assets/lottie/489-rocket-space-outline-dm.json`),
     loop: false
   })
 
@@ -150,8 +150,8 @@ export const workspacesIconLottie: LottieFn = (container, lightMode = true) => {
   creator = createLottie({
     container,
     animationData: lightMode
-      ? require(`../../../common/assets/lottie/112-book-morph-outline.json`)
-      : require(`../../../common/assets/lottie/112-book-morph-outline-dm.json`),
+      ? require(`../common/assets/lottie/112-book-morph-outline.json`)
+      : require(`../common/assets/lottie/112-book-morph-outline-dm.json`),
     loop: false
   })
 
@@ -167,8 +167,8 @@ export const addIconLottie: LottieFn = (container, lightMode = true) => {
   creator = createLottie({
     container,
     animationData: lightMode
-      ? require(`../../../common/assets/lottie/49-plus-circle-outline.json`)
-      : require(`../../../common/assets/lottie/49-plus-circle-outline-dm.json`),
+      ? require(`../common/assets/lottie/49-plus-circle-outline.json`)
+      : require(`../common/assets/lottie/49-plus-circle-outline-dm.json`),
     loop: false
   })
 
@@ -184,8 +184,8 @@ export const mergeIconLottie: LottieFn = (container, lightMode = true) => {
   creator = createLottie({
     container,
     animationData: lightMode
-      ? require(`../../../common/assets/lottie/1325-code-fork-outline.json`)
-      : require(`../../../common/assets/lottie/1325-code-fork-outline-dm.json`),
+      ? require(`../common/assets/lottie/1325-code-fork-outline.json`)
+      : require(`../common/assets/lottie/1325-code-fork-outline-dm.json`),
     loop: false
   })
 
@@ -204,8 +204,8 @@ export const folderClosedIconLottie: LottieFn = (
   creator = createLottie({
     container,
     animationData: lightMode
-      ? require(`../../../common/assets/lottie/133-folder-close-arrow-down-morph-outline.json`)
-      : require(`../../../common/assets/lottie/133-folder-close-arrow-down-morph-outline-dm.json`),
+      ? require(`../common/assets/lottie/133-folder-close-arrow-down-morph-outline.json`)
+      : require(`../common/assets/lottie/133-folder-close-arrow-down-morph-outline-dm.json`),
     loop: false
   })
 
@@ -224,8 +224,8 @@ export const folderOpenedIconLottie: LottieFn = (
   creator = createLottie({
     container,
     animationData: lightMode
-      ? require(`../../../common/assets/lottie/131-folder-open-arrow-up-morph-outline.json`)
-      : require(`../../../common/assets/lottie/131-folder-open-arrow-up-morph-outline-dm.json`),
+      ? require(`../common/assets/lottie/131-folder-open-arrow-up-morph-outline.json`)
+      : require(`../common/assets/lottie/131-folder-open-arrow-up-morph-outline-dm.json`),
     loop: false
   })
 
@@ -241,8 +241,8 @@ export const documentIconLottie: LottieFn = (container, lightMode = true) => {
   creator = createLottie({
     container,
     animationData: lightMode
-      ? require(`../../../common/assets/lottie/56-document-outline.json`)
-      : require(`../../../common/assets/lottie/56-document-outline-dm.json`),
+      ? require(`../common/assets/lottie/56-document-outline.json`)
+      : require(`../common/assets/lottie/56-document-outline-dm.json`),
     loop: false
   })
 
@@ -258,8 +258,8 @@ export const documentsIconLottie: LottieFn = (container, lightMode = true) => {
   creator = createLottie({
     container,
     animationData: lightMode
-      ? require(`../../../common/assets/lottie/60-documents-outline.json`)
-      : require(`../../../common/assets/lottie/60-documents-outline-dm.json`),
+      ? require(`../common/assets/lottie/60-documents-outline.json`)
+      : require(`../common/assets/lottie/60-documents-outline-dm.json`),
     loop: false
   })
 
