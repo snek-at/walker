@@ -1,0 +1,5 @@
+export {default as Analytics} from './Analytics'
+export {default as Diff} from './Diff'
+export {default as Files} from './Files'
+export {default as Pages} from './Pages'
+export {default as Settings} from './Settings'
