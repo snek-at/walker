@@ -1,0 +1,13 @@
+{
+  "name": "@snek-at/jaen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^17.0.2",
+    "@snek-at/jaen-plugin-cms": "*"
+  },
+  "devDependencies": {
+    "gatsby-plugin-emotion": "^6.11.0"
+  }
+}
