@@ -1,0 +1,14 @@
+{
+  "name": "@snek-at/jaen-shared-ui",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@chakra-ui/react": "^1.6.6",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@react-icons/all-files": "^4.1.0",
+    "framer-motion": "^4.1.17",
+    "react": "^17.0.2"
+  }
+}

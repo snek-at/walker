@@ -20,7 +20,14 @@ export const updatePageMeta = createAction<UpdatePageMetaActionPayload>(
 
 export type RegisterPageFieldActionPayload = {
   path: string
-  field: FieldIdentifier
+  field: {
+    fieldName: string
+    block?: {
+      typeName: string
+      position: number
+      blockFieldName?: string
+    }
+  }
 }
 export const registerPageField = createAction<RegisterPageFieldActionPayload>(
   'pages/registerPageField'

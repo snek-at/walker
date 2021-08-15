@@ -32,12 +32,14 @@ const pagesReducer = createReducer(initialState, {
               blocks: {
                 ...blockField?.blocks,
                 [field.block.position]: {
-                  ...blockField?.blocks[field.block.position],
+                  ...blockField?.blocks?.[field.block.position],
                   typeName: field.block.typeName,
-                  fields: {
-                    ...blockField?.blocks[field.block.position].fields,
-                    [field.block.blockFieldName]: {}
-                  }
+                  fields: field.block.blockFieldName
+                    ? {
+                        ...blockField?.blocks?.[field.block.position]?.fields,
+                        [field.block.blockFieldName]: {}
+                      }
+                    : {}
                 }
               }
             }
@@ -71,9 +73,15 @@ const pagesReducer = createReducer(initialState, {
     const nodeFields = state.nodes[path]?.fields
 
     if (field.block) {
-      delete (nodeFields?.[field.fieldName] as BlocksField).blocks?.[
-        field.block.position
-      ]?.fields?.[field.block.blockFieldName]
+      if (field.block.blockFieldName) {
+        delete (nodeFields?.[field.fieldName] as BlocksField).blocks?.[
+          field.block.position
+        ]?.fields?.[field.block.blockFieldName]
+      } else {
+        delete (nodeFields?.[field.fieldName] as BlocksField).blocks?.[
+          field.block.position
+        ]
+      }
     } else {
       delete nodeFields?.[field.fieldName]
     }

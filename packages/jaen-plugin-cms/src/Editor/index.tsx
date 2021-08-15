@@ -1,4 +1,3 @@
-import InlineEditor from '@ckeditor/ckeditor5-build-inline'
 // import {CKEditor} from '@ckeditor/ckeditor5-react'
 import loadable from '@loadable/component'
 import React, {useRef, useState, useEffect} from 'react'
@@ -12,6 +11,8 @@ const LoadableCKEditor = loadable(() => import('@ckeditor/ckeditor5-react'), {
 type EditorProps = {
   data: string
   editing: boolean
+  disableToolbar: boolean
+  toolbarType: 'inline' | 'balloon'
   onChange: (data: string) => void
 }
 
@@ -22,40 +23,50 @@ const Editor: React.FC<EditorProps> = props => {
       dangerouslySetInnerHTML={{__html: props.data}}
     />
   )
+
+  const editorConfig: {[key: string]: any} = {
+    mediaEmbed: {
+      previewsInData: true
+    }
+  }
+
+  if (props.disableToolbar) {
+    editorConfig['toolbar'] = []
+  }
+
   return (
     <>
       {props.editing ? (
         <LoadableCKEditor
           fallback={raw}
-          editor={InlineEditor}
-          config={{
-            mediaEmbed: {
-              previewsInData: true
-            }
-          }}
+          editor={
+            props.toolbarType === 'balloon'
+              ? require('@ckeditor/ckeditor5-build-balloon')
+              : require('@ckeditor/ckeditor5-build-inline')
+          }
+          config={editorConfig}
           data={props.data}
           onReady={editor => {
+            console.log('ready')
             // editor.editing.view.change(writer => {
             //   const viewEditableRoot = editor.editing.view.document.getRoot()
-
             //   writer.removeClass('ck-editor__editable_inline', viewEditableRoot)
+            //   writer.removeClass('ck-focused', viewEditableRoot)
             // })
             // You can store the "editor" and use when it is needed.
-            console.log(
-              'Editor is ready to use!',
-              editor,
-              !props.editing,
-              props.editing
-            )
           }}
           onChange={(event, editor) => {
-            props.onChange(editor.getData())
+            const data = editor.getData()
+            if (data) {
+              props.onChange(data)
+            }
           }}
-          onBlur={(event, editor) => {
-            console.log('Blur.', editor)
-          }}
+          onBlur={(event, editor) => {}}
           onFocus={(event, editor) => {
-            console.log('Focus.', editor)
+            // editor.editing.view.change(writer => {
+            //   const viewEditableRoot = editor.editing.view.document.getRoot()
+            //   writer.removeClass('ck-focused', viewEditableRoot)
+            // })
           }}
         />
       ) : (

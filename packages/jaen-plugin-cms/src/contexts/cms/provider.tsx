@@ -1,15 +1,17 @@
-// import {Button, ChakraProvider, extendTheme} from '@chakra-ui/react'
+import {Button, ChakraProvider, extendTheme} from '@chakra-ui/react'
+
 import {CMSContext, CMSContextType} from './context'
 
-// const theme = extendTheme({})
+const theme = extendTheme({})
 
 export const CMSProvider: React.FC<CMSContextType> = ({children, ...props}) => {
   return (
     <CMSContext.Provider value={{templates: props.templates}}>
-      {/* <ChakraProvider theme={theme} resetCSS={false}>
+      <ChakraProvider theme={theme} resetCSS={false}>
         {'Overlay'}
-      </ChakraProvider> */}
-      {children}
+
+        {children}
+      </ChakraProvider>
     </CMSContext.Provider>
   )
 }

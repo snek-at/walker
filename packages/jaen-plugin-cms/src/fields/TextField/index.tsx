@@ -14,15 +14,20 @@ import {TextBlock} from '../../store/types/pages/blocks'
 import {FieldIdentifier} from '../../types'
 
 interface TextFieldProps extends FieldIdentifier {
-  initValue: string
+  rtf?: boolean
+  toolbar?: 'inline' | 'balloon'
 }
 
-const TextField: React.FC<TextFieldProps> = ({initValue, ...field}) => {
+const TextField: React.FC<TextFieldProps> = ({
+  rtf = true,
+  toolbar = 'balloon',
+  ...field
+}) => {
   const dispatch = useAppDispatch()
   const isEditing = true
   const path = '/'
 
-  const {fieldName, block} = field
+  const {initValue, fieldName, block} = field
 
   const register = () => dispatch(registerPageField({path, field}))
   const unregister = () => dispatch(unregisterPageField({path, field}))
@@ -31,9 +36,12 @@ const TextField: React.FC<TextFieldProps> = ({initValue, ...field}) => {
   const updatedValue = (content as TextBlock)?.text
   const isRegistered = updatedValue !== undefined
 
-  const value = isRegistered ? updatedValue : initValue
+  console.log(isRegistered, updatedValue, initValue, block?.position)
+
+  const value = isRegistered ? updatedValue : initValue || ''
 
   const handleOnChange = (data: string) => {
+    console.log(!isRegistered && data !== initValue, data, block)
     if (!isRegistered && data !== initValue) {
       register()
     }
@@ -42,12 +50,11 @@ const TextField: React.FC<TextFieldProps> = ({initValue, ...field}) => {
       unregister()
     } else {
       let fieldDetails: FieldUpdateDetails
-      console.log(data)
 
       if (block) {
         fieldDetails = {
           _type: 'BlocksField',
-          blockFieldName: block.blockFieldName,
+          blockFieldName: block.blockFieldName as string,
           blockPosition: block.position,
           fieldName,
           block: {
@@ -77,7 +84,13 @@ const TextField: React.FC<TextFieldProps> = ({initValue, ...field}) => {
 
   return (
     <>
-      <Editor data={value} editing={isEditing} onChange={handleOnChange} />
+      <Editor
+        data={value}
+        editing={isEditing}
+        onChange={handleOnChange}
+        disableToolbar={!rtf}
+        toolbarType={toolbar}
+      />
     </>
   )
 }

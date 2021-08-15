@@ -9,8 +9,6 @@ const LoadableCKEditor = loadable(() => import('@ckeditor/ckeditor5-react'), {
   resolveComponent: (editor: {CKEditor: any}) => editor.CKEditor
 })
 
-console.log('LoadableCKEditor', LoadableCKEditor)
-
 type EditorProps = {
   data: string
   editing: boolean

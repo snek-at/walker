@@ -5,6 +5,9 @@
  */
 
 :root {
+  /* Overrides the border radius setting in the theme. */
+  /* --ck-border-radius: 25px !important; */
+
   --ck-color-image-caption-background: hsl(0, 0%, 97%);
   --ck-color-image-caption-text: hsl(0, 0%, 20%);
   --ck-color-mention-background: hsla(341, 100%, 30%, 0.1);
@@ -22,8 +25,26 @@
   --ck-todo-list-checkmark-size: 16px;
 }
 
-.ck.ck-editor__editable_inline {
-  padding: 0 important!;
+.ck-focused {
+  border: none !important;
+  box-shadow: 0 0 0 2.5px #77bd43 !important;
+}
+
+.ck-blurred:hover {
+  box-shadow: 0 0 0 2.5px #77bd43 !important;
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.ck-editor__editable_inline {
+  padding: 0 !important;
+  border: none !important;
+}
+.ck.ck-editor__editable_inline > *:first-child {
+  margin-top: 0 !important;
+}
+
+.ck.ck-editor__editable_inline > *:last-child {
+  margin-bottom: 0 !important;
 }
 
 /* ckeditor5-image/theme/imagestyle.css */

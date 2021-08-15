@@ -17,5 +17,5 @@ export type CustomBlock = {
   fields: {
     [name: string]: ContentBlocks
   }
-  deleted?: boolean
+  deleted?: true
 }

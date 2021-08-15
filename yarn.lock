@@ -101,7 +101,7 @@
     semver "^6.3.0"
     source-map "^0.5.0"
 
-"@babel/core@^7.1.0", "@babel/core@^7.12.10", "@babel/core@^7.14.6", "@babel/core@^7.7.5":
+"@babel/core@^7.1.0", "@babel/core@^7.12.10", "@babel/core@^7.14.6", "@babel/core@^7.15.0", "@babel/core@^7.7.5":
   version "7.15.0"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.15.0.tgz#749e57c68778b73ad8082775561f67f5196aafa8"
   integrity sha512-tXtmTminrze5HEUPn/a0JtOzzfp0nk+UEXQ/tqIJo3WDGypl/2OFQEMll/zSFU8f/lfmfLXvTaORHF3cfXIQMw==
@@ -1383,6 +1383,14 @@
   dependencies:
     "@chakra-ui/utils" "1.8.2"
 
+"@chakra-ui/icons@^1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/icons/-/icons-1.0.15.tgz#90b0e3c2c161c5a100d6b83a277941b22945f880"
+  integrity sha512-MMuPwmeCil9vAXceIN/Fxn6CNHbhkLofFQaKUfs+UaBsviiU2tvS0nqGaxm/9FNzLr5ithPVWpbz3uV7DXc77g==
+  dependencies:
+    "@chakra-ui/icon" "1.1.11"
+    "@types/react" "^17.0.0"
+
 "@chakra-ui/image@1.0.18":
   version "1.0.18"
   resolved "https://registry.yarnpkg.com/@chakra-ui/image/-/image-1.0.18.tgz#9b3b8ee5a9fac5f05699b4fc1705b30aea2073f3"
@@ -1786,6 +1794,31 @@
   dependencies:
     ckeditor5 "^29.1.0"
 
+"@ckeditor/ckeditor5-build-balloon@^29.1.0":
+  version "29.1.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-build-balloon/-/ckeditor5-build-balloon-29.1.0.tgz#d7826b81e3cb2c0e5e77a673421464f38b5f73b9"
+  integrity sha512-Lyg2hPUO2yhKSdHOujBjhu0tVcZX34ejnNP6GihZuEkBFrPXa5w99zsIkxOryGbUBP1rNXt+CUZXzd8b/r0uLA==
+  dependencies:
+    "@ckeditor/ckeditor5-adapter-ckfinder" "^29.1.0"
+    "@ckeditor/ckeditor5-autoformat" "^29.1.0"
+    "@ckeditor/ckeditor5-basic-styles" "^29.1.0"
+    "@ckeditor/ckeditor5-block-quote" "^29.1.0"
+    "@ckeditor/ckeditor5-ckfinder" "^29.1.0"
+    "@ckeditor/ckeditor5-cloud-services" "^29.1.0"
+    "@ckeditor/ckeditor5-easy-image" "^29.1.0"
+    "@ckeditor/ckeditor5-editor-balloon" "^29.1.0"
+    "@ckeditor/ckeditor5-essentials" "^29.1.0"
+    "@ckeditor/ckeditor5-heading" "^29.1.0"
+    "@ckeditor/ckeditor5-image" "^29.1.0"
+    "@ckeditor/ckeditor5-indent" "^29.1.0"
+    "@ckeditor/ckeditor5-link" "^29.1.0"
+    "@ckeditor/ckeditor5-list" "^29.1.0"
+    "@ckeditor/ckeditor5-media-embed" "^29.1.0"
+    "@ckeditor/ckeditor5-paragraph" "^29.1.0"
+    "@ckeditor/ckeditor5-paste-from-office" "^29.1.0"
+    "@ckeditor/ckeditor5-table" "^29.1.0"
+    "@ckeditor/ckeditor5-typing" "^29.1.0"
+
 "@ckeditor/ckeditor5-build-inline@^29.1.0":
   version "29.1.0"
   resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-build-inline/-/ckeditor5-build-inline-29.1.0.tgz#5781f649186b26ea1ddd2eab6f1cdaf6ca87e9d2"
@@ -1852,6 +1885,14 @@
   integrity sha512-2UqIErUMAs+91PkGeDqzgV8+w+AZvRdhxZ6qX6a02xt54sO+rOX+CIX16SNlTpcJqexSB/+JP6/LrREvh2JfIw==
   dependencies:
     ckeditor5 "^29.1.0"
+
+"@ckeditor/ckeditor5-editor-balloon@^29.1.0":
+  version "29.1.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-editor-balloon/-/ckeditor5-editor-balloon-29.1.0.tgz#a054da33b95f73926f03cf4d37540a5f0e92266f"
+  integrity sha512-rMgJMwZTQm0nFtPgmANnx6Uca79LZRQSirUs5N1qzbLpPrOPPUjvCabCFKCKrHFxUU0/7niI4IJ91xwz544sHQ==
+  dependencies:
+    ckeditor5 "^29.1.0"
+    lodash-es "^4.17.15"
 
 "@ckeditor/ckeditor5-editor-inline@^29.1.0":
   version "29.1.0"
@@ -3795,6 +3836,11 @@
     prop-types "^15.7.2"
     tslib "^2.1.0"
 
+"@react-icons/all-files@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@react-icons/all-files/-/all-files-4.1.0.tgz#477284873a0821928224b6fc84c62d2534d6650b"
+  integrity sha512-hxBI2UOuVaI3O/BhQfhtb4kcGn9ft12RWAFVMUeNjqqhLsHvFtzIkFaptBJpFDANTKoDfdVoHTKZDlwKCACbMQ==
+
 "@reduxjs/toolkit@^1.6.1":
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-1.6.1.tgz#7bc83b47352a663bf28db01e79d17ba54b98ade9"
@@ -3947,7 +3993,7 @@
     escape-string-regexp "^2.0.0"
     lodash.deburr "^4.1.0"
 
-"@storybook/addon-actions@6.3.7", "@storybook/addon-actions@^6.3.6":
+"@storybook/addon-actions@6.3.7", "@storybook/addon-actions@^6.3.7":
   version "6.3.7"
   resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-6.3.7.tgz#b25434972bef351aceb3f7ec6fd66e210f256aac"
   integrity sha512-CEAmztbVt47Gw1o6Iw0VP20tuvISCEKk9CS/rCjHtb4ubby6+j/bkp3pkEUQIbyLdHiLWFMz0ZJdyA/U6T6jCw==
@@ -4052,7 +4098,7 @@
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
-"@storybook/addon-essentials@^6.3.6":
+"@storybook/addon-essentials@^6.3.7":
   version "6.3.7"
   resolved "https://registry.yarnpkg.com/@storybook/addon-essentials/-/addon-essentials-6.3.7.tgz#5af605ab705e938c5b25a7e19daa26e5924fd4e4"
   integrity sha512-ZWAW3qMFrrpfSekmCZibp/ivnohFLJdJweiIA0CLnuCNuuK9kQdpFahWdvyBy5NlCj3UJwB7epTZYZyHqYW7UQ==
@@ -4072,7 +4118,7 @@
     storybook-addon-outline "^1.4.1"
     ts-dedent "^2.0.0"
 
-"@storybook/addon-links@^6.3.6":
+"@storybook/addon-links@^6.3.7":
   version "6.3.7"
   resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-6.3.7.tgz#f273abba6d056794a4aa920b2fa9639136e6747f"
   integrity sha512-/8Gq18o1DejP3Om0ZOJRkMzW5FoHqoAmR0pFx4DipmNu5lYy7V3krLw4jW4qja1MuQkZ53MGh08FJOoAc2RZvQ==
@@ -4571,7 +4617,7 @@
     react-docgen-typescript "^2.0.0"
     tslib "^2.0.0"
 
-"@storybook/react@^6.3.6":
+"@storybook/react@^6.3.7":
   version "6.3.7"
   resolved "https://registry.yarnpkg.com/@storybook/react/-/react-6.3.7.tgz#b15259aeb4cdeef99cc7f09d21db42e3ecd7a01a"
   integrity sha512-4S0iCQIzgi6PdAtV2sYw4uL57yIwbMInNFSux9CxPnVdlxOxCJ+U8IgTxD4tjkTvR4boYSEvEle46ns/bwg5iQ==
@@ -5087,7 +5133,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
+"@types/react@*", "@types/react@^17.0.0":
   version "17.0.18"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.18.tgz#4109cbbd901be9582e5e39e3d77acd7b66bb7fbe"
   integrity sha512-YTLgu7oS5zvSqq49X5Iue5oAbVGhgPc5Au29SJC4VeE17V6gASoOxVkUDy9pXFMRFxCWCD9fLeweNFizo3UzOg==
@@ -9977,7 +10023,7 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-framer-motion@^4:
+framer-motion@^4, framer-motion@^4.1.17:
   version "4.1.17"
   resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-4.1.17.tgz#4029469252a62ea599902e5a92b537120cc89721"
   integrity sha512-thx1wvKzblzbs0XaK2X0G1JuwIdARcoNOW7VVwjO8BUltzXPyONGAElLu6CiCScsOQRI7FIk/45YTFtJw5Yozw==

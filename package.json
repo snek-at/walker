@@ -10,16 +10,18 @@
   },
   "homepage": "https://github.com/snek-at/snek-tools#readme",
   "devDependencies": {
+    "@babel/core": "^7.15.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
-    "@storybook/addon-actions": "^6.3.6",
-    "@storybook/addon-essentials": "^6.3.6",
-    "@storybook/addon-links": "^6.3.6",
+    "@storybook/addon-actions": "^6.3.7",
+    "@storybook/addon-essentials": "^6.3.7",
+    "@storybook/addon-links": "^6.3.7",
     "@storybook/preset-create-react-app": "^3.2.0",
-    "@storybook/react": "^6.3.6",
+    "@storybook/react": "^6.3.7",
     "@trivago/prettier-plugin-sort-imports": "^2.0.2",
+    "babel-loader": "^8.2.2",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^7.0.1",
@@ -72,5 +74,6 @@
       "examples/*",
       "packages/*"
     ]
-  }
+  },
+  "dependencies": {}
 }

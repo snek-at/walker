@@ -2,6 +2,7 @@ import {DeepPartial} from '@chakra-ui/react'
 import {createSelector} from '@reduxjs/toolkit'
 
 import {RootState} from '..'
+import {compactObject} from '../../common/utils'
 import {BlocksField, PlainField} from '../types/pages'
 import {ContentBlocks} from '../types/pages/blocks'
 
@@ -28,4 +29,11 @@ export const pageFieldContentSelector = (
     field => {
       return field
     }
+  )
+
+export const pageFieldBlocksSelector = (path: string, fieldName: string) =>
+  createSelector<RootState, BlocksField['blocks'], BlocksField['blocks']>(
+    state =>
+      (state.pages.nodes?.[path]?.fields?.[fieldName] as BlocksField)?.blocks,
+    blocks => blocks
   )
