@@ -78,9 +78,19 @@ export function prepareBlocks<T>(
 }
 
 export const BlockItem = React.memo(
-  ({fieldName, Block, block, height, width, initValue, onDelete}: any) => {
+  ({
+    fieldName,
+    Block,
+    block,
+    height,
+    width,
+    initValue,
+    position,
+    onDelete
+  }: any) => {
+    console.log('render')
     return (
-      <SFBWrapper onDeleteClick={onDelete}>
+      <SFBWrapper onDeleteClick={() => onDelete(position)}>
         <Block
           streamFieldHeight={height}
           streamFieldWidth={width}

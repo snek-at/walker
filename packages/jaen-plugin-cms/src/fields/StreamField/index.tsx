@@ -144,13 +144,14 @@ const StreamField: React.FC<StreamFieldProps> = ({
       return (
         <BlockItem
           key={position}
+          position={position}
           fieldName={fieldName}
           Block={BlockComponent}
           block={block}
           initValue={allBlocks[position]}
           height={height}
           width={width}
-          onDelete={() => deleteBlock(position)}
+          onDelete={deleteBlock}
         />
       )
     }
