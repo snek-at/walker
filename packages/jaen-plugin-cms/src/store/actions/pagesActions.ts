@@ -41,6 +41,20 @@ export const unregisterPageField = createAction<UnregisterPageFieldActionPayload
   'pages/unregisterPageField'
 )
 
+export type DeletePageFieldActionPayload = {
+  path: string
+  field: {
+    fieldName: string
+    block?: {
+      position: number
+      blockFieldName?: string
+    }
+  }
+}
+export const deletePageField = createAction<DeletePageFieldActionPayload>(
+  'pages/deletePageField'
+)
+
 export type UpdatePageFieldActionPayload = {
   path: string
   fieldDetails: FieldUpdateDetails

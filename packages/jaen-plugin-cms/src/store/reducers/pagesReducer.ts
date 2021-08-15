@@ -86,6 +86,39 @@ const pagesReducer = createReducer(initialState, {
       delete nodeFields?.[field.fieldName]
     }
   },
+  [actions.deletePageField.type]: (
+    state,
+    action: PayloadAction<actions.DeletePageFieldActionPayload>
+  ) => {
+    const {path, field} = action.payload
+
+    const f = state.nodes?.[path]?.fields?.[field.fieldName]
+
+    if (field.block) {
+      const blockField = f as BlocksField
+
+      state.nodes = {
+        ...state.nodes,
+        [path]: {
+          ...state.nodes?.[path],
+          fields: {
+            ...state.nodes?.[path]?.fields,
+            [field.fieldName]: {
+              ...blockField,
+              _type: 'BlocksField',
+              blocks: {
+                ...blockField?.blocks,
+                [field.block.position]: {
+                  ...blockField?.blocks?.[field.block.position],
+                  deleted: true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   [actions.updatePageField.type]: (
     state,
     action: PayloadAction<actions.UpdatePageFieldActionPayload>

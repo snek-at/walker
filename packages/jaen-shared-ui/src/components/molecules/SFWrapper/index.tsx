@@ -8,10 +8,12 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
+  Skeleton,
   useDisclosure,
   VStack
 } from '@chakra-ui/react'
 import {FaCube} from '@react-icons/all-files/fa/FaCube'
+import React from 'react'
 
 export type SFWrapperProps = {
   ref: React.Ref<HTMLDivElement>
@@ -22,15 +24,11 @@ export type SFWrapperProps = {
 const SFWrapper: React.FC<SFWrapperProps> = ({children, ...props}) => {
   const popover = useDisclosure()
 
-  const handleButtonClick = () => {
-    popover.onClose()
-  }
-
   return (
     <Box>
       <Popover
         trigger="hover"
-        placement="top-end"
+        placement="auto"
         isOpen={popover.isOpen}
         onOpen={popover.onOpen}
         onClose={popover.onClose}>
@@ -39,7 +37,11 @@ const SFWrapper: React.FC<SFWrapperProps> = ({children, ...props}) => {
             ref={props.ref}
             boxShadow={popover.isOpen ? 'outline' : 'none'}
             rounded="md">
-            {children}
+            {React.Children.toArray(children).length ? (
+              children
+            ) : (
+              <Skeleton h={20} />
+            )}
           </Box>
         </PopoverTrigger>
         <PopoverContent>
@@ -56,14 +58,12 @@ const SFWrapper: React.FC<SFWrapperProps> = ({children, ...props}) => {
                   variant="outline"
                   size="sm"
                   onClick={() => {
-                    handleButtonClick()
                     onClick()
                   }}>
                   {name}
                 </Button>
               ))}
             </VStack>
-            <ButtonGroup orientation="horizontal"></ButtonGroup>
           </PopoverBody>
         </PopoverContent>
       </Popover>

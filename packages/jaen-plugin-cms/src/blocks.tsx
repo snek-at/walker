@@ -7,6 +7,8 @@
  * Use of this source code is governed by an EUPL-1.2 license that can be found
  * in the LICENSE file at https://snek.at/license
  */
+import {SFBWrapper} from '@snek-at/jaen-shared-ui'
+import isEqual from 'lodash/isEqual'
 import * as React from 'react'
 
 import {FieldIdentifier, StreamBlockIdentifier} from './types'
@@ -18,7 +20,7 @@ export interface BC<T>
   extends React.FC<{
     streamFieldHeight: number
     streamFieldWidth: number
-    fieldOptions: StreamBlockIdentifier
+    values: MappingType<T>
   }> {
   BlockType: string
   BlockFields: {
@@ -49,15 +51,13 @@ export function prepareBlocks<T>(
     if (fieldOptions.block) {
       const value = fieldOptions.initValue?.fields[blockFieldName as string]
 
-      let initValue = undefined
+      let initValue = Block.defaultValues[blockFieldName]
 
       if (value?._type === 'TextBlock') {
-        initValue = value.text
+        initValue = value.text as any
       } else if (value?._type === 'FileBlock') {
-        initValue = value.index
+        initValue = value.index as any
       }
-
-      console.log('configuredfield', fieldOptions)
 
       const ConfiguredField = (
         <Field
@@ -76,3 +76,22 @@ export function prepareBlocks<T>(
 
   return mapping
 }
+
+export const BlockItem = React.memo(
+  ({fieldName, Block, block, height, width, initValue, onDelete}: any) => {
+    return (
+      <SFBWrapper onDeleteClick={onDelete}>
+        <Block
+          streamFieldHeight={height}
+          streamFieldWidth={width}
+          values={prepareBlocks(Block, {
+            fieldName,
+            initValue,
+            block
+          })}
+        />
+      </SFBWrapper>
+    )
+  },
+  isEqual
+)

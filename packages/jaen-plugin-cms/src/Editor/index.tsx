@@ -1,4 +1,5 @@
 // import {CKEditor} from '@ckeditor/ckeditor5-react'
+import {Box} from '@chakra-ui/react'
 import loadable from '@loadable/component'
 import React, {useRef, useState, useEffect} from 'react'
 
@@ -18,7 +19,8 @@ type EditorProps = {
 
 const Editor: React.FC<EditorProps> = props => {
   const raw = (
-    <div
+    <Box
+      display={'inline-block'}
       className="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
       dangerouslySetInnerHTML={{__html: props.data}}
     />
@@ -35,7 +37,7 @@ const Editor: React.FC<EditorProps> = props => {
   }
 
   return (
-    <>
+    <Box display={'inline-block'}>
       {props.editing ? (
         <LoadableCKEditor
           fallback={raw}
@@ -57,9 +59,8 @@ const Editor: React.FC<EditorProps> = props => {
           }}
           onChange={(event, editor) => {
             const data = editor.getData()
-            if (data) {
-              props.onChange(data)
-            }
+            console.log('New data', data)
+            props.onChange(data)
           }}
           onBlur={(event, editor) => {}}
           onFocus={(event, editor) => {
@@ -70,9 +71,9 @@ const Editor: React.FC<EditorProps> = props => {
           }}
         />
       ) : (
-        {raw}
+        <>{raw}</>
       )}
-    </>
+    </Box>
   )
 }
 

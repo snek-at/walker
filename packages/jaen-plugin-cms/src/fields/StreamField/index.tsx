@@ -8,13 +8,17 @@
  * in the LICENSE file at https://snek.at/license
  */
 import {SFWrapper} from '@snek-at/jaen-shared-ui'
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useEffect, useState, useRef, useMemo} from 'react'
+import {useCallback} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
-import {GenericBC} from '../../blocks'
+import {BlockItem, GenericBC, prepareBlocks} from '../../blocks'
 import {merge} from '../../common/utils'
 import {useAppDispatch, useAppSelector} from '../../store'
-import {registerPageField} from '../../store/actions/pagesActions'
+import {
+  deletePageField,
+  registerPageField
+} from '../../store/actions/pagesActions'
 import {pageFieldBlocksSelector} from '../../store/selectors/pages'
 import {InitValueType} from './types'
 
@@ -50,20 +54,33 @@ const StreamField: React.FC<StreamFieldProps> = ({
 
   const storeBlocks = useSelector(pageFieldBlocksSelector(path, fieldName))
 
-  const allBlocks = merge(
-    initValue,
-    storeBlocks,
-    value => value.deleted
-  ) as typeof storeBlocks
+  const visibleBlocks = useMemo(
+    () =>
+      merge(
+        initValue,
+        storeBlocks,
+        value => value.deleted
+      ) as typeof storeBlocks,
+    [initValue, storeBlocks]
+  )
 
-  const blocksKeys = Object.keys(allBlocks).sort(
+  const allBlocks = useMemo(
+    () => merge(initValue, storeBlocks) as typeof storeBlocks,
+    [initValue, storeBlocks]
+  )
+
+  const visibleBlocksKeys = Object.keys(visibleBlocks).sort(
+    (a, b) => parseInt(a) - parseInt(b)
+  )
+
+  const allBlocksKeys = Object.keys(allBlocks).sort(
     (a, b) => parseInt(a) - parseInt(b)
   )
 
   const addBlock = (typeName: string): void => {
     let position
-    if (blocksKeys.length > 0) {
-      position = Math.min(...blocksKeys.map(e => parseInt(e)))
+    if (allBlocksKeys.length > 0) {
+      position = Math.min(...allBlocksKeys.map(e => parseInt(e)))
     } else {
       position = 0
     }
@@ -88,6 +105,21 @@ const StreamField: React.FC<StreamFieldProps> = ({
     )
   }
 
+  const deleteBlock = useCallback((position: string) => {
+    console.log('delete block', position)
+    dispatch(
+      deletePageField({
+        path,
+        field: {
+          fieldName,
+          block: {
+            position: parseInt(position)
+          }
+        }
+      })
+    )
+  }, [])
+
   const blocksTypes = blocks.map(block => ({
     id: block.BlockType,
     name: block.BlockType,
@@ -98,33 +130,31 @@ const StreamField: React.FC<StreamFieldProps> = ({
     typeName: string
   ): GenericBC | undefined => blocks.find(b => b.BlockType === typeName)
 
-  const renderBlock = (position: number): JSX.Element | undefined => {
-    const blockTypeName = allBlocks?.[position].typeName
+  const renderedBlocks = visibleBlocksKeys.map(position => {
+    const BlockComponent = getBlockComponentByTypeName(
+      allBlocks?.[position].typeName
+    )
 
-    if (blockTypeName) {
-      const Block = getBlockComponentByTypeName(blockTypeName)
+    if (BlockComponent) {
+      const block = {
+        position: parseInt(position),
+        typeName: BlockComponent.BlockType
+      }
 
       return (
-        <>
-          {Block ? (
-            <Block
-              streamFieldHeight={height}
-              streamFieldWidth={width}
-              fieldOptions={{
-                fieldName,
-                initValue: initValue[position],
-                block: {position, typeName: Block.BlockType}
-              }}
-            />
-          ) : null}
-        </>
+        <BlockItem
+          key={position}
+          fieldName={fieldName}
+          Block={BlockComponent}
+          block={block}
+          initValue={allBlocks[position]}
+          height={height}
+          width={width}
+          onDelete={() => deleteBlock(position)}
+        />
       )
     }
-  }
-
-  const renderedBlocks = blocksKeys.map((position, key) => (
-    <div>{renderBlock(parseInt(position))}</div>
-  ))
+  })
 
   if (editing) {
     return (
