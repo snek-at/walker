@@ -106,7 +106,6 @@ const StreamField: React.FC<StreamFieldProps> = ({
   }
 
   const deleteBlock = useCallback((position: string) => {
-    console.log('delete block', position)
     dispatch(
       deletePageField({
         path,

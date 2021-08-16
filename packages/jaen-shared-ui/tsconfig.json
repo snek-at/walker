@@ -4,6 +4,7 @@
     "outDir": "lib",
     "rootDir": "src"
   },
-  "include": ["src", "gatsby-browser.js"],
+  "include": ["src"],
+  "types": ["../../node_modules"],
   "references": []
 }
