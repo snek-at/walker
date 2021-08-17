@@ -11,7 +11,7 @@ import {SFBWrapper} from '@snek-at/jaen-shared-ui'
 import isEqual from 'lodash/isEqual'
 import * as React from 'react'
 
-import {FieldIdentifier, StreamBlockIdentifier} from './types'
+import {FieldIdentifier, StreamBlockIdentifier} from '../types'
 
 /**
  * Block Component

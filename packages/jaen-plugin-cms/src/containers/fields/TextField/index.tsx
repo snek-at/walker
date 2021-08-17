@@ -1,16 +1,15 @@
 import React, {useEffect} from 'react'
 import {useSelector} from 'react-redux'
 
-import Editor from '../../Editor'
-import {useAppDispatch, useAppSelector} from '../../store'
+import {useAppDispatch, useAppSelector} from '../../../store'
 import {
   registerPageField,
   unregisterPageField,
   updatePageField
-} from '../../store/actions/siteActions'
-import {pageFieldContentSelector} from '../../store/selectors/pages'
-import {TextBlock} from '../../store/types/pages/blocks'
-import {FieldIdentifier, FieldUpdateDetails} from '../../types'
+} from '../../../store/actions/siteActions'
+import {pageFieldContentSelector} from '../../../store/selectors/pages'
+import {FieldIdentifier, FieldUpdateDetails, TextBlock} from '../../../types'
+import Editor from '../../Editor'
 
 interface TextFieldProps extends FieldIdentifier {
   rtf?: boolean
@@ -24,7 +23,7 @@ const TextField: React.FC<TextFieldProps> = ({
 }) => {
   const dispatch = useAppDispatch()
   const isEditing = true
-  const path = '/'
+  const path = 'SitePage /'
 
   const {initValue, fieldName, block} = field
 
@@ -44,7 +43,7 @@ const TextField: React.FC<TextFieldProps> = ({
     if (!isRegistered && data !== initValue) {
       register()
     }
-
+    console.log('data', data, initValue)
     if (data === initValue) {
       unregister()
     } else {

@@ -13,13 +13,13 @@ import {useCallback} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import {BlockItem, GenericBC, prepareBlocks} from '../../blocks'
-import {merge} from '../../common/utils'
-import {useAppDispatch, useAppSelector} from '../../store'
+import {merge} from '../../../common/utils'
+import {useAppDispatch, useAppSelector} from '../../../store'
 import {
   deletePageField,
   registerPageField
-} from '../../store/actions/siteActions'
-import {pageFieldBlocksSelector} from '../../store/selectors/pages'
+} from '../../../store/actions/siteActions'
+import {pageFieldBlocksSelector} from '../../../store/selectors/pages'
 import {InitValueType} from './types'
 
 type StreamFieldProps = {
@@ -37,7 +37,7 @@ const StreamField: React.FC<StreamFieldProps> = ({
 }) => {
   const dispatch = useAppDispatch()
 
-  const path = '/'
+  const path = 'SitePage /'
 
   const [height, setHeight] = useState(0)
   const [width, setWidth] = useState(0)

@@ -1,4 +1,3 @@
-export * from './cms/context'
-export * from './cms/provider'
+export {default as CMSProvider} from "./cms"
 
 export * from './page'

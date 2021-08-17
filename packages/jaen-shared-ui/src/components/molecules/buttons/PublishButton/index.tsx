@@ -16,7 +16,7 @@ const PublishButton: React.FC = props => {
             animation.playSegments([0, animation.totalFrames], true)
           }
           {...(props as any)}>
-          <Button leftIcon={container} rightIcon={container}>
+          <Button leftIcon={container}>
             Publish
           </Button>
         </i>

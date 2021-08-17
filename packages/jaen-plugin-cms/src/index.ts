@@ -1,8 +1,8 @@
 export * from './contexts'
-export * as fields from './fields'
-export * as blocks from './blocks'
+export * as fields from './containers/fields'
+export * as blocks from './containers/blocks'
 
-export {default as Editor} from './Editor'
+export {default as Editor} from './containers/Editor'
 
 export default {
   name: 'jaen-plugin-cms',

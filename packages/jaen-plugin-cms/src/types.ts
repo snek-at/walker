@@ -91,7 +91,7 @@ type BasePageType = {
 
 export interface PageType extends BasePageType {
   relations: {
-    parent: string
+    parent: string | null
     children: string[]
   }
 }

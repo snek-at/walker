@@ -1,6 +1,7 @@
 import {createContext, useContext} from 'react'
 
 import {ResolvedPageType} from '../../types'
+import {usePage} from '../cms'
 
 // SEO: https://github.com/jlengstorf/gatsby-theme-jason-blog/blob/master/src/components/SEO/SEO.js
 
@@ -20,11 +21,22 @@ export const usePageContext = (): PageContextType => {
   return context
 }
 
-export const PageProvider: React.FC<PageContextType> = ({
+type PageProviderProps = {
+  path: string
+}
+
+export const PageProvider: React.FC<PageProviderProps> = ({
   children,
   ...props
 }) => {
-  return <PageContext.Provider value={props}>{children}</PageContext.Provider>
+  const page = usePage(props.path)
+
+  return (
+    <PageContext.Provider value={{page}}>
+      {JSON.stringify(page)}
+      {children}
+    </PageContext.Provider>
+  )
 }
 
 export default PageProvider
