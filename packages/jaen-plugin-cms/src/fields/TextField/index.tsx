@@ -9,9 +9,8 @@ import {
   updatePageField
 } from '../../store/actions/pagesActions'
 import {pageFieldContentSelector} from '../../store/selectors/pages'
-import {FieldUpdateDetails} from '../../store/types/pages'
 import {TextBlock} from '../../store/types/pages/blocks'
-import {FieldIdentifier} from '../../types'
+import {FieldIdentifier, FieldUpdateDetails} from '../../types'
 
 interface TextFieldProps extends FieldIdentifier {
   rtf?: boolean

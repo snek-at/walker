@@ -1,3 +1,3 @@
-import {BlocksField} from '../../store/types/pages'
+import {BlocksField} from '../../types'
 
 export type InitValueType = BlocksField['blocks']

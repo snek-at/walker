@@ -53,7 +53,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare": "husky install",
-    "develop": "yarn workspace @snek-at/jaen-examples-site develop"
+    "develop": "yarn workspace my-gatsby-site develop"
   },
   "lint-staged": {
     "*.tsx,*.ts,*.js,!*js.snap": [

@@ -11,3 +11,123 @@ export type FieldIdentifier = {
   fieldName: string
   block?: {typeName: string; position: number; blockFieldName: string}
 }
+
+export type TextBlock = {
+  _type: 'TextBlock'
+  text: string
+}
+
+export type FileBlock = {
+  _type: 'FileBlock'
+  /**
+   * Reference to a DataLayerFiles[string] object
+   */
+  index: string
+}
+
+export type ContentBlocks = TextBlock | FileBlock
+
+type BlocksFieldDetails = {
+  _type: 'BlocksField'
+  blockFieldName: string
+  blockPosition: number
+}
+
+type PlainFieldDetails = {
+  _type: 'PlainField'
+}
+
+export type FieldUpdateDetails = (BlocksFieldDetails | PlainFieldDetails) & {
+  fieldName: string
+  block: ContentBlocks
+}
+
+export type CustomBlock = {
+  typeName: string
+  fields: {
+    [name: string]: ContentBlocks
+  }
+  deleted?: true
+}
+
+export type BlocksField = {
+  _type: 'BlocksField'
+  blocks: {
+    [position: string]: CustomBlock
+  }
+  deleted?: true
+}
+
+export type PlainField = {
+  _type: 'PlainField'
+  content: ContentBlocks
+}
+
+export type Field = PlainField | BlocksField
+
+export type PageMetadata = {
+  title: string
+  description: string
+  image: string
+  /**
+   * Link rel="canonical" will be used by search engines
+   */
+  canonical: string
+  datePublished: string | false
+  social: {
+    twitter: string
+    fbAppId: string
+  }
+  isBlogPost: boolean
+  deleted?: true
+}
+
+export type FieldsPage = {
+  fields: {
+    [fieldName: string]: Field
+  }
+}
+
+export interface NonCircularPageType extends FieldsPage {
+  pageMetadata: PageMetadata
+}
+
+export interface PageType extends NonCircularPageType {
+  relations: {
+    parent: NonCircularPageType
+    children: NonCircularPageType[]
+  }
+}
+
+export type SiteType = {
+  siteMetadata: {
+    title: string
+    description: string
+    siteUrl: string
+    image: string
+    author: {
+      name: string
+    }
+    organization: {
+      name: string
+      url: string
+      logo: string
+    }
+    social: {
+      twitter: string
+      fbAppID: string
+    }
+  }
+  allSitePage: {
+    nodes: {
+      children: {
+        id: string
+      }
+      parent: {
+        id: string
+      }
+      pageMetadata: PageMetadata
+      id: string
+    }[]
+  }
+}

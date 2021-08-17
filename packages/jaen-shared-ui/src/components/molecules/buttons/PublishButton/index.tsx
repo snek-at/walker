@@ -16,7 +16,9 @@ const PublishButton: React.FC = props => {
             animation.playSegments([0, animation.totalFrames], true)
           }
           {...(props as any)}>
-          <Button leftIcon={container}>Publish</Button>
+          <Button leftIcon={container} rightIcon={container}>
+            Publish
+          </Button>
         </i>
       )}
     </Lottie>

@@ -1,7 +1,8 @@
 import {createReducer, PayloadAction} from '@reduxjs/toolkit'
 
+import {BlocksField, Field, PlainField} from '../../types'
 import * as actions from '../actions/pagesActions'
-import {BlocksField, Field, PagesState, PlainField} from '../types/pages'
+import {PagesState} from '../types/pages'
 
 const initialState: PagesState = {
   distinct: {static: [], dynamic: []},

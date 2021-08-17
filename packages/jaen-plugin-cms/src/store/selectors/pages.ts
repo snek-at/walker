@@ -3,8 +3,7 @@ import {createSelector} from '@reduxjs/toolkit'
 
 import {RootState} from '..'
 import {compactObject} from '../../common/utils'
-import {BlocksField, PlainField} from '../types/pages'
-import {ContentBlocks} from '../types/pages/blocks'
+import {BlocksField, PlainField, ContentBlocks} from '../../types'
 
 export const pageFieldContentSelector = (
   path: string,
