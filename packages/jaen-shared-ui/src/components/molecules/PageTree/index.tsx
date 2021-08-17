@@ -2,7 +2,10 @@ import {Box} from '@chakra-ui/react'
 import {useMemo} from 'react'
 import {useState} from 'react'
 
+import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
+import {Text} from '@chakra-ui/react'
 import styled from '@emotion/styled'
+
 import Tree, {
   mutateTree,
   moveItemOnTree,
@@ -15,6 +18,10 @@ import Tree, {
 } from '@atlaskit/tree'
 
 import {TreeConverter} from './treeconverter'
+
+type State = {
+  tree: TreeData
+}
 
 type Item = {
   id: string
@@ -69,29 +76,17 @@ const PageTree: React.FC<PageTreeProps> = ({items}) => {
     if (item.children && item.children.length > 0) {
       return item.isExpanded ? (
         <PreTextIcon onClick={() => onCollapse(item.id)}>
-          <Animation lottie={folderOpenedIconLottie}>
-            {({container, animation}) => (
-              container
-            )}
-          </Animation>
+          <PhoneIcon />
         </PreTextIcon>
       ) : (
         <PreTextIcon onClick={() => onExpand(item.id)}>
-          <Animation lottie={folderClosedIconLottie}>
-            {({container, animation}) => (
-              container
-            )}
-          </Animation>
+          <PhoneIcon />
         </PreTextIcon>
       )
     }
     return (
       <PreTextIcon>
-        <Animation lottie={documentIconLottie}>
-          {({container, animation}) => (
-            container
-          )}
-        </Animation>
+        <PhoneIcon />
       </PreTextIcon>
     )
   }

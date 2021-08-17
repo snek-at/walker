@@ -34,7 +34,13 @@ export const registerPageField = createAction<RegisterPageFieldActionPayload>(
 
 export type UnregisterPageFieldActionPayload = {
   path: string
-  field: FieldIdentifier
+  field: {
+    fieldName: string
+    block?: {
+      position: number
+      blockFieldName?: string
+    }
+  }
 }
 export const unregisterPageField = createAction<UnregisterPageFieldActionPayload>(
   'site/unregisterPageField'

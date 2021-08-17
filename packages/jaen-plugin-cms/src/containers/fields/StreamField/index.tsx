@@ -10,16 +10,23 @@
 import {SFWrapper} from '@snek-at/jaen-shared-ui'
 import React, {useEffect, useState, useRef, useMemo} from 'react'
 import {useCallback} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch, useSelector, useStore} from 'react-redux'
 
-import {BlockItem, GenericBC, prepareBlocks} from '../../blocks'
 import {merge} from '../../../common/utils'
-import {useAppDispatch, useAppSelector} from '../../../store'
+import {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+  useAppState
+} from '../../../store'
 import {
   deletePageField,
-  registerPageField
+  registerPageField,
+  unregisterPageField
 } from '../../../store/actions/siteActions'
 import {pageFieldBlocksSelector} from '../../../store/selectors/pages'
+import {BlocksField} from '../../../types'
+import {BlockItem, GenericBC, prepareBlocks} from '../../blocks'
 import {InitValueType} from './types'
 
 type StreamFieldProps = {
@@ -36,8 +43,34 @@ const StreamField: React.FC<StreamFieldProps> = ({
   reverseOrder
 }) => {
   const dispatch = useAppDispatch()
-
+  const appState = useAppState()
   const path = 'SitePage /'
+
+  // const [SFBlocks, setSFBlocks] = useState(
+  //   (appState.site.allSitePage?.nodes?.[path]?.fields?.[
+  //     fieldName
+  //   ] as BlocksField)?.blocks
+  // )
+
+  const SFBlocks = useAppSelector(
+    pageFieldBlocksSelector(path, fieldName),
+    (l, r) => {
+      const shouldUpdate =
+        JSON.stringify(Object.keys(l)) !== JSON.stringify(Object.keys(r))
+
+      if (shouldUpdate) {
+        return false
+      }
+
+      for (const key in l) {
+        if (l[key].deleted !== r[key].deleted) {
+          return false
+        }
+      }
+
+      return true
+    }
+  )
 
   const [height, setHeight] = useState(0)
   const [width, setWidth] = useState(0)
@@ -52,21 +85,14 @@ const StreamField: React.FC<StreamFieldProps> = ({
 
   const editing = true //useAppSelector(({cms}) => cms.options.editing)
 
-  const storeBlocks = useSelector(pageFieldBlocksSelector(path, fieldName))
-
   const visibleBlocks = useMemo(
-    () =>
-      merge(
-        initValue,
-        storeBlocks,
-        value => value.deleted
-      ) as typeof storeBlocks,
-    [initValue, storeBlocks]
+    () => merge(initValue, SFBlocks, value => value.deleted) as typeof SFBlocks,
+    [initValue, SFBlocks]
   )
 
   const allBlocks = useMemo(
-    () => merge(initValue, storeBlocks) as typeof storeBlocks,
-    [initValue, storeBlocks]
+    () => merge(initValue, SFBlocks) as typeof SFBlocks,
+    [initValue, SFBlocks]
   )
 
   const visibleBlocksKeys = Object.keys(visibleBlocks).sort(
@@ -106,17 +132,21 @@ const StreamField: React.FC<StreamFieldProps> = ({
   }
 
   const deleteBlock = useCallback((position: string) => {
-    dispatch(
-      deletePageField({
-        path,
-        field: {
-          fieldName,
-          block: {
-            position: parseInt(position)
-          }
+    const payload = {
+      path,
+      field: {
+        fieldName,
+        block: {
+          position: parseInt(position)
         }
-      })
-    )
+      }
+    }
+    // check if position is in initValue, if not, unregister it instead of deleting it
+    if (position in initValue) {
+      dispatch(deletePageField(payload))
+    } else {
+      dispatch(unregisterPageField(payload))
+    }
   }, [])
 
   const blocksTypes = blocks.map(block => ({

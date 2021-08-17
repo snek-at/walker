@@ -98,7 +98,7 @@ export interface PageType extends BasePageType {
 
 export interface ResolvedPageType extends BasePageType {
   relations: {
-    parent: BasePageType
+    parent: BasePageType | null
     children: BasePageType[]
   }
 }

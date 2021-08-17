@@ -40,7 +40,9 @@ export const usePage = (id: string): ResolvedPageType => {
     fields: node.fields
   })
 
-  resolvedPage.relations.parent = transformToBasePage(nodes[relations.parent])
+  resolvedPage.relations.parent = relations.parent
+    ? transformToBasePage(nodes[relations.parent])
+    : null
   resolvedPage.relations.children = relations.children.map((childId: string) =>
     transformToBasePage(nodes[childId])
   )
