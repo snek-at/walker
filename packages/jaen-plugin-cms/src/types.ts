@@ -1,4 +1,4 @@
-import {InitValueType} from './fields/StreamField/types'
+import {InitValueType} from './containers/fields/StreamField/types'
 
 export type StreamBlockIdentifier = {
   initValue: InitValueType['string']
@@ -94,6 +94,7 @@ export interface PageType extends BasePageType {
     parent: string | null
     children: string[]
   }
+  deleted?: true
 }
 
 export interface ResolvedPageType extends BasePageType {

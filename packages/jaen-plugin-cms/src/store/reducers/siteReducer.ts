@@ -1,4 +1,5 @@
 import {createReducer, PayloadAction} from '@reduxjs/toolkit'
+import update from 'immutability-helper'
 
 import {BlocksField, PlainField} from '../../types'
 import * as actions from '../actions/siteActions'
@@ -7,13 +8,118 @@ import {SiteState} from '../types/site'
 const initialState: SiteState = {}
 
 const siteReducer = createReducer(initialState, {
+  [actions.addPage.type]: (
+    state,
+    action: PayloadAction<actions.AddPageActionPayload>
+  ) => {
+    const {pageId, page} = action.payload
+    const parentId = page.relations.parent
+
+    state.allSitePage = {
+      ...state.allSitePage,
+      nodes: {
+        ...state.allSitePage?.nodes,
+        [pageId]: page
+      }
+    }
+
+    if (parentId) {
+      const parentRelations = state.allSitePage?.nodes?.[parentId]?.relations
+
+      if (parentRelations) {
+        parentRelations.children = parentRelations.children || []
+
+        if (!parentRelations.children.includes(pageId)) {
+          parentRelations.children.push(pageId)
+        }
+      }
+    }
+  },
+  [actions.deletePage.type]: (
+    state,
+    action: PayloadAction<actions.DeletePageFieldActionPayload>
+  ) => {
+    const {pageId} = action.payload
+
+    state.allSitePage = {
+      ...state.allSitePage,
+      nodes: {
+        ...state.allSitePage?.nodes,
+        [pageId]: {
+          ...state.allSitePage?.nodes?.[pageId],
+          deleted: true
+        }
+      }
+    }
+  },
+  [actions.movePage.type]: (
+    state,
+    action: PayloadAction<actions.MovePageActionPayload>
+  ) => {
+    const {pageId, parentPageId} = action.payload
+
+    const oldParent = state.allSitePage?.nodes?.[pageId]?.relations?.parent
+
+    // update ids of children of parentPageId node
+    let newAllSitePage = update(state.allSitePage, {
+      nodes: {
+        [pageId]: {
+          relations: {
+            parent: {
+              $set: parentPageId
+            }
+          }
+        },
+        [parentPageId]: {
+          relations: {
+            children: {
+              $push: [pageId]
+            }
+          }
+        }
+      }
+    })
+
+    // remove pageId node from oldParent node children newAllSitePage
+    if (oldParent) {
+      newAllSitePage = update(state.allSitePage, {
+        nodes: {
+          [oldParent]: {
+            relations: {
+              children: arr => arr?.filter(id => id !== pageId)
+            }
+          }
+        }
+      })
+    }
+
+    state.allSitePage = newAllSitePage
+  },
+  [actions.updatePageMeta.type]: (
+    state,
+    action: PayloadAction<actions.UpdatePageMetaActionPayload>
+  ) => {
+    const {pageId, meta} = action.payload
+
+    const newAllSitePage = update(state.allSitePage, {
+      nodes: {
+        [pageId]: {
+          pageMetadata: {
+            $set: meta
+          }
+        }
+      }
+    })
+
+    state.allSitePage = newAllSitePage
+  },
   [actions.registerPageField.type]: (
     state,
     action: PayloadAction<actions.RegisterPageFieldActionPayload>
   ) => {
-    const {path, field} = action.payload
+    const {pageId, field} = action.payload
 
-    const f = state.allSitePage?.nodes?.[path]?.fields?.[field.fieldName]
+    const f = state.allSitePage?.nodes?.[pageId]?.fields?.[field.fieldName]
 
     if (field.block) {
       const blockField = f as BlocksField
@@ -22,10 +128,10 @@ const siteReducer = createReducer(initialState, {
         ...state.allSitePage,
         nodes: {
           ...state.allSitePage?.nodes,
-          [path]: {
-            ...state.allSitePage?.nodes?.[path],
+          [pageId]: {
+            ...state.allSitePage?.nodes?.[pageId],
             fields: {
-              ...state.allSitePage?.nodes?.[path]?.fields,
+              ...state.allSitePage?.nodes?.[pageId]?.fields,
               [field.fieldName]: {
                 ...blockField,
                 _type: 'BlocksField',
@@ -54,10 +160,10 @@ const siteReducer = createReducer(initialState, {
         ...state.allSitePage,
         nodes: {
           ...state.allSitePage?.nodes,
-          [path]: {
-            ...state.allSitePage?.nodes?.[path],
+          [pageId]: {
+            ...state.allSitePage?.nodes?.[pageId],
             fields: {
-              ...state.allSitePage?.nodes?.[path]?.fields,
+              ...state.allSitePage?.nodes?.[pageId]?.fields,
               [field.fieldName]: {
                 ...plainField,
                 _type: 'PlainField'
@@ -72,9 +178,9 @@ const siteReducer = createReducer(initialState, {
     state,
     action: PayloadAction<actions.UnregisterPageFieldActionPayload>
   ) => {
-    const {path, field} = action.payload
+    const {pageId, field} = action.payload
 
-    const nodeFields = state.allSitePage?.nodes?.[path]?.fields
+    const nodeFields = state.allSitePage?.nodes?.[pageId]?.fields
 
     if (field.block) {
       if (field.block.blockFieldName) {
@@ -94,9 +200,9 @@ const siteReducer = createReducer(initialState, {
     state,
     action: PayloadAction<actions.DeletePageFieldActionPayload>
   ) => {
-    const {path, field} = action.payload
+    const {pageId, field} = action.payload
 
-    const f = state.allSitePage?.nodes?.[path]?.fields?.[field.fieldName]
+    const f = state.allSitePage?.nodes?.[pageId]?.fields?.[field.fieldName]
 
     if (field.block) {
       const blockField = f as BlocksField
@@ -105,10 +211,10 @@ const siteReducer = createReducer(initialState, {
         ...state.allSitePage,
         nodes: {
           ...state.allSitePage?.nodes,
-          [path]: {
-            ...state.allSitePage?.nodes?.[path],
+          [pageId]: {
+            ...state.allSitePage?.nodes?.[pageId],
             fields: {
-              ...state.allSitePage?.nodes?.[path]?.fields,
+              ...state.allSitePage?.nodes?.[pageId]?.fields,
               [field.fieldName]: {
                 ...blockField,
                 _type: 'BlocksField',
@@ -130,16 +236,16 @@ const siteReducer = createReducer(initialState, {
     state,
     action: PayloadAction<actions.UpdatePageFieldActionPayload>
   ) => {
-    const {path, fieldDetails} = action.payload
+    const {pageId, fieldDetails} = action.payload
 
     if (fieldDetails._type === 'BlocksField') {
-      ;(state.allSitePage?.nodes?.[path]?.fields?.[
+      ;(state.allSitePage?.nodes?.[pageId]?.fields?.[
         fieldDetails.fieldName
       ] as BlocksField).blocks[fieldDetails.blockPosition].fields[
         fieldDetails.blockFieldName
       ] = fieldDetails.block
     } else if (fieldDetails._type === 'PlainField') {
-      ;(state.allSitePage?.nodes?.[path]?.fields?.[
+      ;(state.allSitePage?.nodes?.[pageId]?.fields?.[
         fieldDetails.fieldName
       ] as PlainField).content = fieldDetails.block
     }

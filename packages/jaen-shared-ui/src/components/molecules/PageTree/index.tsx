@@ -23,7 +23,7 @@ type State = {
   tree: TreeData
 }
 
-type Item = {
+export type Item = {
   id: string
 }
 
@@ -37,7 +37,7 @@ type PageTreeProps = {
 
 const PageTree: React.FC<PageTreeProps> = ({items}) => {
   // convert items to a set
-  const tree = TreeConverter(items)
+  const [tree, setTree] = useState(TreeConverter(items));
 
   console.log(tree)
 
@@ -111,37 +111,26 @@ const PageTree: React.FC<PageTreeProps> = ({items}) => {
   }
 
   const onExpand = (itemId: ItemId) => {
-    const {tree}: State = this.state
-    this.setState({
-      tree: mutateTree(tree, itemId, {isExpanded: true})
-    })
+    setTree(mutateTree(tree, itemId, {isExpanded: true}))
   }
 
   const onCollapse = (itemId: ItemId) => {
-    const {tree}: State = this.state
-    this.setState({
-      tree: mutateTree(tree, itemId, {isExpanded: false})
-    })
+    setTree(mutateTree(tree, itemId, {isExpanded: false}))
   }
 
   const onDragEnd = (
     source: TreeSourcePosition,
     destination?: TreeDestinationPosition
   ) => {
-    const {tree} = this.state
-
     if (!destination) {
       return
     }
     const newTree = moveItemOnTree(tree, source, destination)
 
-    this.setState({
-      tree: mutateTree(newTree, destination.parentId, {isExpanded: true})
-    })
+    setTree(mutateTree(newTree, destination.parentId, {isExpanded: true}))
   }
 
   return (
-
     <Tree
       tree={tree}
       renderItem={renderItem}

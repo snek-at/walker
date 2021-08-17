@@ -3,14 +3,20 @@ import {createAction} from '@reduxjs/toolkit'
 import {FieldIdentifier, FieldUpdateDetails, PageType} from '../../types'
 
 export type AddPageActionPayload = {
-  path: string
+  pageId: string
   page: PageType
 }
-export const addPage = createAction<number>('foo/count')
-export const deletePage = createAction<number>('foo/count')
+export const addPage = createAction<AddPageActionPayload>('site/addPage')
+export const deletePage = createAction<number>('site/deletePage')
+
+export type MovePageActionPayload = {
+  pageId: string
+  parentPageId: string
+}
+export const movePage = createAction<MovePageActionPayload>('site/movePage')
 
 export type UpdatePageMetaActionPayload = {
-  path: string
+  pageId: string
   meta: Partial<PageType['pageMetadata']>
 }
 export const updatePageMeta = createAction<UpdatePageMetaActionPayload>(
@@ -18,7 +24,7 @@ export const updatePageMeta = createAction<UpdatePageMetaActionPayload>(
 )
 
 export type RegisterPageFieldActionPayload = {
-  path: string
+  pageId: string
   field: {
     fieldName: string
     block?: {
@@ -33,7 +39,7 @@ export const registerPageField = createAction<RegisterPageFieldActionPayload>(
 )
 
 export type UnregisterPageFieldActionPayload = {
-  path: string
+  pageId: string
   field: {
     fieldName: string
     block?: {
@@ -47,7 +53,7 @@ export const unregisterPageField = createAction<UnregisterPageFieldActionPayload
 )
 
 export type DeletePageFieldActionPayload = {
-  path: string
+  pageId: string
   field: {
     fieldName: string
     block?: {
@@ -61,7 +67,7 @@ export const deletePageField = createAction<DeletePageFieldActionPayload>(
 )
 
 export type UpdatePageFieldActionPayload = {
-  path: string
+  pageId: string
   fieldDetails: FieldUpdateDetails
 }
 export const updatePageField = createAction<UpdatePageFieldActionPayload>(

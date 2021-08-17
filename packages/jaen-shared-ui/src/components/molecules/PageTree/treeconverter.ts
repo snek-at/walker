@@ -1,26 +1,34 @@
-import {TreeData} from '@atlaskit/tree'
-import type {ItemWithChildren} from './index'
+import {TreeData, TreeItem} from '@atlaskit/tree'
+import type {Item, ItemWithChildren} from './index'
+
+function* genTreeItem(item: ItemWithChildren){
+  yield {
+    id: item.id,
+    children: item.children.map(genTreeItem(item)),
+    hasChildren: item.children.length ? true : false,
+    isExpanded: item.children.length ? true : false,
+    isChildrenLoading: false,
+    data: {
+      title: item.id
+    }
+  }
+}
 
 export const TreeConverter = (items: ItemWithChildren[]): TreeData => {
   console.log(items)
+  const tree: TreeData = {
+    rootId: '1',
+    items: {}
+  }
 
-  return(
-    {
-      rootId: '1',
-      items: {
-        '1': {
-          id: '1',
-          children: ['1-1', '1-2'],
-          hasChildren: true,
-          isExpanded: true,
-          isChildrenLoading: false,
-          data: {
-            title: 'root'
-          }
-        },
-      }
-    }
-  )
+  tree.items = items.reduce((acc: any, item, index) => {
+    const t = acc[index.toString()] = genTreeItem(item)
+
+    return t
+  }, {})
+
+
+  return tree
 }
 
 export const treeWithTwoBranches: TreeData = {
