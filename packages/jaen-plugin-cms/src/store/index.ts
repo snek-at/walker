@@ -10,10 +10,10 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import {useDispatch, useSelector, TypedUseSelectorHook} from 'react-redux'
 
-import pagesReducer from './reducers/pagesReducer'
+import pagesReducer from './reducers/siteReducer'
 
 const combinedReducer = combineReducers({
-  pages: pagesReducer
+  site: pagesReducer
 })
 
 export const store = configureStore({

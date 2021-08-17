@@ -7,7 +7,7 @@ import {
   registerPageField,
   unregisterPageField,
   updatePageField
-} from '../../store/actions/pagesActions'
+} from '../../store/actions/siteActions'
 import {pageFieldContentSelector} from '../../store/selectors/pages'
 import {TextBlock} from '../../store/types/pages/blocks'
 import {FieldIdentifier, FieldUpdateDetails} from '../../types'

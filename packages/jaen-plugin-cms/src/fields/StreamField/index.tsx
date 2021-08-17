@@ -18,7 +18,7 @@ import {useAppDispatch, useAppSelector} from '../../store'
 import {
   deletePageField,
   registerPageField
-} from '../../store/actions/pagesActions'
+} from '../../store/actions/siteActions'
 import {pageFieldBlocksSelector} from '../../store/selectors/pages'
 import {InitValueType} from './types'
 

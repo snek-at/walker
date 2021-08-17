@@ -82,20 +82,24 @@ export type PageMetadata = {
   deleted?: true
 }
 
-export type FieldsPage = {
+type BasePageType = {
+  pageMetadata: PageMetadata
   fields: {
     [fieldName: string]: Field
   }
 }
 
-export interface NonCircularPageType extends FieldsPage {
-  pageMetadata: PageMetadata
+export interface PageType extends BasePageType {
+  relations: {
+    parent: string
+    children: string[]
+  }
 }
 
-export interface PageType extends NonCircularPageType {
+export interface ResolvedPageType extends BasePageType {
   relations: {
-    parent: NonCircularPageType
-    children: NonCircularPageType[]
+    parent: BasePageType
+    children: BasePageType[]
   }
 }
 
@@ -119,15 +123,14 @@ export type SiteType = {
     }
   }
   allSitePage: {
+    rootNodeIds: string[]
     nodes: {
-      children: {
-        id: string
-      }
-      parent: {
-        id: string
-      }
-      pageMetadata: PageMetadata
-      id: string
-    }[]
+      [id: string]: PageType
+    }
   }
 }
+
+// Site Meta update
+// site page structure update
+// site page meta update
+// site page field update

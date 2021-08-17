@@ -11,10 +11,10 @@ export const deletePage = createAction<number>('foo/count')
 
 export type UpdatePageMetaActionPayload = {
   path: string
-  meta: Partial<PageType['metadata']>
+  meta: Partial<PageType['pageMetadata']>
 }
 export const updatePageMeta = createAction<UpdatePageMetaActionPayload>(
-  'pages/updatePageMeta'
+  'site/updatePageMeta'
 )
 
 export type RegisterPageFieldActionPayload = {
@@ -29,7 +29,7 @@ export type RegisterPageFieldActionPayload = {
   }
 }
 export const registerPageField = createAction<RegisterPageFieldActionPayload>(
-  'pages/registerPageField'
+  'site/registerPageField'
 )
 
 export type UnregisterPageFieldActionPayload = {
@@ -37,7 +37,7 @@ export type UnregisterPageFieldActionPayload = {
   field: FieldIdentifier
 }
 export const unregisterPageField = createAction<UnregisterPageFieldActionPayload>(
-  'pages/unregisterPageField'
+  'site/unregisterPageField'
 )
 
 export type DeletePageFieldActionPayload = {
@@ -51,7 +51,7 @@ export type DeletePageFieldActionPayload = {
   }
 }
 export const deletePageField = createAction<DeletePageFieldActionPayload>(
-  'pages/deletePageField'
+  'site/deletePageField'
 )
 
 export type UpdatePageFieldActionPayload = {
@@ -59,5 +59,5 @@ export type UpdatePageFieldActionPayload = {
   fieldDetails: FieldUpdateDetails
 }
 export const updatePageField = createAction<UpdatePageFieldActionPayload>(
-  'pages/updatePageField'
+  'site/updatePageField'
 )
