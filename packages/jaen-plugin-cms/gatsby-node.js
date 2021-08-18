@@ -1,18 +1,6 @@
-exports.onCreateWebpackConfig = ({stage, loaders, actions}) => {
-  if (stage === 'build-html' || stage === 'develop-html') {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /@ckeditor\/ckeditor5-react/,
-            use: loaders.null()
-          },
-          {
-            test: /@ckeditor\/ckeditor5-build-inline/,
-            use: loaders.null()
-          }
-        ]
-      }
-    })
-  }
-}
+require('source-map-support').install()
+require('ts-node').register()
+
+const gatsbyNode = require('./src/gatsby/gatsby-node')
+
+module.exports = gatsbyNode

@@ -7,7 +7,7 @@
  * Use of this source code is governed by an EUPL-1.2 license that can be found
  * in the LICENSE file at https://snek.at/license
  */
-import {SFBWrapper, SFWrapper} from '@snek-at/jaen-shared-ui'
+import {SFWrapper} from '@snek-at/jaen-shared-ui'
 import React, {useEffect, useState, useRef, useMemo} from 'react'
 import {useCallback} from 'react'
 import {useDispatch, useSelector, useStore} from 'react-redux'
@@ -84,7 +84,7 @@ const StreamField: React.FC<StreamFieldProps> = ({
     }
   }, [ref.current?.clientHeight, ref.current?.clientWidth])
 
-  const editing = false //useAppSelector(({cms}) => cms.options.editing)
+  const editing = true //useAppSelector(({cms}) => cms.options.editing)
 
   const visibleBlocks = useMemo(
     () => merge(initValue, SFBlocks, value => value.deleted) as typeof SFBlocks,
@@ -171,7 +171,7 @@ const StreamField: React.FC<StreamFieldProps> = ({
         typeName: BlockComponent.BlockType
       }
 
-      const blockItem = (
+      return (
         <BlockItem
           key={position}
           position={position}
@@ -184,16 +184,6 @@ const StreamField: React.FC<StreamFieldProps> = ({
           onDelete={deleteBlock}
         />
       )
-
-      if (editing) {
-        return (
-          <SFBWrapper onDeleteClick={() => deleteBlock(position)}>
-            {blockItem}
-          </SFBWrapper>
-        )
-      }
-
-      return <>{blockItem}</>
     }
   })
 

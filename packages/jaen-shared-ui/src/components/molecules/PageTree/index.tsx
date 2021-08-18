@@ -13,7 +13,7 @@ import {Text} from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import {useState} from 'react'
 
-import {TreeConverter,treeWithTwoBranches} from './treeconverter'
+import {TreeConverter} from './treeconverter'
 
 type State = {
   tree: TreeData
@@ -113,16 +113,18 @@ const PageTree: React.FC<PageTreeProps> = ({items}) => {
   }
 
   return (
-    <Tree
-      tree={treeWithTwoBranches}
-      renderItem={renderItem}
-      onExpand={onExpand}
-      onCollapse={onCollapse}
-      onDragEnd={onDragEnd}
-      offsetPerLevel={PADDING_PER_LEVEL}
-      isDragEnabled
-      isNestingEnabled
-    />
+    <div style={{ height: 200, overflow: "auto" }}>
+      <Tree
+        tree={tree}
+        renderItem={renderItem}
+        onExpand={onExpand}
+        onCollapse={onCollapse}
+        onDragEnd={onDragEnd}
+        offsetPerLevel={PADDING_PER_LEVEL}
+        isDragEnabled
+        isNestingEnabled
+      />
+    </div>
   )
 }
 

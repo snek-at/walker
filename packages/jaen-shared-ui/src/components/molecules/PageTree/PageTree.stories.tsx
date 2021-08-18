@@ -7,9 +7,9 @@ export default {
   component: PageTree
 } as Meta
 
-const treeWithTwoBranches= {
-  '1': {
-    id: '1',
+const treeWithTwoBranches = {
+  'SitePage /test': {
+    id: 'test',
     children: [],
     data: {
       title: 'root'
@@ -59,7 +59,9 @@ const treeWithTwoBranches= {
   }
 }
 
-const Template: Story = args => <PageTree items={treeWithTwoBranches} {...args} />
+const Template: Story = args => (
+  <PageTree items={treeWithTwoBranches} {...args} />
+)
 
 export const Primary = Template.bind({})
 

@@ -14,26 +14,31 @@ export const TreeConverter = (items: Items): TreeData => {
     }
   }
 
-  tree.items = Object.fromEntries(
-    Object.entries(items).map(([id, item]) => {
-      const totalSlashes = id.split('/').length
+  tree.items = {
+    ...tree.items,
+    ...Object.fromEntries(
+      Object.entries(items).map(([id, item]) => {
+        const totalSlashes = id.split('/').length
 
-      if (totalSlashes === 1) {
-        tree.items[rootName].children.push(id)
-      }
-
-      return [
-        item,
-        {
-          ...item,
-          id,
-          isExpanded: totalSlashes <= 2,
-          hasChildren: !!item.children.length,
-          isChildrenLoading: false
+        if (totalSlashes === 1) {
+          tree.items[rootName].children.push(id)
         }
-      ]
-    })
-  )
+
+        return [
+          id,
+          {
+            ...item,
+            id,
+            isExpanded: totalSlashes <= 2,
+            hasChildren: !!item.children.length,
+            isChildrenLoading: false
+          }
+        ]
+      })
+    )
+  }
+
+  console.log(tree)
 
   return tree
 }
