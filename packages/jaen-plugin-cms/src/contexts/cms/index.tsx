@@ -12,11 +12,11 @@ import {SiteType} from '../../types'
 
 const theme = extendTheme({})
 
-export type CMSContextType = {
-  templates: JSX.Element[]
+type CMSContextType = {
   site: SiteType
 }
-export const CMSContext = createContext<CMSContextType | undefined>(undefined)
+
+const CMSContext = createContext<CMSContextType | undefined>(undefined)
 
 export const useCMSContext = (): CMSContextType => {
   const context = useContext(CMSContext)
@@ -64,7 +64,7 @@ export const useAllSitePage = () => {
   return merge(context.site.allSitePage, storePages || {})
 }
 
-export const CMSProvider: React.FC<CMSContextType> = ({children, ...props}) => {
+export const CMSProvider: React.FC = ({children, ...props}) => {
   // Perf: Querying all the CMS pages in the CMSProvider may be slow, although it's
   // the fastest implementation. In future the PageProvider itself should query
   // its page content along with children and parent page.
@@ -151,7 +151,6 @@ export const CMSProvider: React.FC<CMSContextType> = ({children, ...props}) => {
         return (
           <CMSContext.Provider
             value={{
-              templates: props.templates,
               site
             }}>
             <ChakraProvider theme={theme} resetCSS={true}>
@@ -166,15 +165,4 @@ export const CMSProvider: React.FC<CMSContextType> = ({children, ...props}) => {
   )
 }
 
-export const CMSProviderWithRedux: React.FC<CMSContextType> = ({
-  children,
-  ...props
-}) => {
-  return (
-    <ReduxProvider store={store}>
-      <CMSProvider {...props}>{children}</CMSProvider>
-    </ReduxProvider>
-  )
-}
-
-export default CMSProviderWithRedux
+export default CMSProvider

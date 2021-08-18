@@ -58,42 +58,55 @@ const siteReducer = createReducer(initialState, {
   ) => {
     const {pageId, parentPageId} = action.payload
 
-    const oldParent = state.allSitePage?.nodes?.[pageId]?.relations?.parent
+    const oldParent = JSON.stringify(
+      state.allSitePage?.nodes?.[pageId]?.relations?.parent
+    )
 
-    // update ids of children of parentPageId node
-    let newAllSitePage = update(state.allSitePage, {
+    state.allSitePage = {
+      ...state.allSitePage,
       nodes: {
+        ...state.allSitePage?.nodes,
         [pageId]: {
+          ...state.allSitePage?.nodes?.[pageId],
           relations: {
-            parent: {
-              $set: parentPageId
-            }
+            ...state.allSitePage?.nodes?.[pageId]?.relations,
+            parent: parentPageId
           }
         },
         [parentPageId]: {
+          ...state.allSitePage?.nodes?.[parentPageId],
           relations: {
-            children: {
-              $push: [pageId]
+            ...state.allSitePage?.nodes?.[parentPageId]?.relations,
+            children: [
+              ...(state.allSitePage?.nodes?.[parentPageId]?.relations
+                ?.children || []),
+              pageId
+            ]
+          }
+        }
+      }
+    }
+
+    // remove pageId node from oldParent node children newAllSitePage
+    if (oldParent) {
+      const relations = state.allSitePage?.nodes?.[oldParent]?.relations
+
+      state.allSitePage = {
+        ...state.allSitePage,
+        nodes: {
+          ...state.allSitePage?.nodes,
+          [oldParent]: {
+            ...state.allSitePage?.nodes?.[oldParent],
+            relations: {
+              ...relations,
+              children:
+                relations &&
+                relations.children?.filter(childId => childId !== pageId)
             }
           }
         }
       }
-    })
-
-    // remove pageId node from oldParent node children newAllSitePage
-    if (oldParent) {
-      newAllSitePage = update(state.allSitePage, {
-        nodes: {
-          [oldParent]: {
-            relations: {
-              children: arr => arr?.filter(id => id !== pageId)
-            }
-          }
-        }
-      })
     }
-
-    state.allSitePage = newAllSitePage
   },
   [actions.updatePageMeta.type]: (
     state,
@@ -111,7 +124,7 @@ const siteReducer = createReducer(initialState, {
       }
     })
 
-    state.allSitePage = newAllSitePage
+    state.allSitePage
   },
   [actions.registerPageField.type]: (
     state,

@@ -79,7 +79,6 @@ export type PageMetadata = {
     fbAppId: string
   }
   isBlogPost: boolean
-  deleted?: true
 }
 
 type BasePageType = {

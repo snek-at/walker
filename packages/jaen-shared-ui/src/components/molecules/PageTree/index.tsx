@@ -1,11 +1,3 @@
-import {Box} from '@chakra-ui/react'
-import {useMemo} from 'react'
-import {useState} from 'react'
-
-import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
-import {Text} from '@chakra-ui/react'
-import styled from '@emotion/styled'
-
 import Tree, {
   mutateTree,
   moveItemOnTree,
@@ -16,6 +8,10 @@ import Tree, {
   TreeSourcePosition,
   TreeDestinationPosition
 } from '@atlaskit/tree'
+import {PhoneIcon} from '@chakra-ui/icons'
+import {Text} from '@chakra-ui/react'
+import styled from '@emotion/styled'
+import {useState} from 'react'
 
 import {TreeConverter} from './treeconverter'
 
@@ -23,41 +19,22 @@ type State = {
   tree: TreeData
 }
 
-export type Item = {
-  id: string
-}
-
-export interface ItemWithChildren extends Item {
-  children: Item[]
+export type Items = {
+  [id: string]: {
+    data: {
+      title: string
+    }
+    children: string[]
+  }
 }
 
 type PageTreeProps = {
-  items: ItemWithChildren[]
+  items: Items
 }
 
 const PageTree: React.FC<PageTreeProps> = ({items}) => {
   // convert items to a set
-  const [tree, setTree] = useState(TreeConverter(items));
-
-  console.log(tree)
-
-  // const itemsSet = useMemo(() => new Set(items), [items])
-
-  // const findItem = (id: string) => {
-  //   for (const e of itemsSet) {
-  //     if (e.id === id) {
-  //       return e
-  //     }
-  //   }
-  // }
-
-  // return (
-  //   <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-  //     {items.map((item, key) => (
-  //       <div key={key}>{item.id}</div>
-  //     ))}
-  //   </Box>
-  // )
+  const [tree, setTree] = useState(TreeConverter(items))
 
   const PADDING_PER_LEVEL = 16
   const PreTextIcon = styled.span`
@@ -90,8 +67,13 @@ const PageTree: React.FC<PageTreeProps> = ({items}) => {
       </PreTextIcon>
     )
   }
-  
-  const renderItem = ({item, onExpand, onCollapse, provided}: RenderItemParams) => {
+
+  const renderItem = ({
+    item,
+    onExpand,
+    onCollapse,
+    provided
+  }: RenderItemParams) => {
     return (
       <div
         ref={provided.innerRef}
