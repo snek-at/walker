@@ -7,6 +7,7 @@ import {Provider as ReduxProvider} from 'react-redux'
 import {merge} from '../../common/utils'
 import Overlay from '../../containers/Overlay'
 import {store, useAppSelector} from '../../store'
+import {DesignProvider} from '../../tools/chakra-ui'
 import {PageMetadata, PageType, ResolvedPageType} from '../../types'
 import {SiteType} from '../../types'
 
@@ -153,11 +154,11 @@ export const CMSProvider: React.FC = ({children, ...props}) => {
             value={{
               site
             }}>
-            <ChakraProvider theme={theme} resetCSS={true}>
+            <DesignProvider>
               <Overlay />
+            </DesignProvider>
 
-              {children}
-            </ChakraProvider>
+            {children}
           </CMSContext.Provider>
         )
       }}

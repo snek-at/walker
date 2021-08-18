@@ -7,7 +7,6 @@
  * Use of this source code is governed by an EUPL-1.2 license that can be found
  * in the LICENSE file at https://snek.at/license
  */
-import {SFBWrapper} from '@snek-at/jaen-shared-ui'
 import isEqual from 'lodash/isEqual'
 import * as React from 'react'
 
@@ -78,29 +77,18 @@ export function prepareBlocks<T>(
 }
 
 export const BlockItem = React.memo(
-  ({
-    fieldName,
-    Block,
-    block,
-    height,
-    width,
-    initValue,
-    position,
-    onDelete
-  }: any) => {
+  ({fieldName, Block, block, height, width, initValue, position}: any) => {
     console.log('render')
     return (
-      <SFBWrapper onDeleteClick={() => onDelete(position)}>
-        <Block
-          streamFieldHeight={height}
-          streamFieldWidth={width}
-          values={prepareBlocks(Block, {
-            fieldName,
-            initValue,
-            block
-          })}
-        />
-      </SFBWrapper>
+      <Block
+        streamFieldHeight={height}
+        streamFieldWidth={width}
+        values={prepareBlocks(Block, {
+          fieldName,
+          initValue,
+          block
+        })}
+      />
     )
   },
   isEqual

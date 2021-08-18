@@ -21,7 +21,7 @@ const Editor: React.FC<EditorProps> = props => {
   const raw = (
     <Box
       display={'inline-block'}
-      className="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
+      className="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline"
       dangerouslySetInnerHTML={{__html: props.data}}
     />
   )
@@ -42,9 +42,9 @@ const Editor: React.FC<EditorProps> = props => {
         <LoadableCKEditor
           fallback={raw}
           editor={
-            props.toolbarType === 'balloon'
-              ? require('@ckeditor/ckeditor5-build-balloon')
-              : require('@ckeditor/ckeditor5-build-inline')
+            props.toolbarType === 'balloon' &&
+            typeof window !== 'undefined' &&
+            require('@ckeditor/ckeditor5-build-balloon')
           }
           config={editorConfig}
           data={props.data}

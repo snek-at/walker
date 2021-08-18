@@ -22,15 +22,17 @@ const TextField: React.FC<TextFieldProps> = ({
   ...field
 }) => {
   const dispatch = useAppDispatch()
-  const isEditing = true
-  const path = 'SitePage /'
+  const isEditing = false
+  const pageId = 'SitePage /'
 
   const {initValue, fieldName, block} = field
 
-  const register = () => dispatch(registerPageField({path, field}))
-  const unregister = () => dispatch(unregisterPageField({path, field}))
+  const register = () => dispatch(registerPageField({pageId, field}))
+  const unregister = () => dispatch(unregisterPageField({pageId, field}))
 
-  const content = useSelector(pageFieldContentSelector(path, fieldName, block))
+  const content = useSelector(
+    pageFieldContentSelector(pageId, fieldName, block)
+  )
   const updatedValue = (content as TextBlock)?.text
   const isRegistered = updatedValue !== undefined
 
@@ -73,7 +75,7 @@ const TextField: React.FC<TextFieldProps> = ({
 
       dispatch(
         updatePageField({
-          path,
+          pageId,
           fieldDetails
         })
       )

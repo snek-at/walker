@@ -13,7 +13,7 @@ import {Text} from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import {useState} from 'react'
 
-import {TreeConverter} from './treeconverter'
+import {TreeConverter,treeWithTwoBranches} from './treeconverter'
 
 type State = {
   tree: TreeData
@@ -114,7 +114,7 @@ const PageTree: React.FC<PageTreeProps> = ({items}) => {
 
   return (
     <Tree
-      tree={tree}
+      tree={treeWithTwoBranches}
       renderItem={renderItem}
       onExpand={onExpand}
       onCollapse={onCollapse}

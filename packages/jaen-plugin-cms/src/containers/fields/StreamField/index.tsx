@@ -7,7 +7,7 @@
  * Use of this source code is governed by an EUPL-1.2 license that can be found
  * in the LICENSE file at https://snek.at/license
  */
-import {SFWrapper} from '@snek-at/jaen-shared-ui'
+import {SFBWrapper, SFWrapper} from '@snek-at/jaen-shared-ui'
 import React, {useEffect, useState, useRef, useMemo} from 'react'
 import {useCallback} from 'react'
 import {useDispatch, useSelector, useStore} from 'react-redux'
@@ -25,6 +25,7 @@ import {
   unregisterPageField
 } from '../../../store/actions/siteActions'
 import {pageFieldBlocksSelector} from '../../../store/selectors/pages'
+import {DesignProvider} from '../../../tools/chakra-ui'
 import {BlocksField} from '../../../types'
 import {BlockItem, GenericBC, prepareBlocks} from '../../blocks'
 import {InitValueType} from './types'
@@ -83,7 +84,7 @@ const StreamField: React.FC<StreamFieldProps> = ({
     }
   }, [ref.current?.clientHeight, ref.current?.clientWidth])
 
-  const editing = true //useAppSelector(({cms}) => cms.options.editing)
+  const editing = false //useAppSelector(({cms}) => cms.options.editing)
 
   const visibleBlocks = useMemo(
     () => merge(initValue, SFBlocks, value => value.deleted) as typeof SFBlocks,
@@ -119,7 +120,7 @@ const StreamField: React.FC<StreamFieldProps> = ({
 
     dispatch(
       registerPageField({
-        path,
+        pageId: path,
         field: {
           fieldName,
           block: {
@@ -133,7 +134,7 @@ const StreamField: React.FC<StreamFieldProps> = ({
 
   const deleteBlock = useCallback((position: string) => {
     const payload = {
-      path,
+      pageId: path,
       field: {
         fieldName,
         block: {
@@ -170,7 +171,7 @@ const StreamField: React.FC<StreamFieldProps> = ({
         typeName: BlockComponent.BlockType
       }
 
-      return (
+      const blockItem = (
         <BlockItem
           key={position}
           position={position}
@@ -183,14 +184,26 @@ const StreamField: React.FC<StreamFieldProps> = ({
           onDelete={deleteBlock}
         />
       )
+
+      if (editing) {
+        return (
+          <SFBWrapper onDeleteClick={() => deleteBlock(position)}>
+            {blockItem}
+          </SFBWrapper>
+        )
+      }
+
+      return <>{blockItem}</>
     }
   })
 
   if (editing) {
     return (
-      <SFWrapper ref={ref} fieldName={fieldName} blockTypes={blocksTypes}>
-        {renderedBlocks}
-      </SFWrapper>
+      <DesignProvider>
+        <SFWrapper ref={ref} fieldName={fieldName} blockTypes={blocksTypes}>
+          {renderedBlocks}
+        </SFWrapper>
+      </DesignProvider>
     )
   }
 
