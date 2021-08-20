@@ -36,8 +36,8 @@ const PageExplorer: React.FC<{}> = () => {
   const handlePageMove = () => {
     dispatch(
       actions.movePage({
-        pageId: '3ccea236-af82-4c3c-946c-669ec9d7e61a',
-        parentPageId: 'aaeb0e8c-2ee7-4c71-84f2-606bfdf5106d'
+        pageId: '6abead3d-ce7c-479a-99b7-6d38abbcd9c8',
+        parentPageId: 'hello-world0'
       })
     )
   }

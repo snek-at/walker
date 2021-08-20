@@ -81,7 +81,9 @@ const siteReducer = createReducer(initialState, {
       | string
       | null
 
-    // const newPageId = toPath(parentPageId, toSlug(pageId))
+    if (oldParent === parentPageId) {
+      return
+    }
 
     state.allSitePage = {
       ...state.allSitePage,
