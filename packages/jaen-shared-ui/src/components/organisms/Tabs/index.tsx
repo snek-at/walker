@@ -7,7 +7,7 @@ import {
   Spacer,
 } from '@chakra-ui/react'
 
-import PageTab from '../../../molecules/PageTab'
+import PagetTee from '../../molecules'
 
 const MainTabs: React.FC = () => {
   return (

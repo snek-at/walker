@@ -1,4 +1,3 @@
-
 import {
   Button,
   HStack,
@@ -12,17 +11,12 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  Spacer,
+  Spacer
 } from '@chakra-ui/react'
 
-import {
-  Edit,
-  Discard,
-  Publish,
-} from '../../../molecules/buttons'
+import {Edit, Discard, Publish} from '../../molecules/buttons'
 
-const MainHotbar:React.FC = () => {
-
+const MainHotbar: React.FC = () => {
   return (
     <>
       <HStack>

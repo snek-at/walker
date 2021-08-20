@@ -22,19 +22,24 @@ import {
   Td,
   Tfoot,
   HStack,
-  Spacer
+  Spacer,
+  Image,
+  VStack
 } from '@chakra-ui/react'
 
 const PageContent: React.FC = () => {
   return (
     <>
-      <Stack spacing="24px">
+      <Stack spacing="24px" h="70vh">
         <Flex>
           <Box>
             <Heading size="lg">Snek Homepage</Heading>
           </Box>
           <Spacer />
           <Box>
+            <Badge mx={1} variant="outline" colorScheme="green">
+              BlogPost
+            </Badge>
             <Badge variant="outline" colorScheme="blue">
               Last published: 01.01.2001
             </Badge>
@@ -42,50 +47,30 @@ const PageContent: React.FC = () => {
         </Flex>
         <Divider />
         <Stack spacing={2}>
-          <HStack>
-            <Box>
-              <Text variant="bold" as="strong">
-                Title
-              </Text>
-              <Input placeholder="Title" />
+          <Flex>
+            <Box flex="1" mr={5}>
+              <Box py={2}>
+                <Heading size="md">Title</Heading>
+                <Input placeholder="My title" />
+              </Box>
+              <Box py={2}>
+                <Heading size="md">Slug</Heading>
+                <Input placeholder="My slug" />
+              </Box>
+              <Box py={2}>
+                <Heading size="md">Description</Heading>
+                <Textarea placeholder="Description" maxH="sm" />
+              </Box>
             </Box>
             <Box>
-              <Text variant="bold" as="strong">
-                Slug
-              </Text>
-              <Input placeholder="my-slug" />
+              <Image
+                maxH="sm"
+                src="https://bit.ly/sage-adebayo"
+                alt="Segun Adebayo"
+              />
             </Box>
-          </HStack>
-          <Text variant="bold" as="strong">
-            Description
-          </Text>
-          <Textarea placeholder="Description" />
-          <Text variant="bold" as="strong">
-            Twitter username
-          </Text>
-          <Input placeholder="TwitterUsername" colorScheme="facebook" />
-
-          {/* If you add the size prop to `InputGroup`, it'll pass it to all its children. */}
-          <InputGroup size="sm">
-            <InputLeftAddon children="https://" />
-            <Input placeholder="mysite" />
-            <InputRightAddon children=".com" />
-          </InputGroup>
+          </Flex>
         </Stack>
-        <Heading as="h3" size="md">
-          <Text color="#77bb21" as="span" pr={2}>
-            #
-          </Text>
-          Additional info
-        </Heading>
-        <Checkbox>Hide</Checkbox>
-        <Checkbox>Hide in menus</Checkbox>
-        title: string description: string image: string /** * Link
-        rel="canonical" will be used by search engines */ canonical: string
-        datePublished: string | false social: {'{'}
-        twitter: string fbAppId: string
-        {'}'}
-        isBlogPost: boolean
       </Stack>
     </>
   )
