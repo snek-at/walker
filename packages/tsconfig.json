@@ -2,7 +2,7 @@
   "files": [],
   "references": [
     {"path": "jaen"},
-    {"path": "jaen-plugin-cms"},
+    {"path": "jaen-cms"},
     {"path": "jaen-shared-ui"}
   ]
 }

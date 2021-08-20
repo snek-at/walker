@@ -6,7 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "react": "^17.0.2",
-    "@snek-at/jaen-plugin-cms": "*"
+    "@snek-at/jaen-cms": "*"
   },
   "devDependencies": {
     "gatsby-plugin-emotion": "^6.11.0"

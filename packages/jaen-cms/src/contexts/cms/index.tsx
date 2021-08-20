@@ -1,5 +1,4 @@
 import {ChakraProvider, extendTheme} from '@chakra-ui/react'
-import loadable from '@loadable/component'
 import * as buffer from 'buffer'
 // import {PageTree} from '@snek-at/jaen-shared-ui'
 import {StaticQuery, graphql} from 'gatsby'

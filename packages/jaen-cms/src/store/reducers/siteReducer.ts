@@ -1,6 +1,8 @@
 import {createReducer, PayloadAction} from '@reduxjs/toolkit'
 import update from 'immutability-helper'
 
+import {renameObjectKey} from '../../tools'
+import {toPath, toSlug} from '../../tools/site/path'
 import {BlocksField, PlainField} from '../../types'
 import * as actions from '../actions/siteActions'
 import {SiteState} from '../types/site'
@@ -12,8 +14,10 @@ const siteReducer = createReducer(initialState, {
     state,
     action: PayloadAction<actions.AddPageActionPayload>
   ) => {
-    const {pageId, page} = action.payload
+    const {name, page} = action.payload
     const parentId = page.relations.parent
+
+    const pageId = toPath(parentId, name)
 
     state.allSitePage = {
       ...state.allSitePage,
@@ -26,7 +30,20 @@ const siteReducer = createReducer(initialState, {
     if (parentId) {
       const parentRelations = state.allSitePage?.nodes?.[parentId]?.relations
 
-      if (parentRelations) {
+      if (!parentRelations) {
+        state.allSitePage = {
+          ...state.allSitePage,
+          nodes: {
+            ...state.allSitePage?.nodes,
+            [parentId]: {
+              ...state.allSitePage?.nodes?.[parentId],
+              relations: {
+                children: [pageId]
+              }
+            }
+          }
+        }
+      } else {
         parentRelations.children = parentRelations.children || []
 
         if (!parentRelations.children.includes(pageId)) {
@@ -58,9 +75,13 @@ const siteReducer = createReducer(initialState, {
   ) => {
     const {pageId, parentPageId} = action.payload
 
-    const oldParent = JSON.stringify(
-      state.allSitePage?.nodes?.[pageId]?.relations?.parent
-    )
+    const oldParent = state.allSitePage?.nodes?.[pageId]?.relations?.parent as
+      | string
+      | null
+
+    console.log('heydihoe', pageId, parentPageId)
+
+    const newPageId = toPath(parentPageId, toSlug(pageId))
 
     state.allSitePage = {
       ...state.allSitePage,
@@ -80,16 +101,18 @@ const siteReducer = createReducer(initialState, {
             children: [
               ...(state.allSitePage?.nodes?.[parentPageId]?.relations
                 ?.children || []),
-              pageId
+              newPageId
             ]
           }
         }
       }
     }
 
-    // remove pageId node from oldParent node children newAllSitePage
+    //emove pageId node from oldParent node children newAllSitePage
     if (oldParent) {
       const relations = state.allSitePage?.nodes?.[oldParent]?.relations
+
+      console.log('oldParent', oldParent)
 
       state.allSitePage = {
         ...state.allSitePage,
@@ -106,6 +129,14 @@ const siteReducer = createReducer(initialState, {
           }
         }
       }
+    }
+
+    if (state.allSitePage.nodes) {
+      state.allSitePage.nodes = renameObjectKey(
+        state.allSitePage.nodes,
+        pageId,
+        newPageId
+      )
     }
   },
   [actions.updatePageMeta.type]: (

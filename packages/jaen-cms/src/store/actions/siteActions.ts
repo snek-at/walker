@@ -3,7 +3,7 @@ import {createAction} from '@reduxjs/toolkit'
 import {FieldIdentifier, FieldUpdateDetails, PageType} from '../../types'
 
 export type AddPageActionPayload = {
-  pageId: string
+  name: string
   page: PageType
 }
 export const addPage = createAction<AddPageActionPayload>('site/addPage')

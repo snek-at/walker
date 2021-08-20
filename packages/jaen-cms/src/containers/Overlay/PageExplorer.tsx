@@ -13,10 +13,10 @@ const PageExplorer: React.FC<{}> = () => {
   const handleAddPage = () => {
     dispatch(
       actions.addPage({
-        pageId: 'SitePage /a/b/c/d',
+        name: 'My Fance Page',
         page: {
           relations: {
-            parent: null,
+            parent: 'SitePage /404/',
             children: []
           },
           fields: {},
@@ -37,15 +37,24 @@ const PageExplorer: React.FC<{}> = () => {
   const handlePageMove = () => {
     dispatch(
       actions.movePage({
-        pageId: 'SitePage /a/b/c/d',
-        parentPageId: 'SitePage /'
+        pageId: 'SitePage /404/my-fance-page/',
+        parentPageId: 'SitePage /dev-404-page/'
       })
     )
   }
 
+  const pages = allSitePage.nodes
+
   return (
     <>
-      {JSON.stringify(allSitePage)}
+      {/* {JSON.stringify(pages)} */}
+      {Object.entries(pages).map(([id, page], key) => (
+        <li key={key}>
+          <b>{id}</b>
+          {JSON.stringify(page)}
+        </li>
+      ))}
+
       <Button onClick={handleAddPage}>{'SitePage /a/b/c/d'}</Button>
       <Button onClick={handlePageMove}>
         {'Move Page (SitePage /a/b/c/d -> SitePage /)'}

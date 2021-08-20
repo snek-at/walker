@@ -5,7 +5,7 @@ export * as blocks from './containers/blocks'
 export {default as Editor} from './containers/Editor'
 
 export default {
-  name: 'jaen-plugin-cms',
+  name: 'jaen-cms',
   registerUI: {
     hotbar: {
       buttons: []

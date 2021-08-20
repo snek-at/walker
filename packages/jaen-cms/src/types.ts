@@ -108,13 +108,23 @@ export interface PageType extends BasePageType {
   /**
    * dynamic: true if the page is a dynamic page (not a static page).
    * Leads to a different template and different routing behaviour.
+   *
+   * Dynamic is true when:
+   *  1. A page is created
+   *  2. A page is deleted
+   *  3. A page is moved to a different parent or renamed (path change)
+   *
+   * Dynamic is false when:
+   *  1. Field content is changed
+   *  2. Page meta data is changed
+   *  3. Page children are changed
    */
   dynamic?: true
   /**
-   * hasTemplate: false if the page has no underlying template.
-   * This means that the page is a static page unhandled by the CMS (except fields).
+   * template: holds the template name for the page.
+   * This is undefined for static pages unhandled by the CMS (except fields).
    */
-  hasTemplate?: false
+  template?: string
   deleted?: true
 }
 
