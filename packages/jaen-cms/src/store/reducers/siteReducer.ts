@@ -109,8 +109,6 @@ const siteReducer = createReducer(initialState, {
     if (oldParent) {
       const children = state.allSitePage?.nodes?.[oldParent]?.children
 
-      console.log('oldParent', oldParent)
-
       if (children) {
         state.allSitePage = {
           ...state.allSitePage,

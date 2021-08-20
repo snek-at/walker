@@ -86,10 +86,6 @@ export type PageMetadata = {
    */
   canonical: string
   datePublished: string | false
-  social: {
-    twitter: string
-    fbAppId: string
-  }
   isBlogPost: boolean
 }
 

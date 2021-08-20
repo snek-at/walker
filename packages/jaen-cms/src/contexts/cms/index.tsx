@@ -168,7 +168,6 @@ export const CMSProvider: React.FC<CMSProviderType> = ({
           image: '',
           canonical: '',
           datePublished: '',
-          social: {twitter: '', fbAppId: ''},
           isBlogPost: false
         }
 

@@ -25,7 +25,6 @@ const PageExplorer: React.FC<{}> = () => {
             image: '',
             canonical: '',
             datePublished: '',
-            social: {twitter: '', fbAppId: ''},
             isBlogPost: false
           }
         }
