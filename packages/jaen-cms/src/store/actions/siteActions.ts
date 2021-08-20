@@ -15,7 +15,6 @@ export const updateSiteMeta = createAction<UpdateSiteMetaActionPayload>(
 )
 
 export type AddPageActionPayload = {
-  name: string
   page: PageType
 }
 export const addPage = createAction<AddPageActionPayload>('site/addPage')

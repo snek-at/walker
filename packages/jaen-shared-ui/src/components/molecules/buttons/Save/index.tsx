@@ -1,12 +1,12 @@
 import {Button, useColorMode} from '@chakra-ui/react'
 import {Lottie} from '@snek-at/react-lottie'
 
-import {ARocketLottie} from '../../../atoms/icons/ARocket'
+import {APublishLottie} from '../../../atoms/icons/APublish'
 
-const PublishButton: React.FC = props => {
+const Publish: React.FC = props => {
   const {colorMode} = useColorMode()
 
-  const lottie = ARocketLottie(colorMode === 'dark')
+  const lottie = APublishLottie(colorMode === 'dark')
 
   return (
     <Lottie lottie={lottie} forceReloadDeps={[lottie]}>
@@ -25,4 +25,4 @@ const PublishButton: React.FC = props => {
   )
 }
 
-export default PublishButton
+export default Publish

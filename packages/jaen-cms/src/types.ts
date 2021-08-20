@@ -94,6 +94,7 @@ export type PageMetadata = {
 }
 
 type BasePageType = {
+  slug: string
   pageMetadata: PageMetadata
   fields: {
     [fieldName: string]: Field
@@ -101,10 +102,10 @@ type BasePageType = {
 }
 
 export interface PageType extends BasePageType {
-  relations: {
-    parent: string | null
-    children: string[]
-  }
+  parent: {
+    id: string
+  } | null
+  children: {id: string}[]
   /**
    * dynamic: true if the page is a dynamic page (not a static page).
    * Leads to a different template and different routing behaviour.
@@ -122,17 +123,19 @@ export interface PageType extends BasePageType {
   dynamic?: true
   /**
    * template: holds the template name for the page.
-   * This is undefined for static pages unhandled by the CMS (except fields).
+   * This is null for static pages unhandled by the CMS (except fields).
    */
-  template?: string
+  template: string | null
   deleted?: true
 }
 
 export interface ResolvedPageType extends BasePageType {
-  relations: {
-    parent: BasePageType | null
-    children: BasePageType[]
-  }
+  parent: {
+    page: BasePageType
+  } | null
+  children: {
+    page: BasePageType
+  }[]
 }
 
 export type SiteType = {

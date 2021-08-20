@@ -13,15 +13,14 @@ const PageExplorer: React.FC<{}> = () => {
   const handleAddPage = () => {
     dispatch(
       actions.addPage({
-        name: 'My Fance Page',
         page: {
-          relations: {
-            parent: 'SitePage /404/',
-            children: []
-          },
+          slug: 'sample-page-01',
+          template: 'HomePage',
+          parent: null,
+          children: [],
           fields: {},
           pageMetadata: {
-            title: 'A new page',
+            title: 'Sample Page 01',
             description: '',
             image: '',
             canonical: '',
@@ -37,22 +36,25 @@ const PageExplorer: React.FC<{}> = () => {
   const handlePageMove = () => {
     dispatch(
       actions.movePage({
-        pageId: 'SitePage /404/my-fance-page/',
-        parentPageId: 'SitePage /dev-404-page/'
+        pageId: '3ccea236-af82-4c3c-946c-669ec9d7e61a',
+        parentPageId: 'aaeb0e8c-2ee7-4c71-84f2-606bfdf5106d'
       })
     )
   }
 
   const pages = allSitePage.nodes
 
+  console.log('start rendering')
+
   return (
     <>
-      {/* {JSON.stringify(pages)} */}
+      {JSON.stringify(Object.keys(pages).length)}
+
       {Object.entries(pages).map(([id, page], key) => (
-        <li key={key}>
-          <b>{id}</b>
+        <div key={key}>
+          <b>{id}: </b>
           {JSON.stringify(page)}
-        </li>
+        </div>
       ))}
 
       <Button onClick={handleAddPage}>{'SitePage /a/b/c/d'}</Button>

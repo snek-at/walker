@@ -3,11 +3,11 @@ import {Story, Meta} from '@storybook/react'
 import PageTree from '.'
 
 export default {
-  title: 'Molecules/PageTree',
+  title: 'Atoms/PageTree',
   component: PageTree
 } as Meta
 
-const treeWithTwoBranches = {
+const treeExample = {
   'SitePage /test': {
     id: 'test',
     children: [],
@@ -60,7 +60,7 @@ const treeWithTwoBranches = {
 }
 
 const Template: Story = args => (
-  <PageTree items={treeWithTwoBranches} {...args} />
+  <PageTree items={treeExample} onItemSelect={()=>(console.log("help"))} {...args} />
 )
 
 export const Primary = Template.bind({})

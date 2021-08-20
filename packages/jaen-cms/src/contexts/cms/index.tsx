@@ -33,21 +33,23 @@ export const useCMSContext = (): CMSContextType => {
 export const usePage = (id: string): ResolvedPageType => {
   const context = useCMSContext()
   const nodes = context.site.allSitePage.nodes
-  const relations = nodes[id].relations
+  const cNode = nodes[id]
 
   let resolvedPage = {} as ResolvedPageType
 
   const transformToBasePage = (node: PageType) => ({
+    slug: node.slug,
     pageMetadata: node.pageMetadata,
     fields: node.fields
   })
 
-  resolvedPage.relations.parent = relations.parent
-    ? transformToBasePage(nodes[relations.parent])
+  resolvedPage.parent = cNode.parent
+    ? {page: transformToBasePage(nodes[cNode.parent.id])}
     : null
-  resolvedPage.relations.children = relations.children.map((childId: string) =>
-    transformToBasePage(nodes[childId])
-  )
+
+  resolvedPage.children = cNode.children.map(child => ({
+    page: transformToBasePage(nodes[child.id])
+  }))
 
   return resolvedPage
 }
@@ -102,26 +104,62 @@ export const CMSProvider: React.FC<CMSProviderType> = ({
               }
             }
           }
-          allSitePage {
+          jaenPageRootIds: allJaenPage(filter: {parent: {id: {eq: null}}}) {
+            distinct(field: id)
+          }
+          sitePageRootIds: allSitePage(filter: {parent: {id: {eq: null}}}) {
+            distinct(field: id)
+          }
+          allJaenPage {
+            allPaths: distinct(field: path)
             nodes {
-              children {
-                id
-              }
+              id
+              slug
+              template
               parent {
                 id
               }
+              children {
+                id
+              }
+              pageMetadata {
+                title
+                description
+                image
+                canonical
+                datePublished
+                social {
+                  twitter
+                  fbAppId
+                }
+                isBlogPost
+              }
+            }
+          }
+          allSitePage {
+            nodes {
+              path
               id
+              parent {
+                id
+              }
+              children {
+                id
+              }
             }
           }
         }
       `}
-      render={({site: {siteMetadata}, allSitePage}) => {
-        const structure = allSitePage as {
-          nodes: {
-            id: string
-            children: {id: string}[]
-            parent: {id: string} | null
-          }[]
+      render={({
+        site: {siteMetadata},
+        allJaenPage,
+        allSitePage,
+        jaenPageRootIds,
+        sitePageRootIds
+      }) => {
+        const structure = allJaenPage as {
+          allPaths: string[]
+          nodes: (PageType & {id: string})[]
         }
 
         const tmpPageMetadata: PageMetadata = {
@@ -134,27 +172,24 @@ export const CMSProvider: React.FC<CMSProviderType> = ({
           isBlogPost: false
         }
 
+        const staticNodes = allSitePage.nodes.filter(
+          (node: any) => !structure.allPaths.includes(node.path)
+        ) as (PageType & {id: string})[]
+
         const site: SiteType = {
           siteMetadata,
           allSitePage: {
-            rootNodeIds: [],
+            rootNodeIds: jaenPageRootIds.distinct.concat(
+              sitePageRootIds.distinct
+            ),
             nodes: {}
           }
         }
 
-        for (const node of structure.nodes) {
-          if (node.parent === null) {
-            site.allSitePage.rootNodeIds.push(node.id)
-          }
+        site.allSitePage.rootNodeIds = []
 
-          site.allSitePage.nodes[node.id] = {
-            fields: {},
-            pageMetadata: tmpPageMetadata,
-            relations: {
-              parent: node.parent?.id || null,
-              children: node.children.map(child => child.id)
-            }
-          }
+        for (const {id, ...node} of structure.nodes.concat(staticNodes)) {
+          site.allSitePage.nodes[id] = node
         }
 
         return (

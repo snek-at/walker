@@ -1,13 +1,13 @@
 import {Story, Meta} from '@storybook/react'
 
-import ARocket from '.'
+import ASave from '.'
 
 export default {
-  title: 'Atoms/icons/ARocket',
-  component: ARocket
+  title: 'Atoms/icons/ASave',
+  component: ASave
 } as Meta
 
-const Template: Story = args => <ARocket {...args} />
+const Template: Story = args => <ASave {...args} />
 
 export const Primary = Template.bind({})
 

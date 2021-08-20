@@ -6,7 +6,7 @@ import {
   LottieFnResult
 } from '@snek-at/react-lottie'
 
-export const ARocketLottie: LottieFnFn = (dm: boolean) => container => {
+export const ADmToggleLottie: LottieFnFn = (dm: boolean) => container => {
   let creator: LottieFnResult['creator']
   const containerProps: LottieFnResult['containerProps'] = {
     style: {width: 24}
@@ -15,8 +15,8 @@ export const ARocketLottie: LottieFnFn = (dm: boolean) => container => {
   creator = createLottie({
     container,
     animationData: require(dm
-      ? `./489-rocket-space-outline-dm.json`
-      : `./489-rocket-space-outline.json`),
+      ? `./0-dm-toggle.json`
+      : `./0-dm-toggle.json`),
     loop: false
   })
 
@@ -25,10 +25,10 @@ export const ARocketLottie: LottieFnFn = (dm: boolean) => container => {
 
 type SnekIconProps = IconProps
 
-const ARocket: React.FC<SnekIconProps> = props => {
+const ADmToggle: React.FC<SnekIconProps> = props => {
   const toggle = useColorMode()
 
-  const lottie = ARocketLottie(toggle.colorMode === 'dark')
+  const lottie = ADmToggleLottie(toggle.colorMode === 'dark')
 
   return (
     <Lottie lottie={lottie} forceReloadDeps={[lottie]}>
@@ -45,4 +45,4 @@ const ARocket: React.FC<SnekIconProps> = props => {
   )
 }
 
-export default ARocket
+export default ADmToggle

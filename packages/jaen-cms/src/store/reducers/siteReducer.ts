@@ -1,5 +1,6 @@
 import {createReducer, PayloadAction} from '@reduxjs/toolkit'
 import update from 'immutability-helper'
+import {v4 as uuidv4} from 'uuid'
 
 import {renameObjectKey} from '../../tools'
 import {toPath, toSlug} from '../../tools/site/path'
@@ -19,10 +20,10 @@ const siteReducer = createReducer(initialState, {
     state,
     action: PayloadAction<actions.AddPageActionPayload>
   ) => {
-    const {name, page} = action.payload
-    const parentId = page.relations.parent
+    const {page} = action.payload
+    const parentId = page.parent?.id
 
-    const pageId = toPath(parentId, name)
+    const pageId = uuidv4()
 
     state.allSitePage = {
       ...state.allSitePage,
@@ -33,26 +34,22 @@ const siteReducer = createReducer(initialState, {
     }
 
     if (parentId) {
-      const parentRelations = state.allSitePage?.nodes?.[parentId]?.relations
+      const parentChildren = state.allSitePage?.nodes?.[parentId]?.children
 
-      if (!parentRelations) {
+      if (!parentChildren) {
         state.allSitePage = {
           ...state.allSitePage,
           nodes: {
             ...state.allSitePage?.nodes,
             [parentId]: {
               ...state.allSitePage?.nodes?.[parentId],
-              relations: {
-                children: [pageId]
-              }
+              children: [{id: pageId}]
             }
           }
         }
       } else {
-        parentRelations.children = parentRelations.children || []
-
-        if (!parentRelations.children.includes(pageId)) {
-          parentRelations.children.push(pageId)
+        if (!parentChildren.includes({id: pageId})) {
+          parentChildren.push({id: pageId})
         }
       }
     }
@@ -80,13 +77,11 @@ const siteReducer = createReducer(initialState, {
   ) => {
     const {pageId, parentPageId} = action.payload
 
-    const oldParent = state.allSitePage?.nodes?.[pageId]?.relations?.parent as
+    const oldParent = state.allSitePage?.nodes?.[pageId]?.parent?.id as
       | string
       | null
 
-    console.log('heydihoe', pageId, parentPageId)
-
-    const newPageId = toPath(parentPageId, toSlug(pageId))
+    // const newPageId = toPath(parentPageId, toSlug(pageId))
 
     state.allSitePage = {
       ...state.allSitePage,
@@ -94,54 +89,38 @@ const siteReducer = createReducer(initialState, {
         ...state.allSitePage?.nodes,
         [pageId]: {
           ...state.allSitePage?.nodes?.[pageId],
-          relations: {
-            ...state.allSitePage?.nodes?.[pageId]?.relations,
-            parent: parentPageId
+          parent: {
+            ...state.allSitePage?.nodes?.[pageId]?.parent,
+            id: parentPageId
           }
         },
         [parentPageId]: {
           ...state.allSitePage?.nodes?.[parentPageId],
-          relations: {
-            ...state.allSitePage?.nodes?.[parentPageId]?.relations,
-            children: [
-              ...(state.allSitePage?.nodes?.[parentPageId]?.relations
-                ?.children || []),
-              newPageId
-            ]
-          }
+          children: (
+            state.allSitePage?.nodes?.[parentPageId]?.children || []
+          ).concat([{id: pageId}])
         }
       }
     }
 
-    //emove pageId node from oldParent node children newAllSitePage
+    //remove pageId node from oldParent node children newAllSitePage
     if (oldParent) {
-      const relations = state.allSitePage?.nodes?.[oldParent]?.relations
+      const children = state.allSitePage?.nodes?.[oldParent]?.children
 
       console.log('oldParent', oldParent)
 
-      state.allSitePage = {
-        ...state.allSitePage,
-        nodes: {
-          ...state.allSitePage?.nodes,
-          [oldParent]: {
-            ...state.allSitePage?.nodes?.[oldParent],
-            relations: {
-              ...relations,
-              children:
-                relations &&
-                relations.children?.filter(childId => childId !== pageId)
+      if (children) {
+        state.allSitePage = {
+          ...state.allSitePage,
+          nodes: {
+            ...state.allSitePage?.nodes,
+            [oldParent]: {
+              ...state.allSitePage?.nodes?.[oldParent],
+              children: children.filter(child => child?.id !== pageId)
             }
           }
         }
       }
-    }
-
-    if (state.allSitePage.nodes) {
-      state.allSitePage.nodes = renameObjectKey(
-        state.allSitePage.nodes,
-        pageId,
-        newPageId
-      )
     }
   },
   [actions.updatePageMeta.type]: (

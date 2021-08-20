@@ -13,7 +13,7 @@ import {Box, Text, useColorModeValue} from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import {useState} from 'react'
 
-import {File, FolderClose, FolderOpen} from '../../atoms/icons'
+import {File, FolderClose, FolderOpen} from '../icons'
 import {TreeConverter} from './treeconverter'
 
 type State = {
