@@ -1,6 +1,18 @@
 import {createAction} from '@reduxjs/toolkit'
 
-import {FieldIdentifier, FieldUpdateDetails, PageType} from '../../types'
+import {
+  FieldIdentifier,
+  FieldUpdateDetails,
+  PageType,
+  SiteType
+} from '../../types'
+
+export type UpdateSiteMetaActionPayload = {
+  meta: SiteType['siteMetadata']
+}
+export const updateSiteMeta = createAction<UpdateSiteMetaActionPayload>(
+  'site/updateSiteMeta'
+)
 
 export type AddPageActionPayload = {
   name: string

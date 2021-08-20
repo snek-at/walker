@@ -10,6 +10,11 @@ import {SiteState} from '../types/site'
 const initialState: SiteState = {}
 
 const siteReducer = createReducer(initialState, {
+  [actions.updateSiteMeta.type]: (state, action: PayloadAction<SiteState>) => {
+    const {siteMetadata} = action.payload
+
+    state.siteMetadata = siteMetadata
+  },
   [actions.addPage.type]: (
     state,
     action: PayloadAction<actions.AddPageActionPayload>

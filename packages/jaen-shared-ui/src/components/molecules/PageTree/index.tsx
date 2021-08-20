@@ -9,10 +9,11 @@ import Tree, {
   TreeDestinationPosition
 } from '@atlaskit/tree'
 import {PhoneIcon} from '@chakra-ui/icons'
-import {Text} from '@chakra-ui/react'
+import {Box, Text, useColorModeValue} from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import {useState} from 'react'
 
+import {File, FolderClose, FolderOpen} from '../../atoms/icons'
 import {TreeConverter} from './treeconverter'
 
 type State = {
@@ -30,11 +31,19 @@ export type Items = {
 
 type PageTreeProps = {
   items: Items
+  onItemSelect: (id: string) => void
 }
 
-const PageTree: React.FC<PageTreeProps> = ({items}) => {
+const PageTree: React.FC<PageTreeProps> = ({items, ...props}) => {
+  const itemBgColor = useColorModeValue('blue.100', 'blue.400')
   // convert items to a set
   const [tree, setTree] = useState(TreeConverter(items))
+  const [selectedItem, selectItem] = useState<string | null>(null)
+
+  const handleItemClick = (id: string) => {
+    selectItem(id)
+    props.onItemSelect(id)
+  }
 
   const PADDING_PER_LEVEL = 16
   const PreTextIcon = styled.span`
@@ -53,17 +62,17 @@ const PageTree: React.FC<PageTreeProps> = ({items}) => {
     if (item.children && item.children.length > 0) {
       return item.isExpanded ? (
         <PreTextIcon onClick={() => onCollapse(item.id)}>
-          <PhoneIcon />
+          <FolderOpen />
         </PreTextIcon>
       ) : (
         <PreTextIcon onClick={() => onExpand(item.id)}>
-          <PhoneIcon />
+          <FolderClose />
         </PreTextIcon>
       )
     }
     return (
       <PreTextIcon>
-        <PhoneIcon />
+        <File />
       </PreTextIcon>
     )
   }
@@ -84,10 +93,17 @@ const PageTree: React.FC<PageTreeProps> = ({items}) => {
           top: 'auto !important',
           left: 'auto !important'
         }}>
-        <Text>
+        <Box
+          borderWidth="1px"
+          borderRadius="lg"
+          overflow="hidden"
+          p={2}
+          onClick={() => handleItemClick(item.id as string)}
+          _hover={{bg: itemBgColor}}
+          bg={selectedItem === item.id ? itemBgColor : ''}>
           {getIcon(item, onExpand, onCollapse)}
           {item.data ? item.data.title : ''}
-        </Text>
+        </Box>
       </div>
     )
   }
@@ -110,10 +126,12 @@ const PageTree: React.FC<PageTreeProps> = ({items}) => {
     const newTree = moveItemOnTree(tree, source, destination)
 
     setTree(mutateTree(newTree, destination.parentId, {isExpanded: true}))
+
+    selectItem(destination.parentId as string)
   }
 
   return (
-    <div style={{ height: 200, overflow: "auto" }}>
+    <div style={{height: 500, overflow: 'auto'}}>
       <Tree
         tree={tree}
         renderItem={renderItem}
