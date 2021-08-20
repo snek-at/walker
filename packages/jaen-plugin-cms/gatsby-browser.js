@@ -1,3 +1,4 @@
-import wrapWithProvider from './wrap-with-provider'
+// require('source-map-support').install()
+// require('ts-node').register()
 
-export const wrapRootElement = wrapWithProvider
+module.exports = require('./src/gatsby/gatsby-browser')

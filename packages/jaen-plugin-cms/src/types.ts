@@ -1,4 +1,16 @@
+import type {Jaen} from '@snek-at/jaen'
+
 import {InitValueType} from './containers/fields/StreamField/types'
+
+export type JaenCMS = {
+  config: Jaen['config'] & {
+    plugins: {
+      cms: {
+        templates: typeof module[]
+      }
+    }
+  }
+}
 
 export type StreamBlockIdentifier = {
   initValue: InitValueType['string']
@@ -93,6 +105,16 @@ export interface PageType extends BasePageType {
     parent: string | null
     children: string[]
   }
+  /**
+   * dynamic: true if the page is a dynamic page (not a static page).
+   * Leads to a different template and different routing behaviour.
+   */
+  dynamic?: true
+  /**
+   * hasTemplate: false if the page has no underlying template.
+   * This means that the page is a static page unhandled by the CMS (except fields).
+   */
+  hasTemplate?: false
   deleted?: true
 }
 

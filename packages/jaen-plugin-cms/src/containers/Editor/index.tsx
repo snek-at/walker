@@ -49,7 +49,6 @@ const Editor: React.FC<EditorProps> = props => {
           config={editorConfig}
           data={props.data}
           onReady={editor => {
-            console.log('ready')
             // editor.editing.view.change(writer => {
             //   const viewEditableRoot = editor.editing.view.document.getRoot()
             //   writer.removeClass('ck-editor__editable_inline', viewEditableRoot)
@@ -59,7 +58,6 @@ const Editor: React.FC<EditorProps> = props => {
           }}
           onChange={(event, editor) => {
             const data = editor.getData()
-            console.log('New data', data)
             props.onChange(data)
           }}
           onBlur={(event, editor) => {}}

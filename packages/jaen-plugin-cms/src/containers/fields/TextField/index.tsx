@@ -36,16 +36,13 @@ const TextField: React.FC<TextFieldProps> = ({
   const updatedValue = (content as TextBlock)?.text
   const isRegistered = updatedValue !== undefined
 
-  // console.log(isRegistered, updatedValue, initValue, block?.position)
 
   const value = isRegistered ? updatedValue : initValue || ''
 
   const handleOnChange = (data: string) => {
-    console.log(data, fieldName, block?.position)
     if (!isRegistered && data !== initValue) {
       register()
     }
-    console.log('data', data, initValue)
     if (data === initValue) {
       unregister()
     } else {

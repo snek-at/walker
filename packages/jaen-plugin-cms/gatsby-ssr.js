@@ -1,4 +1,4 @@
-import wrapWithProvider from './wrap-with-provider'
+// require('source-map-support').install()
+// require('ts-node').register()
 
-export {onRenderBody} from './src/tools/chakra-ui'
-export const wrapRootElement = wrapWithProvider
+module.exports = require('./src/gatsby/gatsby-ssr')

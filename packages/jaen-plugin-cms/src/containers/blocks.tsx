@@ -88,7 +88,6 @@ export const BlockItem = React.memo(
     position,
     onDelete
   }: any) => {
-    console.log('render')
     return (
       <SFBWrapper onDeleteClick={() => onDelete(position)}>
         <Block
