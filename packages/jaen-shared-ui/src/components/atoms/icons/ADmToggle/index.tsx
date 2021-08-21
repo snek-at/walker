@@ -24,9 +24,9 @@ export const ADmToggleLottie: LottieFnFn = (dm: boolean) => container => {
   return {creator, containerProps}
 }
 
-type SnekIconProps = IconProps
+type ADmToggleIconProps = IconProps
 
-const ADmToggle: React.FC<SnekIconProps> = props => {
+const ADmToggleIcon: React.FC<ADmToggleIconProps> = props => {
   const {colorMode} = useColorMode()
 
   const lottie = ADmToggleLottie(colorMode === 'dark')
@@ -48,4 +48,4 @@ const ADmToggle: React.FC<SnekIconProps> = props => {
   )
 }
 
-export default ADmToggle
+export default ADmToggleIcon

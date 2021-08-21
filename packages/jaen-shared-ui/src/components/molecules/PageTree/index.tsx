@@ -22,7 +22,7 @@ import styled from '@emotion/styled'
 import {MouseEvent, useState, useMemo} from 'react'
 
 import {ContextMenu} from '../../atoms'
-import {File, FolderClose, FolderOpen} from '../../atoms/icons'
+import {FileIcon, FolderCloseIcon, FolderOpenIcon} from '../../atoms/icons'
 import {TreeConverter} from './treeconverter'
 
 export type Items = {
@@ -140,17 +140,17 @@ const PageTree: React.FC<PageTreeProps> = ({items, ...props}) => {
     if (item.children && item.children.length > 0) {
       return item.isExpanded ? (
         <PreTextIcon onClick={() => onCollapse(item.id)}>
-          <FolderOpen />
+          <FolderOpenIcon />
         </PreTextIcon>
       ) : (
         <PreTextIcon onClick={() => onExpand(item.id)}>
-          <FolderClose />
+          <FolderCloseIcon />
         </PreTextIcon>
       )
     }
     return (
       <PreTextIcon>
-        <File />
+        <FileIcon />
       </PreTextIcon>
     )
   }

@@ -23,9 +23,9 @@ export const ADiscardLottie: LottieFnFn = (dm: boolean) => container => {
   return {creator, containerProps}
 }
 
-type SnekIconProps = IconProps
+type ADiscardIconProps = IconProps
 
-const ADiscard: React.FC<SnekIconProps> = props => {
+const ADiscardIcon: React.FC<ADiscardIconProps> = props => {
   const {colorMode} = useColorMode()
 
   const lottie = ADiscardLottie(colorMode === 'dark')
@@ -45,4 +45,4 @@ const ADiscard: React.FC<SnekIconProps> = props => {
   )
 }
 
-export default ADiscard
+export default ADiscardIcon

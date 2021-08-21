@@ -23,9 +23,9 @@ export const ASaveLottie: LottieFnFn = (dm: boolean) => container => {
   return {creator, containerProps}
 }
 
-type SnekIconProps = IconProps
+type ASaveIconProps = IconProps
 
-const ASave: React.FC<SnekIconProps> = props => {
+const ASaveIcon: React.FC<ASaveIconProps> = props => {
   const {colorMode} = useColorMode()
 
   const lottie = ASaveLottie(colorMode === 'dark')
@@ -45,4 +45,4 @@ const ASave: React.FC<SnekIconProps> = props => {
   )
 }
 
-export default ASave
+export default ASaveIcon

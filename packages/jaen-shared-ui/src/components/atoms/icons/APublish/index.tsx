@@ -23,9 +23,9 @@ export const APublishLottie: LottieFnFn = (dm: boolean) => container => {
   return {creator, containerProps}
 }
 
-type SnekIconProps = IconProps
+type APublishIconProps = IconProps
 
-const APublish: React.FC<SnekIconProps> = props => {
+const APublishIcon: React.FC<APublishIconProps> = props => {
   const {colorMode} = useColorMode()
 
   const lottie = APublishLottie(colorMode === 'dark')
@@ -45,4 +45,4 @@ const APublish: React.FC<SnekIconProps> = props => {
   )
 }
 
-export default APublish
+export default APublishIcon
