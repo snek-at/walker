@@ -26,9 +26,9 @@ export const ASaveLottie: LottieFnFn = (dm: boolean) => container => {
 type SnekIconProps = IconProps
 
 const ASave: React.FC<SnekIconProps> = props => {
-  const toggle = useColorMode()
+  const {colorMode} = useColorMode()
 
-  const lottie = ASaveLottie(toggle.colorMode === 'dark')
+  const lottie = ASaveLottie(colorMode === 'dark')
 
   return (
     <Lottie lottie={lottie} forceReloadDeps={[lottie]}>

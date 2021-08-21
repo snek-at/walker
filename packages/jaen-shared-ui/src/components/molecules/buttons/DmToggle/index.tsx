@@ -1,28 +1,28 @@
-import {Button, useColorMode} from '@chakra-ui/react'
+import {Button, IconButton, useColorMode} from '@chakra-ui/react'
 import {Lottie} from '@snek-at/react-lottie'
 
-import {APublishLottie} from '../../../atoms/icons/APublish'
+import {ADmToggleLottie} from '../../../atoms/icons/ADmToggle'
 
-const DmToggle: React.FC = props => {
+const ADmToggle: React.FC = props => {
   const {colorMode} = useColorMode()
 
-  const lottie = APublishLottie(colorMode === 'dark')
+  const lottie = ADmToggleLottie(colorMode === 'dark')
 
   return (
     <Lottie lottie={lottie} forceReloadDeps={[lottie]}>
       {({animation, container}) => (
         <i
           onClick={() =>
-            animation.playSegments([0, animation.totalFrames], true)
+            colorMode === 'dark'
+              ? animation.playSegments([0, 114], true)
+              : animation.playSegments([114, 228], true)
           }
           {...(props as any)}>
-          <Button leftIcon={container}>
-            Publish
-          </Button>
+          <IconButton aria-label="darkmode toggle" variant="ghost" icon={container} />
         </i>
       )}
     </Lottie>
   )
 }
 
-export default DmToggle
+export default ADmToggle

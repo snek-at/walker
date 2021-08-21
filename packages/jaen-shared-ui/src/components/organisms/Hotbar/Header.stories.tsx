@@ -1,13 +1,13 @@
 import {Story, Meta} from '@storybook/react'
 
-import Hotbar from '.'
+import MainHotbar from '.'
 
 export default {
-  title: 'Organisms/Hotbarr',
-  component: Hotbar
+  title: 'Organisms/Hotbar',
+  component: MainHotbar
 } as Meta
 
-const Template: Story = args => <Hotbar {...args} />
+const Template: Story = args => <MainHotbar {...args} />
 
 export const Primary = Template.bind({})
 

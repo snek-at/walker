@@ -1,13 +1,13 @@
 import {Story, Meta} from '@storybook/react'
 
-import Publish from '.'
+import Save from '.'
 
 export default {
-  title: 'Molecules/buttons/Publish',
-  component: Publish
+  title: 'Molecules/buttons/Save',
+  component: Save
 } as Meta
 
-const Template: Story = args => <Publish {...args} />
+const Template: Story = args => <Save {...args} />
 
 export const Primary = Template.bind({})
 

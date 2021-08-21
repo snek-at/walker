@@ -1,13 +1,13 @@
 import {Story, Meta} from '@storybook/react'
 
-import Footer from '.'
+import MainFooter from '.'
 
 export default {
-  title: 'Organisms/Footer',
-  component: Footer
+  title: 'Organisms/MainFooter',
+  component: MainFooter
 } as Meta
 
-const Template: Story = args => <Footer {...args} />
+const Template: Story = args => <MainFooter {...args} />
 
 export const Primary = Template.bind({})
 

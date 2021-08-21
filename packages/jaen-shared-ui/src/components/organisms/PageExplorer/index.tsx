@@ -11,65 +11,58 @@ import {
   InputRightAddon,
   InputLeftAddon,
   Textarea,
-  Checkbox
+  Checkbox,
+  Button
 } from '@chakra-ui/react'
+import {useState} from 'react'
 
 import {PageContent} from '../../molecules'
 import PageTree from '../../molecules/PageTree'
 
-const treeExample = {
-  'SitePage /test': {
-    id: 'test',
-    children: [],
+export type Items = {
+  [id: string]: {
     data: {
-      title: 'root'
+      title: string
+      slug: string
+      description: string
+      image: string
+      isBlogPost: boolean
+      lastPublished: string
+      locked?: boolean
     }
-  },
-  '1-1': {
-    id: '1-1',
-    children: [],
-    data: {
-      title: 'First parent'
-    }
-  },
-  '1-2': {
-    id: '1-2',
-    children: [],
-    data: {
-      title: 'Second parent'
-    }
-  },
-  '1-1-1': {
-    id: '1-1-1',
-    children: [],
-    data: {
-      title: 'Child one'
-    }
-  },
-  '1-1-2': {
-    id: '1-1-2',
-    children: [],
-    data: {
-      title: 'Child two'
-    }
-  },
-  '1-2-1': {
-    id: '1-2-1',
-    children: [],
-    data: {
-      title: 'Child three'
-    }
-  },
-  '1-2-2': {
-    id: '1-2-2',
-    children: [],
-    data: {
-      title: 'Child four'
-    }
+    children: string[]
+    isRootItem?: true
   }
 }
 
-const MainTabs = () => {
+export type PageExplorerProps = {
+  items: Items
+}
+
+const PageExplorer: React.FC<PageExplorerProps> = props => {
+  const [selectedItem, setSelectedItem] = useState<string | null>(null)
+
+  const getItemValues = (id: string) => {
+    const item = props.items[id]
+
+    return {
+      title: item.data.title,
+      slug: item.data.slug,
+      description: item.data.description,
+      image: item.data.image,
+      isBlogPost: item.data.isBlogPost,
+      lastPublished: item.data.lastPublished
+    }
+  }
+
+  const values = selectedItem ? getItemValues(selectedItem) : undefined
+
+  const handleItemSelect = (id: string | null) => {
+    setSelectedItem(id)
+  }
+
+  const handleValuesChange = (values: any) => {}
+
   return (
     <>
       {/* <Divider mt={4} mb={4} /> */}
@@ -82,15 +75,16 @@ const MainTabs = () => {
         <Flex minHeight="65vh">
           <Box paddingRight={5} minW="sm">
             <PageTree
-              items={treeExample}
-              onItemSelect={() => console.log('help')}
+              items={props.items}
+              height="100%"
+              onItemSelect={handleItemSelect}
             />
           </Box>
           <Center height="65vh">
             <Divider orientation="vertical" />
           </Center>
           <Box flex="1" p={5}>
-            <PageContent />
+            <PageContent values={values} onValuesChange={handleValuesChange} />
           </Box>
         </Flex>
       </Box>
@@ -98,4 +92,4 @@ const MainTabs = () => {
   )
 }
 
-export default MainTabs
+export default PageExplorer

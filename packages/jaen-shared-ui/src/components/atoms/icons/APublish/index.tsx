@@ -26,9 +26,9 @@ export const APublishLottie: LottieFnFn = (dm: boolean) => container => {
 type SnekIconProps = IconProps
 
 const APublish: React.FC<SnekIconProps> = props => {
-  const toggle = useColorMode()
+  const {colorMode} = useColorMode()
 
-  const lottie = APublishLottie(toggle.colorMode === 'dark')
+  const lottie = APublishLottie(colorMode === 'dark')
 
   return (
     <Lottie lottie={lottie} forceReloadDeps={[lottie]}>

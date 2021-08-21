@@ -1,12 +1,12 @@
 import {Button, useColorMode} from '@chakra-ui/react'
 import {Lottie} from '@snek-at/react-lottie'
 
-import {APublishLottie} from '../../../atoms/icons/APublish'
+import {ASaveLottie} from '../../../atoms/icons/ASave'
 
-const Publish: React.FC = props => {
+const Save: React.FC = props => {
   const {colorMode} = useColorMode()
 
-  const lottie = APublishLottie(colorMode === 'dark')
+  const lottie = ASaveLottie(colorMode === 'dark')
 
   return (
     <Lottie lottie={lottie} forceReloadDeps={[lottie]}>
@@ -17,7 +17,7 @@ const Publish: React.FC = props => {
           }
           {...(props as any)}>
           <Button leftIcon={container}>
-            Publish
+            Save
           </Button>
         </i>
       )}
@@ -25,4 +25,4 @@ const Publish: React.FC = props => {
   )
 }
 
-export default Publish
+export default Save

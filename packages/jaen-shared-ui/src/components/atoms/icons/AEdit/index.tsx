@@ -15,8 +15,8 @@ export const AEditLottie: LottieFnFn = (dm: boolean) => container => {
   creator = createLottie({
     container,
     animationData: require(dm
-      ? `./245-edit-document-outline-dm.json`
-      : `./245-edit-document-outline.json`),
+      ? `./35-edit-outline-dm.json`
+      : `./35-edit-outline.json`),
     loop: false
   })
 
@@ -26,9 +26,9 @@ export const AEditLottie: LottieFnFn = (dm: boolean) => container => {
 type SnekIconProps = IconProps
 
 const AEdit: React.FC<SnekIconProps> = props => {
-  const toggle = useColorMode()
+  const {colorMode} = useColorMode()
 
-  const lottie = AEditLottie(toggle.colorMode === 'dark')
+  const lottie = AEditLottie(colorMode === 'dark')
 
   return (
     <Lottie lottie={lottie} forceReloadDeps={[lottie]}>

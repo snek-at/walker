@@ -1,14 +1,14 @@
-// import {Story, Meta} from '@storybook/react'
+import {Story, Meta} from '@storybook/react'
 
-// import PageExplorer from '.'
+import MainHeader from '.'
 
-// export default {
-//   title: 'Organisms/PageExplorer',
-//   component: PageExplorer
-// } as Meta
+export default {
+  title: 'Organisms/Header',
+  component: MainHeader
+} as Meta
 
-// const Template: Story = args => <PageExplorer {...args} />
+const Template: Story = args => <MainHeader {...args} />
 
-// export const Primary = Template.bind({})
+export const Primary = Template.bind({})
 
-// Primary.args = {}
+Primary.args = {}

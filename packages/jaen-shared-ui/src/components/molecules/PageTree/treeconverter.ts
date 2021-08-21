@@ -17,10 +17,8 @@ export const TreeConverter = (items: Items): TreeData => {
   tree.items = {
     ...tree.items,
     ...Object.fromEntries(
-      Object.entries(items).map(([id, item]) => {
-        const totalSlashes = id.split('/').length
-
-        if (totalSlashes === 1) {
+      Object.entries(items).map(([id, {isRootItem, ...item}]) => {
+        if (isRootItem) {
           tree.items[rootName].children.push(id)
         }
 
@@ -29,7 +27,6 @@ export const TreeConverter = (items: Items): TreeData => {
           {
             ...item,
             id,
-            isExpanded: totalSlashes <= 2,
             hasChildren: !!item.children.length,
             isChildrenLoading: false
           }

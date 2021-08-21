@@ -14,11 +14,12 @@ export const ADmToggleLottie: LottieFnFn = (dm: boolean) => container => {
 
   creator = createLottie({
     container,
-    animationData: require(dm
-      ? `./0-dm-toggle.json`
-      : `./0-dm-toggle.json`),
-    loop: false
+    animationData: require(`./0-dm-toggle.json`),
+    loop: false,
+    initialSegment: dm ? [0, 114] : [114, 228],
   })
+
+  creator.animation.setSpeed(2)
 
   return {creator, containerProps}
 }
@@ -26,16 +27,18 @@ export const ADmToggleLottie: LottieFnFn = (dm: boolean) => container => {
 type SnekIconProps = IconProps
 
 const ADmToggle: React.FC<SnekIconProps> = props => {
-  const toggle = useColorMode()
+  const {colorMode} = useColorMode()
 
-  const lottie = ADmToggleLottie(toggle.colorMode === 'dark')
+  const lottie = ADmToggleLottie(colorMode === 'dark')
 
   return (
-    <Lottie lottie={lottie} forceReloadDeps={[lottie]}>
+    <Lottie lottie={lottie}>
       {({animation, container}) => (
         <i
           onClick={() =>
-            animation.playSegments([0, animation.totalFrames], true)
+            colorMode === 'dark'
+              ? animation.playSegments([0, 114], true)
+              : animation.playSegments([114, 228], true)
           }
           {...(props as any)}>
           {container}
