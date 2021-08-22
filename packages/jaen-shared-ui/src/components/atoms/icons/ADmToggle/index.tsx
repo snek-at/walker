@@ -7,6 +7,7 @@ import {
 } from '@snek-at/react-lottie'
 
 export const ADmToggleLottie: LottieFnFn = (dm: boolean) => container => {
+  console.log('update ADmToggleLottie')
   let creator: LottieFnResult['creator']
   const containerProps: LottieFnResult['containerProps'] = {
     style: {width: 24}
@@ -16,7 +17,7 @@ export const ADmToggleLottie: LottieFnFn = (dm: boolean) => container => {
     container,
     animationData: require(`./0-dm-toggle.json`),
     loop: false,
-    initialSegment: dm ? [0, 114] : [114, 228],
+    initialSegment: dm ? [0, 114] : [114, 228]
   })
 
   creator.animation.setSpeed(2)
