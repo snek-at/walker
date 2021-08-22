@@ -103,7 +103,6 @@ const PageContent: React.FC<PageContentType> = props => {
                 <Heading size="md">Description</Heading>
                 <Textarea
                   placeholder="Description"
-                  h="sm"
                   maxH="sm"
                   value={values.description}
                   onChange={e => handleValuesChange('description', e)}

@@ -8,30 +8,28 @@ const ADmToggleButton: React.FC = props => {
 
   console.log('colorMode', colorMode)
 
-  // const lottie = ADmToggleLottie(colorMode === 'dark')
+  const lottie = ADmToggleLottie(colorMode === 'dark')
 
   return (
-    <Button onClick={() => toggleColorMode()}>test</Button>
-    // <Lottie lottie={lottie} forceReloadDeps={[lottie]}>
-    //   {({animation, container}) => (
-    //     <i
-    //       onClick={() => {
-    //         // colorMode === 'dark'
-    //         //   ? animation.playSegments([0, 114], true)
-    //         //   : animation.playSegments([114, 228], true)
+    <Lottie lottie={lottie} forceReloadDeps={[lottie]}>
+      {({animation, container}) => (
+        <i
+          onClick={() => {
+            colorMode === 'dark'
+              ? animation.playSegments([0, 114], true)
+              : animation.playSegments([114, 228], true)
 
-    //         console.log('toggle CM')
-    //         toggleColorMode()
-    //       }}
-    //       {...(props as any)}>
-    //       <IconButton
-    //         aria-label="darkmode toggle"
-    //         variant="ghost"
-    //         icon={container}
-    //       />
-    //     </i>
-    //   )}
-    // </Lottie>
+            toggleColorMode()
+          }}
+          {...(props as any)}>
+          <IconButton
+            aria-label="darkmode toggle"
+            variant="ghost"
+            icon={container}
+          />
+        </i>
+      )}
+    </Lottie>
   )
 }
 

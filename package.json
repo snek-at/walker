@@ -33,7 +33,8 @@
     "semantic-release": "^17.4.4",
     "semantic-release-monorepo": "^7.0.5",
     "typescript": "^4.3.5",
-    "typescript-tslint-plugin": "^1.0.1"
+    "typescript-tslint-plugin": "^1.0.1",
+    "@snek-at/storybook-addon-chakra-ui": "^1.0.0-beta.2"
   },
   "scripts": {
     "build:all": "tsc -b",

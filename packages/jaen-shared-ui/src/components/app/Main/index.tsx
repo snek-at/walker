@@ -50,13 +50,20 @@ import {
   Wrap,
   WrapItem
 } from '@chakra-ui/react'
-
+import {SnekFinder} from '@snek-at/snek-finder'
+import IPFSBackend from '@snek-at/snek-finder/lib/backends/IPFSBackend'
+import ImageViewer from '@snek-at/snek-finder/lib/components/organisms/ImageViewer'
 import React from 'react'
 
+import {Primary as PageExplorer} from '../../organisms/PageExplorer/PageExplorer.stories'
 import {HeaderMain, HotbarMain, FooterMain} from '../../organisms/main'
 
-import PageExplorer from '../../organisms/PageExplorer'
+IPFSBackend.onBackendLinkChange = (link: string) => {
+  console.log(link)
+}
 
+IPFSBackend.initBackendLink =
+  'https://ipfs.io/ipfs/QmSw2QEGRx9PzBXsxt5HoKiong1hkWYN8pNwLKqwNPgaiR'
 
 function Main() {
   const {isOpen, onOpen, onClose} = useDisclosure()
@@ -65,7 +72,14 @@ function Main() {
 
   return (
     <>
-      <Drawer
+      <Drawer isOpen={true} placement="right" size="sm" onClose={onClose}>
+        <DrawerOverlay />
+
+        <DrawerContent>
+          <SnekFinder backend={IPFSBackend} />
+        </DrawerContent>
+      </Drawer>
+      {/* <Drawer
         isOpen={true}
         placement="right"
         size="2xl"
@@ -81,29 +95,29 @@ function Main() {
 
           <Divider />
 
-          <DrawerBody pd={0} mt={2}>
+          <DrawerBody pd={0} mt={2} overflowY="hidden">
             <HotbarMain />
-            {/* <Divider mt={4} mb={4} /> */}
             <Tabs pd={0} mt={4}>
               <TabList>
                 <Tab>Pages</Tab>
-                <Tab>Images</Tab>
-                <Tab>Documents</Tab>
+                <Tab>Files</Tab>
                 <Spacer />
                 <Tab>Analytics</Tab>
                 <Tab>Settings</Tab>
               </TabList>
 
-              <TabPanels overflowY="auto" maxH="80vh">
+              <TabPanels>
                 <TabPanel>
-                  {/* <PageExplorer items={items}/> */}
-                  <p>one!</p>
+                  <PageExplorer items={PageExplorer.args?.items || {}} />
                 </TabPanel>
                 <TabPanel>
-                  <p>two!</p>
+              
                 </TabPanel>
                 <TabPanel>
-                  <p>three!</p>
+                  <p>Analytics</p>
+                </TabPanel>
+                <TabPanel>
+                  <p>Settings</p>
                 </TabPanel>
               </TabPanels>
             </Tabs>
@@ -113,7 +127,7 @@ function Main() {
             <FooterMain />
           </DrawerFooter>
         </DrawerContent>
-      </Drawer>
+      </Drawer> */}
     </>
   )
 }

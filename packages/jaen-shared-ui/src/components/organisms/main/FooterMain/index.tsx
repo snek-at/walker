@@ -10,7 +10,7 @@ const MainFooter:React.FC = () => {
 
   return (
     <>
-      <HStack>
+      <HStack width="100%">
         <CopyrightButton />
         <Spacer />
         <LanguageButton />

@@ -66,13 +66,8 @@ const PageExplorer: React.FC<PageExplorerProps> = props => {
   return (
     <>
       {/* <Divider mt={4} mb={4} /> */}
-      <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        minHeight="65vh"
-        p={2}>
-        <Flex minHeight="65vh">
+      <Box borderWidth="1px" borderRadius="lg" overflow="hidden" h="65vh" p={2}>
+        <Flex h="65vh">
           <Box paddingRight={5} minW="sm">
             <PageTree
               items={props.items}
