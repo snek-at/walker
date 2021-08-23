@@ -13,6 +13,11 @@ const ADmToggleButton: React.FC = props => {
   return (
     <Lottie lottie={lottie} forceReloadDeps={[lottie]}>
       {({animation, container}) => (
+        <Tooltip
+        hasArrow
+        label={CONTENT.tooltip}
+        placement="bottom-start"
+        fontSize="md">
         <i
           onClick={() => {
             colorMode === 'dark'

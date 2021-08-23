@@ -1,14 +1,16 @@
 import {Story, Meta} from '@storybook/react'
 
-import EditButton from '.'
+import EditButton, {EditButtonProps} from '.'
 
 export default {
   title: 'Molecules/buttons/Edit',
   component: EditButton
 } as Meta
 
-const Template: Story = args => <EditButton {...args} />
+const Template: Story<EditButtonProps> = args => <EditButton {...args} />
 
 export const Primary = Template.bind({})
 
-Primary.args = {}
+Primary.args = {
+  onEditingChange: () => null
+}

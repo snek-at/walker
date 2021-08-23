@@ -1,0 +1,12 @@
+{
+  "button_on": {"en": "Stop Editing", "de": "Bearbeiten Beenden"},
+  "button_off": {"en": "Start Editing", "de": "Bearbeiten Starten"},
+  "tooltip_on": {
+    "en": "Click this button to enable the editing mode",
+    "de": "Wenn Sie auf diesen Knopf drücken aktivieren Sie den Editiermodus"
+  },
+  "tooltip_off": {
+    "en": "By clicking this button you disable the editing mode",
+    "de": "Klicken Sie auf diesen Knopf um den Editiermodus auszuschalten"
+  }
+}

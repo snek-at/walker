@@ -11,7 +11,7 @@ module.exports = async ({config}) => {
 
   config.module.rules.unshift({
     test: /\.svg$/,
-    use: ['@svgr/webpack', assetLoader]
+    use: ['inline-react-svg', assetLoader]
   })
 
   return config
