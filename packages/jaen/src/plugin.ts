@@ -1,16 +1,8 @@
+import {HotbarMainProps, TabsMainProps} from '@snek-at/jaen-shared-ui'
+
 export type PluginUI = {
-  hotbar: {
-    buttons: {
-      position: number
-      orientation: 'start' | 'end'
-      button: JSX.Element
-    }[]
-  }
-  tabs: {
-    position: number
-    orientation: 'start' | 'end'
-    tab: JSX.Element
-  }[]
+  hotbar: HotbarMainProps
+  tabs: TabsMainProps
 }
 
 export type PluginCallbacks = {
@@ -31,12 +23,18 @@ export type Plugin = {
  * Merges the plugin UI objects into a single object.
  */
 export const getUI = (plugins: Plugin[]): PluginUI => {
-  const ui: PluginUI = {hotbar: {buttons: []}, tabs: []}
+  const ui: PluginUI = {
+    hotbar: {start: [], end: []},
+    tabs: {start: [], end: []}
+  }
+
   plugins.forEach(plugin => {
     const {hotbar, tabs} = plugin.registerUI
 
-    ui.hotbar.buttons = ui.hotbar.buttons.concat(hotbar.buttons)
-    ui.tabs = ui.tabs.concat(tabs)
+    ui.hotbar.start = [...ui.hotbar.start, ...hotbar.start]
+    ui.hotbar.end = [...ui.hotbar.end, ...hotbar.end]
+    ui.tabs.start = [...ui.tabs.start, ...tabs.start]
+    ui.tabs.end = [...ui.tabs.end, ...tabs.end]
   })
 
   return ui

@@ -2,8 +2,7 @@ import {Button, Text} from '@chakra-ui/react'
 
 import {SnekIcon} from '../../../atoms/icons'
 
-const SnekButton: React.FC = props => {
-
+const SnekBrandButton: React.FC = props => {
   return (
     <Button
       minW="4xs"
@@ -15,4 +14,4 @@ const SnekButton: React.FC = props => {
   )
 }
 
-export default SnekButton
+export default SnekBrandButton

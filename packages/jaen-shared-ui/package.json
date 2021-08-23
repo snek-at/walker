@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "license": "MIT",
+  "scripts": {
+    "build": {}
+  },
   "dependencies": {
     "@atlaskit/tree": "^8.4.0",
     "@chakra-ui/icons": "^1.0.15",

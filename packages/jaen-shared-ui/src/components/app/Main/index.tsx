@@ -6,10 +6,13 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerFooter,
-  Divider
+  Divider,
+  Box,
+  useDisclosure
 } from '@chakra-ui/react'
-import React, {useEffect} from 'react'
+import React, {useRef} from 'react'
 
+import {JaenToggleButton} from '../../molecules/buttons'
 import {
   HeaderMain,
   HotbarMain,
@@ -22,19 +25,22 @@ import {
 export type MainProps = {
   hotbar: HotbarMainProps
   tabs: TabsMainProps
-  onOpen: () => void
-  onClose: () => void
-  isOpen: boolean
 }
 
 const Main: React.FC<MainProps> = props => {
+  const {isOpen, onOpen, onClose} = useDisclosure()
+  const btnRef = useRef<HTMLButtonElement | null>()
   return (
     <>
+      <Box pos="fixed" bottom={5} right={5} ref={btnRef as any}>
+        <JaenToggleButton ref={btnRef as any} onClick={onOpen} />
+      </Box>
       <Drawer
-        isOpen={props.isOpen}
         placement="right"
-        size="2xl"
-        onClose={props.onClose}>
+        size="6xl"
+        isOpen={isOpen}
+        onClose={onClose}
+        finalFocusRef={btnRef as any}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />

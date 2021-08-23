@@ -15,9 +15,5 @@ export const Primary = Template.bind({})
 
 Primary.args = {
   hotbar: HotbarMain.args as any,
-  tabs: TabsMain.args as any,
-
-  onOpen: () => null,
-  onClose: () => null,
-  isOpen: true
+  tabs: TabsMain.args as any
 }
