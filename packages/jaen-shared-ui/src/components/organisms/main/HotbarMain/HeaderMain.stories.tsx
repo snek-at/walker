@@ -1,14 +1,22 @@
 import {Story, Meta} from '@storybook/react'
 
-import MainHotbar from '.'
+import HotbarMain, {HotbarMainProps} from '.'
+import {
+  EditButton,
+  DiscardButton,
+  PublishButton
+} from '../../../molecules/buttons'
 
 export default {
   title: 'Organisms/main/Hotbar',
-  component: MainHotbar
+  component: HotbarMain
 } as Meta
 
-const Template: Story = args => <MainHotbar {...args} />
+const Template: Story<HotbarMainProps> = args => <HotbarMain {...args} />
 
 export const Primary = Template.bind({})
 
-Primary.args = {}
+Primary.args = {
+  start: [<EditButton />, <DiscardButton />],
+  end: [<PublishButton />]
+}

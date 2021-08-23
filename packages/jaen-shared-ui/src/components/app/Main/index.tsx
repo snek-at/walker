@@ -56,21 +56,24 @@ import React, {useEffect} from 'react'
 
 import {Items} from '../../organisms/PageExplorer'
 import {Primary as PageExplorer} from '../../organisms/PageExplorer/PageExplorer.stories'
-import {HeaderMain, HotbarMain, FooterMain} from '../../organisms/main'
+import {
+  HeaderMain,
+  HotbarMain,
+  FooterMain,
+  HotbarMainProps,
+  TabsMainProps,
+  TabsMain
+} from '../../organisms/main'
 
 export type MainProps = {
-  pagesItems: Items
-  filesInitBackendLink: string
-  filesBackendLinkChange: (link: string) => void
+  hotbar: HotbarMainProps
+  tabs: TabsMainProps
   onOpen: () => void
   onClose: () => void
   isOpen: boolean
 }
 
 const Main: React.FC<MainProps> = props => {
-  IPFSBackend.initBackendLink = props.filesInitBackendLink
-  IPFSBackend.onBackendLinkChange = props.filesBackendLinkChange
-
   return (
     <>
       <Drawer
@@ -89,32 +92,8 @@ const Main: React.FC<MainProps> = props => {
           <Divider />
 
           <DrawerBody pd={0} mt={2}>
-            <HotbarMain />
-            <Tabs pd={0} mt={4}>
-              <TabList>
-                <Tab>Pages</Tab>
-                <Tab>Files</Tab>
-                <Spacer />
-                <Tab>Analytics</Tab>
-                <Tab>Settings</Tab>
-              </TabList>
-
-              <TabPanels>
-                <TabPanel>
-                  <PageExplorer items={props.pagesItems} />
-                </TabPanel>
-                <TabPanel>
-                  {/* <SnekFinder backend={IPFSBackend} /> */}
-                  <SnekFinder backend={IPFSBackend} />
-                </TabPanel>
-                <TabPanel>
-                  <p>Analytics</p>
-                </TabPanel>
-                <TabPanel>
-                  <p>Settings</p>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
+            <HotbarMain {...props.hotbar} />
+            <TabsMain {...props.tabs} />
           </DrawerBody>
           <Divider />
           <DrawerFooter py={2}>

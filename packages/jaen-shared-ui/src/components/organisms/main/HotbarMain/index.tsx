@@ -1,24 +1,26 @@
 import {Divider, HStack, Stack, Flex, Spacer} from '@chakra-ui/react'
 
-import {
-  EditButton,
-  DiscardButton,
-  PublishButton
-} from '../../../molecules/buttons'
+export type HotbarMainProps = {
+  start: JSX.Element[]
+  end: JSX.Element[]
+}
 
-const MainHotbar: React.FC = () => {
+const HotbarMain: React.FC<HotbarMainProps> = ({start, end}) => {
   return (
     <>
       <HStack>
         <Flex width="100%">
           <Stack direction="row">
             <Divider borderLeftWidth="2px" orientation="vertical" />
-            <EditButton />
-            <DiscardButton />
+            {start.map((item, index) => (
+              <div key={index}> {item} </div>
+            ))}
           </Stack>
           <Spacer />
           <Stack direction="row">
-            <PublishButton />
+            {end.map((item, index) => (
+              <div key={index}> {item} </div>
+            ))}
             <Divider borderLeftWidth="2px" orientation="vertical" />
           </Stack>
         </Flex>
@@ -27,4 +29,4 @@ const MainHotbar: React.FC = () => {
   )
 }
 
-export default MainHotbar
+export default HotbarMain
