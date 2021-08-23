@@ -4,7 +4,11 @@ import {Lottie} from '@snek-at/react-lottie'
 import {ADiscardLottie} from '../../../atoms/icons/ADiscardIcon'
 import translations from './translations.json'
 
-const DiscardButton: React.FC = props => {
+export type DiscardButtonProps = {
+  onDiscardClick: () => void
+}
+
+const DiscardButton: React.FC<DiscardButtonProps> = props => {
   const {colorMode} = useColorMode()
 
   const lottie = ADiscardLottie(colorMode === 'dark')
@@ -41,6 +45,7 @@ const DiscardButton: React.FC = props => {
             leftIcon={container}
             onClick={() => {
               animation.playSegments([0, animation.totalFrames], true)
+              props.onDiscardClick()
             }}
             {...(props as any)}>
             {CONTENT.button}

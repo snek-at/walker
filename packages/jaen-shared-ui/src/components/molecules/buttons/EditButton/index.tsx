@@ -5,15 +5,15 @@ import React, {useState} from 'react'
 import {AEditLottie} from '../../../atoms/icons/AEdit'
 import translations from './translations.json'
 
-export type EditingButtonProps = {
-  onEditingChange: (editing: boolean) => void
+export type EditButtonProps = {
+  onEditChange: (editing: boolean) => void
 }
 
-const EditButton: React.FC<EditingButtonProps> = props => {
+const EditButton: React.FC<EditButtonProps> = props => {
   const [active, setActive] = useState(false)
   const toggleActive = () => {
     setActive(!active)
-    props.onEditingChange(!active)
+    props.onEditChange(!active)
   }
 
   const {colorMode} = useColorMode()

@@ -12,5 +12,5 @@ const Template: Story<EditButtonProps> = args => <EditButton {...args} />
 export const Primary = Template.bind({})
 
 Primary.args = {
-  onEditingChange: () => null
+  onEditChange: () => null
 }

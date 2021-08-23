@@ -11,9 +11,16 @@ export default {
 
 const Template: Story<MainProps> = args => <Main {...args} />
 
-export const Primary = Template.bind({})
+export const Authenticated = Template.bind({})
 
-Primary.args = {
+Authenticated.args = {
   hotbar: HotbarMain.args as any,
-  tabs: TabsMain.args as any
+  tabs: TabsMain.args as any,
+  authenticated: true
+}
+
+export const Unauthenticated = Authenticated.bind({})
+
+Unauthenticated.args = {
+  authenticated: false
 }

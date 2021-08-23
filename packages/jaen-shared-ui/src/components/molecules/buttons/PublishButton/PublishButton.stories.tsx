@@ -1,14 +1,16 @@
 import {Story, Meta} from '@storybook/react'
 
-import PublishButton from '.'
+import PublishButton, {PublishButtonProps} from '.'
 
 export default {
   title: 'Molecules/buttons/PublishButton',
   component: PublishButton
 } as Meta
 
-const Template: Story = args => <PublishButton {...args} />
+const Template: Story<PublishButtonProps> = args => <PublishButton {...args} />
 
 export const Primary = Template.bind({})
 
-Primary.args = {}
+Primary.args = {
+  onPublishClick: () => null
+}

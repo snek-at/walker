@@ -5,7 +5,11 @@ import {APublishLottie} from '../../../atoms/icons/APublishIcon'
 
 import translations from './translations.json'
 
-const PublishButton: React.FC = props => {
+export type PublishButtonProps = {
+  onPublishClick: () => void
+}
+
+const PublishButton: React.FC<PublishButtonProps> = props => {
   const {colorMode} = useColorMode()
 
   const lottie = APublishLottie(colorMode === 'dark')
@@ -37,17 +41,15 @@ const PublishButton: React.FC = props => {
           placement="bottom-start"
           fontSize="md">
             <Button
-                size="sm"
-                variant="outline"
-                leftIcon={container}
-                onClick={() => {
-                animation.playSegments(
-                    [0, animation.totalFrames],
-                    true
-                )
-                }}
-                {...(props as any)}>
-                {CONTENT.button}
+              size="sm"
+              variant="outline"
+              leftIcon={container}
+              onClick={() => {
+                animation.playSegments([0, animation.totalFrames], true)
+                props.onPublishClick()
+              }}
+              {...(props as any)}>
+              {CONTENT.button}
             </Button>
           </Tooltip>
         )}

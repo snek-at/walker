@@ -19,12 +19,14 @@ import {
   FooterMain,
   HotbarMainProps,
   TabsMainProps,
-  TabsMain
+  TabsMain,
+  LoginMain
 } from '../../organisms/main'
 
 export type MainProps = {
   hotbar: HotbarMainProps
   tabs: TabsMainProps
+  authenticated: boolean
 }
 
 const Main: React.FC<MainProps> = props => {
@@ -45,20 +47,24 @@ const Main: React.FC<MainProps> = props => {
         <DrawerContent>
           <DrawerCloseButton />
 
-          <DrawerHeader>
-            <HeaderMain />
-          </DrawerHeader>
-
-          <Divider />
-
-          <DrawerBody pd={0} mt={2}>
-            <HotbarMain {...props.hotbar} />
-            <TabsMain {...props.tabs} />
-          </DrawerBody>
-          <Divider />
-          <DrawerFooter py={2}>
-            <FooterMain />
-          </DrawerFooter>
+          {props.authenticated ? (
+            <>
+              <DrawerHeader>
+                <HeaderMain />
+              </DrawerHeader>
+              <Divider />
+              <DrawerBody pd={0} mt={2}>
+                <HotbarMain {...props.hotbar} />
+                <TabsMain {...props.tabs} />
+              </DrawerBody>
+              <Divider />
+              <DrawerFooter py={2}>
+                <FooterMain />
+              </DrawerFooter>
+            </>
+          ) : (
+            <LoginMain />
+          )}
         </DrawerContent>
       </Drawer>
     </>

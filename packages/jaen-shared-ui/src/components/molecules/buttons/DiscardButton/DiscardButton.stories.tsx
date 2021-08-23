@@ -1,14 +1,16 @@
 import {Story, Meta} from '@storybook/react'
 
-import DiscardButton from '.'
+import DiscardButton, {DiscardButtonProps} from '.'
 
 export default {
   title: 'Molecules/buttons/DiscardButton',
   component: DiscardButton
 } as Meta
 
-const Template: Story = args => <DiscardButton {...args} />
+const Template: Story<DiscardButtonProps> = args => <DiscardButton {...args} />
 
 export const Primary = Template.bind({})
 
-Primary.args = {}
+Primary.args = {
+  onDiscardClick: () => null
+}
