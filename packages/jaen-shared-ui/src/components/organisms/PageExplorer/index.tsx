@@ -31,7 +31,7 @@ export type Items = {
       locked?: boolean
     }
     children: string[]
-    isRootItem?: true
+    parent: string | null
   }
 }
 
@@ -40,7 +40,9 @@ export type PageExplorerProps = {
 }
 
 const PageExplorer: React.FC<PageExplorerProps> = props => {
-  const [selectedItem, setSelectedItem] = useState<string | null>(null)
+  const [selectedItem, setSelectedItem] = useState<string | null>(
+    Object.keys(props.items)[0]
+  )
 
   const getItemValues = (id: string) => {
     const item = props.items[id]

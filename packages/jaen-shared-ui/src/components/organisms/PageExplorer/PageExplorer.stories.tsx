@@ -24,7 +24,7 @@ Primary.args = {
         lastPublished: 'string',
         locked: true
       },
-      isRootItem: true
+      parent: null
     },
     '2': {
       children: ['2-1'],
@@ -36,10 +36,10 @@ Primary.args = {
         isBlogPost: false,
         lastPublished: 'string'
       },
-      isRootItem: true
+      parent: null
     },
     '2-1': {
-      children: [],
+      children: ['2-1-1'],
       data: {
         title: 'JaenV2',
         slug: 'jaen-v2',
@@ -47,7 +47,32 @@ Primary.args = {
         image: 'string',
         isBlogPost: true,
         lastPublished: '21.08.2021'
-      }
+      },
+      parent: '2'
+    },
+    '2-1-1': {
+      children: ['2-1-1-1'],
+      data: {
+        title: 'JaenV3',
+        slug: 'jaen-v2',
+        description: 'Wow.. Jaen release out now!',
+        image: 'string',
+        isBlogPost: true,
+        lastPublished: '21.08.2021'
+      },
+      parent: '2-1'
+    },
+    '2-1-1-1': {
+      children: [],
+      data: {
+        title: 'JaenV3',
+        slug: 'jaen-v2',
+        description: 'Wow.. Jaen release out now!',
+        image: 'string',
+        isBlogPost: true,
+        lastPublished: '21.08.2021'
+      },
+      parent: '2-1-1'
     }
   }
 }

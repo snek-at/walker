@@ -13,7 +13,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
     "@snek-at/react-lottie": "1.0.0-beta.3",
-    "@snek-at/snek-finder": "1.0.0-beta.6",
+    "@snek-at/snek-finder": "1.0.0-beta.7",
     "framer-motion": "^4.1.17",
     "react": "^17.0.2"
   }

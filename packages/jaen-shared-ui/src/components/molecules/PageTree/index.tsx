@@ -33,6 +33,7 @@ export type Items = {
     }
     isRootItem?: true
     children: string[]
+    parent: string | null
   }
 }
 

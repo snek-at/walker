@@ -14,7 +14,7 @@ const treeExample = {
     data: {
       title: 'root'
     },
-    isRootItem: true
+    parent: null
   },
   '1-1': {
     id: '1-1',
@@ -23,7 +23,7 @@ const treeExample = {
       title: 'First parent',
       locked: true
     },
-    isRootItem: true
+    parent: null
   },
   '1-2': {
     id: '1-2',
@@ -31,7 +31,7 @@ const treeExample = {
     data: {
       title: 'Second parent'
     },
-    isRootItem: true
+    parent: null
   },
   '1-1-1': {
     id: '1-1-1',
@@ -39,7 +39,7 @@ const treeExample = {
     data: {
       title: 'Child one'
     },
-    isRootItem: true
+    parent: null
   },
   '1-1-2': {
     id: '1-1-2',
@@ -47,7 +47,7 @@ const treeExample = {
     data: {
       title: 'Child two'
     },
-    isRootItem: true
+    parent: null
   },
   '1-2-1': {
     id: '1-2-1',
@@ -55,7 +55,7 @@ const treeExample = {
     data: {
       title: 'Child three'
     },
-    isRootItem: true
+    parent: null
   },
   '1-2-2': {
     id: '1-2-2',
@@ -63,7 +63,7 @@ const treeExample = {
     data: {
       title: 'Child four'
     },
-    isRootItem: true
+    parent: null
   }
 }
 

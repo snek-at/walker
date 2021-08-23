@@ -52,39 +52,32 @@ import {
 } from '@chakra-ui/react'
 import {SnekFinder} from '@snek-at/snek-finder'
 import IPFSBackend from '@snek-at/snek-finder/lib/backends/IPFSBackend'
-import ImageViewer from '@snek-at/snek-finder/lib/components/organisms/ImageViewer'
-import React from 'react'
+import React, {useEffect} from 'react'
 
+import {Items} from '../../organisms/PageExplorer'
 import {Primary as PageExplorer} from '../../organisms/PageExplorer/PageExplorer.stories'
 import {HeaderMain, HotbarMain, FooterMain} from '../../organisms/main'
 
-IPFSBackend.onBackendLinkChange = (link: string) => {
-  console.log(link)
+export type MainProps = {
+  pagesItems: Items
+  filesInitBackendLink: string
+  filesBackendLinkChange: (link: string) => void
+  onOpen: () => void
+  onClose: () => void
+  isOpen: boolean
 }
 
-IPFSBackend.initBackendLink =
-  'https://ipfs.io/ipfs/QmSw2QEGRx9PzBXsxt5HoKiong1hkWYN8pNwLKqwNPgaiR'
-
-function Main() {
-  const {isOpen, onOpen, onClose} = useDisclosure()
-  const btnRef = React.useRef()
-  const {colorMode, toggleColorMode} = useColorMode()
+const Main: React.FC<MainProps> = props => {
+  IPFSBackend.initBackendLink = props.filesInitBackendLink
+  IPFSBackend.onBackendLinkChange = props.filesBackendLinkChange
 
   return (
     <>
-      <Drawer isOpen={true} placement="right" size="sm" onClose={onClose}>
-        <DrawerOverlay />
-
-        <DrawerContent>
-          <SnekFinder backend={IPFSBackend} />
-        </DrawerContent>
-      </Drawer>
-      {/* <Drawer
-        isOpen={true}
+      <Drawer
+        isOpen={props.isOpen}
         placement="right"
         size="2xl"
-        onClose={onClose}
-        finalFocusRef={btnRef as any}>
+        onClose={props.onClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
@@ -95,7 +88,7 @@ function Main() {
 
           <Divider />
 
-          <DrawerBody pd={0} mt={2} overflowY="hidden">
+          <DrawerBody pd={0} mt={2}>
             <HotbarMain />
             <Tabs pd={0} mt={4}>
               <TabList>
@@ -108,10 +101,11 @@ function Main() {
 
               <TabPanels>
                 <TabPanel>
-                  <PageExplorer items={PageExplorer.args?.items || {}} />
+                  <PageExplorer items={props.pagesItems} />
                 </TabPanel>
                 <TabPanel>
-              
+                  {/* <SnekFinder backend={IPFSBackend} /> */}
+                  <SnekFinder backend={IPFSBackend} />
                 </TabPanel>
                 <TabPanel>
                   <p>Analytics</p>
@@ -127,7 +121,7 @@ function Main() {
             <FooterMain />
           </DrawerFooter>
         </DrawerContent>
-      </Drawer> */}
+      </Drawer>
     </>
   )
 }
