@@ -1,61 +1,15 @@
 import {
-  Button,
   Drawer,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
   DrawerHeader,
   DrawerBody,
-  Input,
   DrawerFooter,
-  useDisclosure,
-  Switch,
-  Text,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanel,
-  TabPanels,
-  InputGroup,
-  InputLeftElement,
-  Heading,
-  Box,
-  IconButton,
-  HStack,
-  Badge,
-  Stack,
-  Divider,
-  ButtonGroup,
-  Tooltip,
-  List,
-  ListItem,
-  ListIcon,
-  useColorMode,
-  Flex,
-  Center,
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Select,
-  InputRightAddon,
-  InputLeftAddon,
-  Textarea,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  Spacer,
-  Checkbox,
-  Wrap,
-  WrapItem
+  Divider
 } from '@chakra-ui/react'
-import {SnekFinder} from '@snek-at/snek-finder'
-import IPFSBackend from '@snek-at/snek-finder/lib/backends/IPFSBackend'
 import React, {useEffect} from 'react'
 
-import {Items} from '../../organisms/PageExplorer'
-import {Primary as PageExplorer} from '../../organisms/PageExplorer/PageExplorer.stories'
 import {
   HeaderMain,
   HotbarMain,
