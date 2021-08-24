@@ -4,7 +4,6 @@ import {SnekIcon} from '../../../atoms/icons'
 import translations from './translations.json'
 
 const SnekBrandButton: React.FC = props => {
-
   const LM = 'en'
 
   type Translations = {[name: string]: {en: string; de: string}}
@@ -24,19 +23,13 @@ const SnekBrandButton: React.FC = props => {
   const CONTENT = useLanguageModeValue(translations)
 
   return (
-    <Tooltip
-    hasArrow
-    label={CONTENT.tooltip}
-    placement="bottom-start"
-    fontSize="md">
-      <Button
-        minW="4xs"
-        variant="ghost"
-        leftIcon={<SnekIcon w={35} h={35} />}
-        onClick={() => window.open('https://snek.at', 'blank')}>
-        <Text>snek - Jaen</Text>
-      </Button>
-    </Tooltip>
+    <Button
+      minW="4xs"
+      variant="ghost"
+      leftIcon={<SnekIcon w={35} h={35} />}
+      onClick={() => window.open('https://snek.at', 'blank')}>
+      <Text>snek - Jaen</Text>
+    </Button>
   )
 }
 

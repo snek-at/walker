@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import React, {useRef} from 'react'
 
-import {JaenToggleButton} from '../../molecules/buttons'
+import {JaenToggleButton, SnekButton} from '../../molecules/buttons'
 import {
   HeaderMain,
   HotbarMain,
@@ -63,7 +63,14 @@ const Main: React.FC<MainProps> = props => {
               </DrawerFooter>
             </>
           ) : (
-            <LoginMain />
+            <>
+              <DrawerHeader>
+                <SnekButton />
+              </DrawerHeader>
+              <DrawerBody pd={0} mt={2}>
+                <LoginMain />
+              </DrawerBody>
+            </>
           )}
         </DrawerContent>
       </Drawer>

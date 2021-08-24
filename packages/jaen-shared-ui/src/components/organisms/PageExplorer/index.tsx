@@ -68,7 +68,7 @@ const PageExplorer: React.FC<PageExplorerProps> = props => {
   return (
     <>
       {/* <Divider mt={4} mb={4} /> */}
-      <Box borderWidth="1px" borderRadius="lg" overflow="hidden" h="65vh" p={2}>
+      <Box borderWidth="1px" borderRadius="lg" overflow="hidden" h="67vh" p={2}>
         <Flex h="65vh">
           <Box paddingRight={5} minW="sm">
             <PageTree
@@ -80,7 +80,7 @@ const PageExplorer: React.FC<PageExplorerProps> = props => {
           <Center height="65vh">
             <Divider orientation="vertical" />
           </Center>
-          <Box flex="1" p={5}>
+          <Box flex="1" p={5} overflow="auto">
             <PageContent values={values} onValuesChange={handleValuesChange} />
           </Box>
         </Flex>

@@ -11,9 +11,6 @@ import {
   Avatar,
   AvatarGroup,
   useBreakpointValue,
-  IconProps,
-  Icon,
-  IconButton,
   Link,
   Popover,
   PopoverTrigger,
@@ -23,8 +20,6 @@ import {
   PopoverHeader,
   PopoverCloseButton
 } from '@chakra-ui/react'
-
-import {GithubButton} from '../../../molecules/buttons'
 
 const avatars = [
   {

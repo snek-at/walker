@@ -22,18 +22,14 @@ export const TreeConverter = (items: Items): TreeData => {
     allItems: Items,
     rootItemId: string
   ): Generator<string> {
-    let cur = rootItemId
+    let parent = allItems[rootItemId].parent
 
-    while (true) {
-      const parent = allItems[rootItemId].parent
+    while (parent) {
+      // console.log("parent: " +  parent)
 
-      if (!parent) {
-        break
-      }
+      yield parent
 
-      cur = parent
-
-      yield cur
+      parent = allItems[parent].parent
     }
   }
 
@@ -44,7 +40,9 @@ export const TreeConverter = (items: Items): TreeData => {
       }
 
       const parentIter = genItemParent(items, id)
-      const isExpanded = !nth(parentIter, 0)
+      const isExpanded = !nth(parentIter, 3)
+      
+      // console.log("isExpanded: " +  !nth(genItemParent(items, id), 2))
 
       yield {
         ...item,

@@ -49,12 +49,17 @@ const EditButton: React.FC<EditButtonProps> = props => {
             size="sm"
             variant="outline"
             leftIcon={container}
+            rightIcon={
+              <Badge borderRadius="full" px="2" colorScheme={active ? "green" : "red"}>
+                {active ? CONTENT.active : CONTENT.inactive}
+              </Badge>
+            }
             onClick={() => {
               animation.playSegments([0, animation.totalFrames], true)
               toggleActive()
             }}
             {...(props as any)}>
-            {active ? CONTENT.button_on : CONTENT.button_off}
+            {CONTENT.button}
           </Button>
         </Tooltip>
       )}

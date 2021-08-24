@@ -4,6 +4,7 @@ import {Story, Meta} from '@storybook/react'
 
 import TabsMain, {TabsMainProps} from '.'
 import {Primary as PageExplorer} from '../../PageExplorer/PageExplorer.stories'
+import {Primary as Settings} from '../../Settings/Settings.stories'
 
 export default {
   title: 'Organisms/main/Tabs',
@@ -31,7 +32,7 @@ Primary.args = {
     },
     {
       label: 'Settings',
-      content: <div>Settings</div>
+      content: <Settings />
     }
   ]
 }

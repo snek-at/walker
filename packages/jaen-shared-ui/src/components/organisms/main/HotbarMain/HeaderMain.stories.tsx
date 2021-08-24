@@ -17,6 +17,9 @@ const Template: Story<HotbarMainProps> = args => <HotbarMain {...args} />
 export const Primary = Template.bind({})
 
 Primary.args = {
-  start: [<EditButton />, <DiscardButton />],
-  end: [<PublishButton />]
+  start: [
+    <EditButton onEditChange={(editing: boolean) => null} />,
+    <DiscardButton onDiscardClick={() => null} />
+  ],
+  end: [<PublishButton onPublishClick={() => null} />]
 }

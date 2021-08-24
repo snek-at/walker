@@ -1,22 +1,14 @@
-import {
-  Input,
-  InputGroup,
-  InputLeftElement,
-  HStack,
-} from '@chakra-ui/react'
+import {Input, InputGroup, InputLeftElement, HStack} from '@chakra-ui/react'
 
-import {
-  SearchIcon,
-} from '../../../atoms/icons'
+import {SearchIcon} from '../../../atoms/icons'
 import {
   SnekButton,
   DmToggleButton,
   QuestionButton,
-  GithubButton,
+  GithubButton
 } from '../../../molecules/buttons'
 
-const MainHeader:React.FC = () => {
-
+const MainHeader: React.FC = () => {
   return (
     <>
       <HStack>
@@ -30,7 +22,7 @@ const MainHeader:React.FC = () => {
         </InputGroup>
         <GithubButton />
         <QuestionButton />
-        <DmToggleButton />
+        <DmToggleButton onDmToggleChange={() => null} />
       </HStack>
     </>
   )

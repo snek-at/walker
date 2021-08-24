@@ -1,10 +1,9 @@
 import {Tooltip, IconButton, useColorMode} from '@chakra-ui/react'
 import {Lottie} from '@snek-at/react-lottie'
-
 import {useState} from 'react'
 
+// import {DmToggle} from '../../../atoms/icons'
 import {ADmToggleLottie} from '../../../atoms/icons/ADmToggle'
-
 import translations from './translations.json'
 
 export type DmToggleButtonProps = {
@@ -19,6 +18,7 @@ const ADmToggleButton: React.FC<DmToggleButtonProps> = props => {
   }
 
   const {colorMode, toggleColorMode} = useColorMode()
+  const dm: boolean = colorMode === 'dark'
 
   console.log('colorMode', colorMode)
 
@@ -69,6 +69,21 @@ const ADmToggleButton: React.FC<DmToggleButtonProps> = props => {
         </Tooltip>
       )}
     </Lottie>
+    // <Tooltip
+    //   hasArrow
+    //   label={dm ? CONTENT.tooltip_on : CONTENT.tooltip_off}
+    //   placement="bottom-start"
+    //   fontSize="md">
+    //   <IconButton
+    //     aria-label="darkmode toggle"
+    //     variant="ghost"
+    //     icon={<DmToggle isDMEnabled={dm} />}
+    //     onClick={() => {
+    //       toggleColorMode()
+    //     }}
+    //     {...(props as any)}
+    //   />
+    // </Tooltip>
   )
 }
 

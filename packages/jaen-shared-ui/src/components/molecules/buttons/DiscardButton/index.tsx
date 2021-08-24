@@ -1,4 +1,4 @@
-import {Button, useColorMode, Tooltip} from '@chakra-ui/react'
+import {Button, Badge, useColorMode, Tooltip} from '@chakra-ui/react'
 import {Lottie} from '@snek-at/react-lottie'
 
 import {ADiscardLottie} from '../../../atoms/icons/ADiscardIcon'
@@ -43,6 +43,11 @@ const DiscardButton: React.FC<DiscardButtonProps> = props => {
             size="sm"
             variant="outline"
             leftIcon={container}
+            rightIcon={
+              <Badge borderRadius="full" px="2" colorScheme="yellow">
+                143
+              </Badge>
+            }
             onClick={() => {
               animation.playSegments([0, animation.totalFrames], true)
               props.onDiscardClick()

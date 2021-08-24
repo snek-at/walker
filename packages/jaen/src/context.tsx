@@ -33,7 +33,7 @@ export const JaenCoreProvider: React.FC<JaenCoreProviderProps> = ({
 
   return (
     <JaenCoreContext.Provider value={{onPublish}}>
-      <MainUI hotbar={hotbar} tabs={tabs} />
+      <MainUI hotbar={hotbar} tabs={tabs} authenticated={false} />
       {children}
     </JaenCoreContext.Provider>
   )

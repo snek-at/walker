@@ -149,8 +149,8 @@ export type SiteType = {
       logo: string
     }
     social: {
-      twitter: string
-      fbAppID: string
+      twitter: string // twitter username
+      fbAppID: string // FB ANALYTICS
     }
   }
   allSitePage: {

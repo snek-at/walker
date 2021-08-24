@@ -1,4 +1,4 @@
-import {Button, useColorMode, Tooltip} from '@chakra-ui/react'
+import {Button, Badge, useColorMode, Tooltip} from '@chakra-ui/react'
 import {Lottie} from '@snek-at/react-lottie'
 
 import {APublishLottie} from '../../../atoms/icons/APublishIcon'
@@ -44,6 +44,11 @@ const PublishButton: React.FC<PublishButtonProps> = props => {
               size="sm"
               variant="outline"
               leftIcon={container}
+              rightIcon={
+                <Badge borderRadius="full" px="2" colorScheme="green">
+                  authorised
+                </Badge>
+              }
               onClick={() => {
                 animation.playSegments([0, animation.totalFrames], true)
                 props.onPublishClick()
