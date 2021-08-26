@@ -1,19 +1,50 @@
 {
-  "button": {"en": "Editing", "de": "Bearbeiten"},
-  "active": {
-    "en": "ON",
-    "de": "EIN"
+  "headingtooltip":{
+    "en": "This is a tooltip.",
+    "de": "Dies ist ein Tooltip"
   },
-  "inactive": {
-    "en": "OFF",
-    "de": "AUS"
+  "titletooltip":{
+    "en": "This is a tooltip.",
+    "de": "Dies ist ein Tooltip"
   },
-  "tooltip_on": {
-    "en": "Click this button to enable the editing mode",
-    "de": "Wenn Sie auf diesen Knopf drücken aktivieren Sie den Editiermodus"
+  "urltooltip":{
+    "en": "This is a tooltip.",
+    "de": "Dies ist ein Tooltip"
   },
-  "tooltip_off": {
-    "en": "By clicking this button you disable the editing mode",
-    "de": "Klicken Sie auf diesen Knopf um den Editiermodus auszuschalten"
+  "descriptiontooltip":{
+    "en": "This is a tooltip.",
+    "de": "Dies ist ein Tooltip"
+  },
+  "authortooltip":{
+    "en": "This is a tooltip.",
+    "de": "Dies ist ein Tooltip"
+  },
+  "organizationtooltip":{
+    "en": "This is a tooltip.",
+    "de": "Dies ist ein Tooltip"
+  },
+  "heading": {
+    "en": "Site",
+    "de": "Webseite"
+  },
+  "lastpublished": {
+    "en": "Last published: ",
+    "de": "Letzte Veröffentlichung: "
+  },
+  "description": {
+    "en": "Description",
+    "de": "Beschreibung"
+  },
+  "author": {
+    "en": "Author",
+    "de": "Autor"
+  },
+  "organization": {
+    "en": "Organisation",
+    "de": "Organisation"
+  },
+  "title": {
+    "en": "Title",
+    "de": "Titel"
   }
 }

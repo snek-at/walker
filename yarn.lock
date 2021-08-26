@@ -18525,6 +18525,13 @@ rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-analytics-charts@^1.2.12:
+  version "1.2.12"
+  resolved "https://registry.yarnpkg.com/react-analytics-charts/-/react-analytics-charts-1.2.12.tgz#31479cad4a9ef1982ce9928c1a770374845de1da"
+  integrity sha512-RmHFTl8hZNx+Iev4THwpD3mrDo91dk9TlZgW2HWMF4oJQZlG/YkNA3ObG1cXqDj8VPdqiE8YGuly1JCqsMqOBA==
+  dependencies:
+    react-use-analytics-api "^1.4.15"
+
 react-beautiful-dnd-next@11.0.5:
   version "11.0.5"
   resolved "https://registry.yarnpkg.com/react-beautiful-dnd-next/-/react-beautiful-dnd-next-11.0.5.tgz#41e693733bbdeb6269b9e4b923a36de2e99ed761"
@@ -18852,6 +18859,11 @@ react-textarea-autosize@^8.3.0:
     "@babel/runtime" "^7.10.2"
     use-composed-ref "^1.0.0"
     use-latest "^1.0.0"
+
+react-use-analytics-api@^1.4.15, react-use-analytics-api@^1.4.16:
+  version "1.4.16"
+  resolved "https://registry.yarnpkg.com/react-use-analytics-api/-/react-use-analytics-api-1.4.16.tgz#4dfd6b3b981b7d3b666eea9b8be8545b4b80c3fd"
+  integrity sha512-7XLEH/UL3A+Dnkxa2/W/AX2Q/iwtu0jtHf1mrQVC0LfBJBZYHWcTeDUNI8qA9FX5USA97YElbKvFriXDrYksUQ==
 
 react-zoom-pan-pinch@^2.1.3:
   version "2.1.3"

@@ -5,6 +5,7 @@ import {Story, Meta} from '@storybook/react'
 import TabsMain, {TabsMainProps} from '.'
 import {Primary as PageExplorer} from '../../PageExplorer/PageExplorer.stories'
 import {Primary as Settings} from '../../Settings/Settings.stories'
+// import {Primary as Analytics} from '../../Analytics/Analytics.stories'
 
 export default {
   title: 'Organisms/main/Tabs',
@@ -26,10 +27,10 @@ Primary.args = {
     {label: 'Files', content: <SnekFinder backend={IPFSBackend} />}
   ],
   end: [
-    {
-      label: 'Analytics',
-      content: <div>Analytics</div>
-    },
+    // {
+    //   label: 'Analytics',
+    //   content: <Analytics />
+    // },
     {
       label: 'Settings',
       content: <Settings />

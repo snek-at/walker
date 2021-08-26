@@ -80,7 +80,7 @@ const PageExplorer: React.FC<PageExplorerProps> = props => {
           <Center height="65vh">
             <Divider orientation="vertical" />
           </Center>
-          <Box flex="1" p={5} overflow="auto">
+          <Box flex="1" p={5} overflow="auto" >
             <PageContent values={values} onValuesChange={handleValuesChange} />
           </Box>
         </Flex>

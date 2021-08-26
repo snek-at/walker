@@ -1,3 +1,4 @@
+import { InfoOutlineIcon } from '@chakra-ui/icons'
 import {
   Input,
   Text,
@@ -24,7 +25,9 @@ import {
   HStack,
   Spacer,
   Image,
-  VStack
+  VStack,
+  Icon,
+  Tooltip
 } from '@chakra-ui/react'
 import {ChangeEvent, useEffect, useState} from 'react'
 import translations from './translations.json'
@@ -93,14 +96,14 @@ const SiteSettings: React.FC<SiteSettingsType> = props => {
     <>
       <Stack spacing="24px" h="70vh">
         <Flex>
-          <Box>
-            <Heading size="lg">Site</Heading>
+          <Box d="flex">
+          <Heading size="lg"> {CONTENT.heading}</Heading>
           </Box>
           <Spacer />
           <Box>
             {values.lastPublished && (
               <Badge variant="outline" colorScheme="blue">
-                Last published: {values.lastPublished}
+                {CONTENT.lastpublished} {values.lastPublished}
               </Badge>
             )}
           </Box>
@@ -110,7 +113,16 @@ const SiteSettings: React.FC<SiteSettingsType> = props => {
           <Flex>
             <Box flex="1" mr={5}>
               <Box py={2}>
-                <Heading size="md">Title</Heading>
+                <Flex>           
+                <Heading size="md">{CONTENT.title}</Heading>
+                <Tooltip
+                  hasArrow
+                  label={CONTENT.titletooltip}
+                  placement="top-start"
+                  fontSize="md">
+                  <InfoOutlineIcon w={3.5} h={3.5} ml="1" mt="1"/>
+                </Tooltip>       
+                </Flex>
                 <Input
                   placeholder="My title"
                   value={values.title}
@@ -118,7 +130,16 @@ const SiteSettings: React.FC<SiteSettingsType> = props => {
                 />
               </Box>
               <Box py={2}>
-                <Heading size="md">siteUrl</Heading>
+                <Flex>
+                <Heading size="md">URL</Heading>
+                <Tooltip
+                  hasArrow
+                  label={CONTENT.urltooltip}
+                  placement="top-start"
+                  fontSize="md">
+                  <InfoOutlineIcon w={3.5} h={3.5} ml="1" mt="1"/>
+                </Tooltip>      
+                </Flex>
                 <Input
                   placeholder="My slug"
                   value={values.siteUrl}
@@ -126,7 +147,16 @@ const SiteSettings: React.FC<SiteSettingsType> = props => {
                 />
               </Box>
               <Box py={2}>
-                <Heading size="md">Description</Heading>
+                <Flex>      
+                <Heading size="md">{CONTENT.description}</Heading>
+                <Tooltip
+                  hasArrow
+                  label={CONTENT.descriptiontooltip}
+                  placement="top-start"
+                  fontSize="md">
+                  <InfoOutlineIcon w={3.5} h={3.5} ml="1" mt="1"/>
+                </Tooltip>           
+                </Flex>
                 <Textarea
                   placeholder="Description"
                   maxH="sm"
@@ -135,7 +165,16 @@ const SiteSettings: React.FC<SiteSettingsType> = props => {
                 />
               </Box>
               <Box py={2}>
-                <Heading size="md">Author</Heading>
+                <Flex>      
+                  <Heading size="md">{CONTENT.author}</Heading>
+                  <Tooltip
+                    hasArrow
+                    label={CONTENT.authortooltip}
+                    placement="top-start"
+                    fontSize="md">
+                    <InfoOutlineIcon w={3.5} h={3.5} ml="1" mt="1"/>
+                  </Tooltip>            
+                </Flex>
                 <Box p={2}>
                   <Heading size="sm">Name</Heading>
                   <Input
@@ -146,8 +185,17 @@ const SiteSettings: React.FC<SiteSettingsType> = props => {
                 </Box>
               </Box>
               <Box py={2}>
-                <Heading size="md">Organization</Heading>
-                <Box p={2}>
+                <Flex>
+                <Heading size="md">{CONTENT.organization}</Heading>
+                <Tooltip
+                  hasArrow
+                  label={CONTENT.organizationtooltip}
+                  placement="top-start"
+                  fontSize="md">
+                  <InfoOutlineIcon w={3.5} h={3.5} ml="1" mt="1"/>
+                </Tooltip>            
+                </Flex>
+                <Box p={2}>    
                   <Heading size="sm">Name</Heading>
                   <Input
                     placeholder="Description"

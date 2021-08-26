@@ -24,9 +24,12 @@ import {
   HStack,
   Spacer,
   Image,
-  VStack
+  VStack,
+  Tooltip
 } from '@chakra-ui/react'
 import {ChangeEvent, useEffect, useState} from 'react'
+import translations from './translations.json'
+import { InfoOutlineIcon } from '@chakra-ui/icons'
 
 type Values = {
   title: string
@@ -58,6 +61,24 @@ const PageContent: React.FC<PageContentType> = props => {
     props.onValuesChange(values)
   }
 
+  const LM = 'en'
+
+  type Translations = {[name: string]: {en: string; de: string}}
+
+  type Trs<T> = {[name in keyof T]: string}
+
+  function useLanguageModeValue<T extends Translations>(value: T) {
+    const translation: Trs<T> = {} as Trs<T>
+
+    for (const [key, element] of Object.entries(value)) {
+      translation[key as keyof T] = element[LM]
+    }
+
+    return translation
+  }
+
+  const CONTENT = useLanguageModeValue(translations)
+
   return (
     <>
       <Stack spacing="24px" h="70vh">
@@ -84,7 +105,16 @@ const PageContent: React.FC<PageContentType> = props => {
           <Flex>
             <Box flex="1" mr={5}>
               <Box py={2}>
-                <Heading size="md">Title</Heading>
+              <Flex>
+                <Heading size="md">{CONTENT.title}</Heading>
+                <Tooltip
+                    hasArrow
+                    label={CONTENT.titletooltip}
+                    placement="top-start"
+                    fontSize="md">
+                    <InfoOutlineIcon w={3.5} h={3.5} ml="1" mt="1"/>
+                  </Tooltip>  
+                </Flex>
                 <Input
                   placeholder="My title"
                   value={values.title}
@@ -92,7 +122,16 @@ const PageContent: React.FC<PageContentType> = props => {
                 />
               </Box>
               <Box py={2}>
-                <Heading size="md">Slug</Heading>
+                <Flex>
+                  <Heading size="md">{CONTENT.slug}</Heading>
+                  <Tooltip
+                      hasArrow
+                      label={CONTENT.slugtooltip}
+                      placement="top-start"
+                      fontSize="md">
+                      <InfoOutlineIcon w={3.5} h={3.5} ml="1" mt="1"/>
+                    </Tooltip>  
+                </Flex>
                 <Input
                   placeholder="My slug"
                   value={values.slug}
@@ -100,7 +139,16 @@ const PageContent: React.FC<PageContentType> = props => {
                 />
               </Box>
               <Box py={2}>
-                <Heading size="md">Description</Heading>
+                <Flex>
+                <Heading size="md">{CONTENT.description}</Heading>
+                <Tooltip
+                    hasArrow
+                    label={CONTENT.descriptiontooltip}
+                    placement="top-start"
+                    fontSize="md">
+                    <InfoOutlineIcon w={3.5} h={3.5} ml="1" mt="1"/>
+                  </Tooltip>  
+                </Flex>
                 <Textarea
                   placeholder="Description"
                   maxH="sm"
